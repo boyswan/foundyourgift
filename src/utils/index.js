@@ -5,3 +5,9 @@ export const match = curry((...a) => cond([ ...a, [T, identity] ]))
 
 
 export const formatToRead = reduce((arr, { title, answer }) => merge(arr, { [title]: answer }), {})
+
+
+export const toSnakeCaseUpper = pipe(
+  replace(/([A-Z])/g, str => `_${toLower(str)}`),
+  toUpper
+);

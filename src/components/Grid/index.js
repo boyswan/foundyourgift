@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import Card from '../Card';
 
 const Grid = styled.div`
-  height: 100%;
   display: flex;
   flex-wrap: wrap;
+  list-style: none;
+  margin:0 auto;
   justify-content: center;
+  max-width: 1000px;
 `
 
 export default () =>

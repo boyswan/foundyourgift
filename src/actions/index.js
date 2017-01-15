@@ -1,8 +1,6 @@
-import createActions from 'utils/createActions'
+import { createActions } from 'utils/helpers';
 
 export default createActions([
-  'selectItem',
-  'nextQuestion',
-  'prevQuestion',
-  'sendQuestion'
+  'toggleFilter',
+  'toggleSummary'
 ])

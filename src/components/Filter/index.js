@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import Logo from 'svg/Logo';
 
-const Sidebar = styled.div`
-  min-width: 250px;
+const Filter = styled.div`
+  min-width: 300px;
   background: purple;
 `
 
 export default () =>
-  <Sidebar>hi</Sidebar>
+  <Filter>
+    <Logo/>
+    <p> Brief intro copy goes here. talk about something not sure what to say but we have 3 lines worth of space. </p>
+
+  </Filter>

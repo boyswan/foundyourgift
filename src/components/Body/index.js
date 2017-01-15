@@ -6,14 +6,8 @@ const Body = styled.div`
   flex: 1;
   height: 100%;
 `
-const Center = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-`
 
 export default () =>
   <Body>
-    {/* <Center> */}
-      <Grid/>
-    {/* </Center> */}
+    <Grid/>
   </Body>

@@ -20,8 +20,9 @@ const config = {
     loaders: [
       { test: /\.(js)$/, exclude: /node_modules/, loader: 'babel' },
       { test: /\.(css)$/, exclude: /node_modules/, loader: 'style-loader!css-loader' },
+      { test: /\.svg$/, loader: 'babel!react-svg' },
       {
-        test: /\.(ttf|eot|svg|jpg|woff(2)?)(\?[a-z0-9]+)?$/,
+        test: /\.(ttf|eot|jpg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader'
       },
     ]
