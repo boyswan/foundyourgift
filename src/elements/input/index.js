@@ -1,30 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Button = styled.div`
+const Container = styled.div`
+`
+const Input = styled.input`
   transition: all 0.2s ease-in-out;
   display: inline-block;
-  padding: 0.5rem 1rem;
-  border: 1px solid red;
-  border-radius: 2rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+  padding: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 0.3rem;
 `
 
-const primary = styled(Button)`
-  background: transparent;
-  color: red;
-  &:hover {
-    transition: all 0.2s ease-in-out;
-    background: red;
-    color: white;
-  }
+const Label = styled.label`
+  color: #4674AB;
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  display: block;
 `
 
-export default ({ style = 'primary', onClick, label }) => {
-  const Toggle = Toggles[style];
-  const key = label + 1;
-  return <Toggle {...{ onClick, key }}>
-    <span>{label}</span>
-  </Toggle>
-}
+const handleInput = (type, value) => Actions.setInput({ type, value })
+
+export default ({ type, label, onClick }) =>
+  <Container>
+    <Label>{label}</Label>
+    <Input onClick={onClick} value="" onChange={e => handleInput(type, e.target.value)}/>
+  </Container>

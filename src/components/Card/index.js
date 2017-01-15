@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 const Card = styled.div`
   background: white;
-  flex: 0 0 250px;
-  height: 290px;
-  margin: 0.5rem;
+  flex: 0 0 25rem;
+  height: 30rem;
+  margin: 1rem;
+  ${''/* box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.04);*/}
 `
 const Image = styled.img`
   width: 100%;
