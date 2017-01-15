@@ -1,4 +1,5 @@
 import store from "./store";
+import { connect as _connect } from 'react-redux';
 import { toSnakeCaseUpper } from './index';
 
 export const createActions = reduce(
@@ -19,3 +20,5 @@ export const createReducer =
         : fn(action, state)(state)
       : identity;
   })
+
+export const connect = (key, component) => _connect(state => ({[key]: state[key]}))(component)

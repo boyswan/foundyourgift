@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Actions from 'actions';
 
 const Container = styled.div`
 `

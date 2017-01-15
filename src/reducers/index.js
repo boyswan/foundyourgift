@@ -5,13 +5,13 @@ const toggleSummary = (action, state) => pipe(
   x => !!state.toggleSummary
 )
 
-const formInput = (action, state) =>
-  set(action.value, prop(action.type))
+const setInput = (action, state) =>
+  set(lensProp(action.type), action.value)
 
 export default createReducer({
   toggleSummary: false,
   searchInput: ''
 }, {
   TOGGLE_SUMMARY: toggleSummary,
-  FORM_INPUT: formInput
+  SET_INPUT: setInput
 })
