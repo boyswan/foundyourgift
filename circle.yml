@@ -1,0 +1,5 @@
+deployment:
+  staging:
+    branch: master
+    commands:
+      - aws s3 sync public s3://boyce-client-websites/test --delete
