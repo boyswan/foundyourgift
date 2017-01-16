@@ -19,7 +19,7 @@ const config = {
   module: {
     loaders: [
       { test: /\.(js)$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.(css)$/, exclude: /node_modules/, loader: 'style-loader!css-loader' },
+      { test: /\.(css)$/, loader: 'style-loader!css-loader' },
       { test: /\.svg$/, loader: 'babel!react-svg' },
       {
         test: /\.(ttf|eot|jpg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -28,7 +28,7 @@ const config = {
     ]
   },
   plugins: [],
-  devtool: '#eval-cheap-module-source-map'
+  devtool: 'source-map'
 };
 
 switch(NODE_ENV) {

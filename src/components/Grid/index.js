@@ -13,5 +13,5 @@ const Grid = styled.div`
 
 export default () =>
   <Grid>
-    {map(Card, range(1, 100))}
+    {addIndex(map)(Card, range(1, 100))}
   </Grid>

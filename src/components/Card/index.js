@@ -14,7 +14,7 @@ const Image = styled.img`
   object-fit: cover;
 `
 
-export default () =>
-  <Card>
+export default key =>
+  <Card key={key}>
     <Image src="http://animal-dream.com/data_images/leaves/leaves2.jpg"/>
   </Card>

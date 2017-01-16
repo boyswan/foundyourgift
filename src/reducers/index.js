@@ -10,8 +10,12 @@ const setInput = (action, state) =>
 
 export default createReducer({
   toggleSummary: false,
-  searchInput: ''
+  searchInput: '',
+  budgetInput: 0,
+  relationInput: ''
 }, {
   TOGGLE_SUMMARY: toggleSummary,
-  SET_INPUT: setInput
+  SET_INPUT: setInput,
+  SET_SLIDER: setInput,
+  SET_RELATION: setInput
 })

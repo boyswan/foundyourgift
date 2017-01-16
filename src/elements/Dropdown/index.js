@@ -9,7 +9,7 @@ const InputContainer = styled.div`
   border-radius: 0.3rem;
   background: white;
 `
-const Input = styled.input`
+const Dropdown = styled.input`
   transition: all 0.2s ease-in-out;
   display: inline-block;
   padding: 1rem;
@@ -37,7 +37,7 @@ export default ({ type, value, label, icon, onClick = identity }) =>
   <Container>
     <Label>{label}</Label>
     <InputContainer>
-      <Input value={value} onChange={e => handleInput(type, e.target.value)}/>
+      <Dropdown value={value} onChange={e => handleInput(type, e.target.value)}/>
       {icon ? <Icon onClick={onClick}>{getIcon(icon)}</Icon> : ''}
     </InputContainer>
   </Container>
