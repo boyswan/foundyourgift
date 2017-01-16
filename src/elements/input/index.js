@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
 import { Container, Label } from 'styles';
-import { getIcon } from 'svg';
+import { svg } from 'svg';
 
 const InputContainer = styled.div`
   position: relative;
@@ -38,6 +38,6 @@ export default ({ type, value, label, icon, onClick = identity }) =>
     <Label>{label}</Label>
     <InputContainer>
       <Input value={value} onChange={e => handleInput(type, e.target.value)}/>
-      {icon ? <Icon onClick={onClick}>{getIcon(icon)}</Icon> : ''}
+      {icon ? <Icon onClick={onClick}>{svg(icon)}</Icon> : ''}
     </InputContainer>
   </Container>

@@ -49655,9 +49655,7 @@
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
-	var _Logo = __webpack_require__(641);
-	
-	var _Logo2 = _interopRequireDefault(_Logo);
+	var _svg = __webpack_require__(695);
 	
 	var _helpers = __webpack_require__(554);
 	
@@ -49674,7 +49672,6 @@
 	var LogoWrap = _styledComponents2.default.div(_templateObject2);
 	
 	var Intro = _styledComponents2.default.p(_templateObject3);
-	
 	var Divider = _styledComponents2.default.div(_templateObject4);
 	var Component = function Component(_ref) {
 	  var searchInput = _ref.searchInput,
@@ -49686,7 +49683,7 @@
 	    _react2.default.createElement(
 	      LogoWrap,
 	      null,
-	      _react2.default.createElement(_Logo2.default, null)
+	      (0, _svg.svg)('Logo')
 	    ),
 	    _react2.default.createElement(
 	      Intro,
@@ -50917,7 +50914,7 @@
 	      icon ? _react2.default.createElement(
 	        Icon,
 	        { onClick: onClick },
-	        (0, _svg.getIcon)(icon)
+	        (0, _svg.svg)(icon)
 	      ) : ''
 	    )
 	  );
@@ -50974,7 +50971,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.getIcon = undefined;
+	exports.svg = undefined;
 	
 	var _react = __webpack_require__(345);
 	
@@ -50994,7 +50991,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var getIcon = exports.getIcon = function getIcon(icon) {
+	var svg = exports.svg = function svg(icon) {
 	  return {
 	    Logo: _react2.default.createElement(_Logo2.default, null),
 	    Search: _react2.default.createElement(_Search2.default, null),
@@ -56967,7 +56964,7 @@
 	      icon ? _react2.default.createElement(
 	        Icon,
 	        { onClick: onClick },
-	        (0, _svg.getIcon)(icon)
+	        (0, _svg.svg)(icon)
 	      ) : ''
 	    )
 	  );

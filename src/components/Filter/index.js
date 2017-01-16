@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from 'svg/Logo';
+import { svg } from 'svg';
 import { connect } from 'utils/helpers'
 import Text from 'utils/i18n';
 import { Input, Slider, Dropdown } from 'elements'
@@ -22,14 +22,13 @@ const Intro = styled.p`
   line-height: 2.4rem;
   margin-bottom: 2rem;
 `
-
 const Divider = styled.div`
   margin-bottom: 2rem;
   border-bottom: 0.2rem solid #EBEBEB;
 `
 const Component = ({ searchInput, budgetInput, relationInput }) =>
   <Filter>
-    <LogoWrap><Logo/></LogoWrap>
+    <LogoWrap>{svg('Logo')}</LogoWrap>
     <Intro>{Text.intro}</Intro>
     <Divider/>
     <Input type='searchInput' icon="Search" value={searchInput} label='Search'/>
