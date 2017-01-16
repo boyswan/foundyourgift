@@ -28,7 +28,6 @@ const config = {
     ]
   },
   plugins: [],
-  devtool: 'source-map'
 };
 
 switch(NODE_ENV) {
@@ -39,7 +38,9 @@ switch(NODE_ENV) {
       new webpack.DefinePlugin({ 'process.env': { NODE_ENV: JSON.stringify('production') }}),
     ]);
     break;
-  case 'development':
+  case 'development':{
+    config.devtool = 'source-map'
+  }
   default:
     break;
 }

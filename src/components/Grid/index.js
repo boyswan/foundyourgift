@@ -6,9 +6,9 @@ const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  margin:0 auto;
+  margin: 0 auto;
   justify-content: center;
-  max-width: 1000px;
+  max-width: 1280px;
 `
 
 export default () =>

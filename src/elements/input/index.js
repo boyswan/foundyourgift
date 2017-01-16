@@ -8,6 +8,9 @@ const InputContainer = styled.div`
   position: relative;
   border-radius: 0.3rem;
   background: white;
+  &:hover {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+  }
 `
 const Input = styled.input`
   transition: all 0.2s ease-in-out;

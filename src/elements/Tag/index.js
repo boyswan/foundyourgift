@@ -6,9 +6,11 @@ import { svg } from 'svg';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-const handleInput = (type, value) => Actions.setInput({ type, value });
+const handleInput = curry((type, value) => Actions.setInterests({ type, value }));
+const renderValues = values => <div>{values.label}</div>
+const renderOption = values => <div>{values.label}sdfsdf</div>
 
-export default ({ type, value, label, options, icon, onClick = identity }) => console.log(value) ||
+export default ({ type, value, label, options, icon }) =>
   <Container>
     <Label>{label}</Label>
     <SelectContainer>
@@ -16,10 +18,13 @@ export default ({ type, value, label, options, icon, onClick = identity }) => co
         value={value}
         options={options}
         arrowRenderer={() => svg(icon)}
-        onChange={e => handleInput(type, e)}
+        onChange={handleInput(type)}
         autosize={false}
         clearable={false}
+        multi={true}
         placeholder=""
+        // optionRenderer={renderOption}
+        // valueRenderer={renderValues}
       />
     </SelectContainer>
   </Container>

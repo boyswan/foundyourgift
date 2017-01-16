@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Sidebar = styled.div`
+const Sidebar = styled.aside`
   width: 300px;
   min-width: 300px;
   background: white;

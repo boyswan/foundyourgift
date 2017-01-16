@@ -36,6 +36,7 @@ const Handle = styled.div`
   padding: 3px;
   align-items: center;
   margin-left: -1rem;
+  cursor: pointer;
   left: ${({ offset }) => offset + '%'};
   span {
     width: 0.2rem;

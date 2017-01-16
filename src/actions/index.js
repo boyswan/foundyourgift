@@ -5,5 +5,6 @@ export default createActions([
   'toggleSummary',
   'setInput',
   'setSlider',
-  'setRelation'
+  'setRelation',
+  'setInterests'
 ])
