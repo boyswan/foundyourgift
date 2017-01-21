@@ -14,9 +14,9 @@ const Wrap = styled.article`
   height: 100vh;
 `
 
-export default () =>
+export default ({ children }) =>
   <Wrap>
     <Body>
-      <Grid/>
+      {children}
     </Body>
   </Wrap>

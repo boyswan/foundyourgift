@@ -1,11 +1,5 @@
-import React from 'react';
-
-import Logo from './Logo';
-import Dropdown from './Dropdown';
-import Search from './Search';
-
-export const svg = icon => ({
-  Logo: <Logo/>,
-  Search: <Search/>,
-  Dropdown: <Dropdown/>
-})[icon];
+export { default as Logo } from './Logo'
+export { default as Dropdown } from './Dropdown'
+export { default as Search } from './Search'
+export { default as Mascot } from './Mascot'
+export { default as MascotShadow } from './MascotShadow'

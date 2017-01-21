@@ -1,19 +1,14 @@
 import 'app.css';
 import 'utils/ramda';
 import React from 'react';
-import Render from 'utils/render';
-import styled from 'styled-components';
-import { Summary, Filter, Body, Footer } from 'components';
+import render from 'utils/render';
+import { Router, Route, Link, browserHistory } from 'react-router'
+import { Home, Search, NoMatch } from 'views';
 
-const Background = styled.div`
-  display: flex;
-`
-const App = () =>
-  <Background>
-    <Filter/>
-    <Body/>
-    <Summary/>
-  </Background>
-
-
-Render(App);
+render((
+  <Router history={browserHistory}>
+    <Route path="/" component={Home}/>
+    <Route path="search" component={Search}/>
+    <Route path="*" component={NoMatch}/>
+  </Router>
+));

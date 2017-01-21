@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { svg } from 'svg';
+// import Logo from 'svg/Logo'
 import { connect } from 'utils/helpers'
-import Text from 'utils/i18n';
+import { Text } from 'utils/constants';
 import { Input, Slider, Dropdown, Tag } from 'elements'
+import { Link } from 'react-router'
 
 const Filter = styled.aside`
   width: 300px;
@@ -27,49 +28,15 @@ const Divider = styled.div`
   border-bottom: 0.2rem solid #EBEBEB;
 `
 
-const relationOptions = [
-  { value: 1, label: 'Brother' },
-  { value: 2, label: 'Sister' },
-  { value: 3, label: 'Mum' },
-  { value: 4, label: 'Dad' },
-  { value: 5, label: 'Grandma' },
-  { value: 6, label: 'Grandad' },
-  { value: 7, label: 'Husband' },
-  { value: 8, label: 'Wife' }
-];
-
-const ageOptions = [
-  { value: 1, label: '0-10' },
-  { value: 2, label: '12-20' },
-  { value: 3, label: '21-30' },
-  { value: 4, label: '31-40' },
-  { value: 5, label: '41-50' },
-  { value: 6, label: '51-60' },
-  { value: 7, label: '61+' },
-];
-
-const interestsOptions = [
-  { value: 1, label: 'Brother' },
-  { value: 2, label: 'Sister' },
-  { value: 3, label: 'Mum' },
-  { value: 4, label: 'Dad' },
-  { value: 5, label: 'Grandma' },
-  { value: 6, label: 'Grandad' },
-  { value: 7, label: 'Husband' },
-  { value: 8, label: 'Wife' }
-]
-
 const Component = ({ searchInput, budgetInput, relationInput, ageInput, interestsInput }) =>
   <Filter>
-    <LogoWrap>{svg('Logo')}</LogoWrap>
-    <Intro>{Text.intro}</Intro>
+    <LogoWrap><Logo colour="red" /></LogoWrap>
+    <Intro>{Text.search.intro}</Intro>
+    <Link to="search" >test link here</Link>
     <Divider/>
     <Input type='searchInput' icon="Search" value={searchInput} label='Search'/>
     <Divider/>
     <Slider type='budgetInput' value={budgetInput} label='Budget'/>
-    <Dropdown type='relationInput' options={relationOptions} icon="Dropdown" value={relationInput} label='Who for?'/>
-    <Dropdown type='ageInput' options={ageOptions} icon="Dropdown" value={ageInput} label='How old?'/>
-    <Tag type='interestsInput' options={interestsOptions} icon="Dropdown" value={interestsInput} label='Interests?'/>
   </Filter>
 
 export default connect(Component)
