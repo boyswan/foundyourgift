@@ -5,7 +5,7 @@ import store from './store';
 
 export default Root => render(
   <Provider store={store}>
-  {Root}
+    {Root}
   </Provider>,
   document.getElementById('app')
 );

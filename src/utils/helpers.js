@@ -5,19 +5,16 @@ import { toSnakeCaseUpper } from './index';
 export const createActions = reduce(
   (acc, type) =>
     (acc[type] = payload =>
-      store.dispatch({ ...payload, actionType: toSnakeCaseUpper(type) }), acc),
+      store.dispatch({ ...payload, type: toSnakeCaseUpper(type) }), acc),
   {}
 )
 
 export const createReducer =
-  curry((init, reducers, existingState, _action) => {
+  curry((init, reducers, existingState, action) => {
     const state = existingState ? existingState : init;
-    const fn = reducers[_action.actionType] || (x => y => y);
-    const action = omit('actionType', _action);
+    const fn = reducers[action.type] || (x => y => y);
     return typeof fn === "function"
-      ? isEmpty(_action)
-        ? fn(action, state)(state)
-        : fn(action, state)(state)
+      ? fn(action, state)(state)
       : identity;
   })
 

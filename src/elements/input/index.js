@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
 import { Container, Label } from 'styles';
-import { svg } from 'svg';
+import { Dropdown } from 'svg';
 
 const InputContainer = styled.div`
   position: relative;
@@ -34,13 +34,13 @@ const Icon = styled.div`
   top: 50%;
 `
 
-const handleInput = (type, value) => Actions.setInput({ type, value });
+const handleInput = (input, value) => Actions.setInput({ input, value });
 
-export default ({ type, value, label, icon, onClick = identity }) =>
+export default ({ input, value, label, icon, onClick = identity }) =>
   <Container>
     <Label>{label}</Label>
     <InputContainer>
-      <Input value={value} onChange={e => handleInput(type, e.target.value)}/>
-      {icon ? <Icon onClick={onClick}>{svg(icon)}</Icon> : ''}
+      <Input value={value} onChange={e => handleInput(input, e.target.value)}/>
+      {icon ? <Icon onClick={onClick}>{icon}</Icon> : ''}
     </InputContainer>
   </Container>

@@ -4,28 +4,36 @@ import styled from 'styled-components';
 const Button = styled.button`
   transition: all 0.2s ease-in-out;
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 2rem;
   border: 1px solid white;
-  border-radius: 2rem;
-  font-size: 1.2rem;
+  font-size: 1.8rem;
   cursor: pointer;
-  margin: 0 0.5rem 2rem 0.5rem;
+  border-radius: 10rem;
+  font-weight: 100;
+  margin: 0 1rem 2rem 1rem;
+
   &:hover {
     transition: all 0.2s ease-in-out;
   }
 `
 
-const primary = styled(Button)`
-  background: transparent;
-  color: white;
-  &:hover {
+const styles = {
+  primary: styled(Button)`
+    background: transparent;
+    color: white;
+    &:hover {
+      background: white;
+      color: #59a9ff;
+    }
+  `,
+  selected: styled(Button)`
     background: white;
-    color: #59a9ff;
-  }
-`
+    color: red;
+  `
+}
 
-const fn = { primary }
 export default ({ style = 'primary', onClick, label }) => {
-  const Button = fn[style];
-  return <Button {...{ onClick, key: label + 1 }}>{label}</Button>
+  console.log('style', style)
+  const Button = styles[style];
+  return <Button {...{ onClick }}>{label}</Button>
 }

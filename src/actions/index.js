@@ -1,10 +1,7 @@
 import { createActions } from 'utils/helpers';
 
 export default createActions([
-  'toggleFilter',
-  'toggleSummary',
+  'toggleInterest',
   'setInput',
   'setSlider',
-  'setRelation',
-  'setInterests'
 ])

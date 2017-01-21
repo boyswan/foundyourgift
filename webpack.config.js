@@ -18,8 +18,8 @@ const config = {
   },
   module: {
     loaders: [
-      { test: /\.(js)$/, exclude: /node_modules/, loader: 'babel' },
-      { test: /\.(css)$/, loader: 'style-loader!css-loader' },
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel', 'ramda-loader?debug=true'] },
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.svg$/, loader: 'babel!react-svg' },
       { test: /\.(ttf|eot|jpg|woff(2)?)(\?[a-z0-9]+)?$/, loader: 'file-loader' }
     ]
