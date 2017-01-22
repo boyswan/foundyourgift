@@ -1,5 +1,7 @@
-import { createReducer } from 'utils/helpers';
+import { set, lensProp, over, adjust, assoc } from 'ramda';
+import { createReducer, setInteretsFromParams } from 'utils/helpers';
 import Const from 'utils/constants'
+
 
 // _set :: (String, a) -> State -> State
 const _set = ({ item, value }, state) =>
@@ -7,12 +9,12 @@ const _set = ({ item, value }, state) =>
 
 
 // _toggle :: (Number) -> State -> State
-const _toggle = ({ index }, state) =>
+const _toggle = ({ index }, state) => 
   over(lensProp('interests'), adjust(x => assoc('active', !x.active, x), index))
 
 
 export default createReducer({
-  interests: Const.interests,
+  interests: setInteretsFromParams(Const.interests),
   searchResults: [],
   searchInput: '',
   budgetInput: 0
@@ -20,6 +22,6 @@ export default createReducer({
   TOGGLE_INTEREST: _toggle,
   SET_INPUT: _set,
   SET_SLIDER: _set,
-  SEARCH_RESULTS: _set
+  SET_RESULTS: _set
 
 })

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import Actions from 'actions';
 import Const from 'utils/constants';
-import { Summary, Filter, Body, Footer, Grid } from '../components';
+import { connect } from 'utils/helpers'
+import { Summary, Filter, Body, Footer, Grid } from 'components';
 
 const Background = styled.div`
   display: flex;
@@ -11,11 +13,24 @@ const Background = styled.div`
   background: ${({ color }) => color};
 `
 
-export default () =>
-  <Background color={Const.color.grey} row >
-    <Filter/>
-    <Body>
-      <Grid/>
-    </Body>
-    <Summary/>
-  </Background>
+class Component extends React.Component {
+
+  componentDidMount() {
+    Actions.search({ router: this.props.router })
+  }
+
+  render() {
+    const { router } = this.props
+    return (
+      <Background color={Const.color.grey} row >
+        <Filter router={router}/>
+        <Body>
+          <Grid/>
+        </Body>
+        <Summary/>
+      </Background>
+    )
+  }
+}
+
+export default connect(Component)

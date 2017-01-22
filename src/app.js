@@ -1,9 +1,10 @@
 import 'app.css';
-import 'utils/ramda';
+// import 'utils/ramda';
 import React from 'react';
 import render from 'utils/render';
 import { Router, Route, Link, browserHistory } from 'react-router'
 import { Home, Search, NoMatch } from 'views';
+import Actions from 'actions';
 
 render((
   <Router history={browserHistory}>

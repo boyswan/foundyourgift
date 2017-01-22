@@ -18,7 +18,7 @@ const config = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel', 'ramda-loader?debug=true'] },
+      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel'] },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.svg$/, loader: 'babel!react-svg' },
       { test: /\.(ttf|eot|jpg|woff(2)?)(\?[a-z0-9]+)?$/, loader: 'file-loader' }
@@ -29,6 +29,7 @@ const config = {
 
 switch(NODE_ENV) {
   case 'production':
+    config.output.filename = '[name].min.js',
     config.plugins = config.plugins.concat([
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({ compressor: { warnings: false } }),

@@ -4,6 +4,7 @@ import Actions from 'actions';
 import { Container, Label } from 'styles';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import { curry } from 'ramda';
 
 const SliderContainer = styled.div`
   position: relative;

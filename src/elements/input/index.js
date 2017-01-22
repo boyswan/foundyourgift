@@ -36,7 +36,7 @@ const Icon = styled.div`
 
 const handleInput = (item, value) => Actions.setInput({ item, value });
 
-export default ({ item, value, label, icon, onClick = identity }) =>
+export default ({ item, value, label, icon, onClick }) =>
   <Container>
     <Label>{label}</Label>
     <InputContainer>

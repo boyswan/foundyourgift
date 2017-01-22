@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
 import { connect } from 'utils/helpers';
+import { mapIndex, interestToQuery } from 'utils';
 import { Logo, MascotShadow } from 'svg'
 import Actions from 'actions';
 import { Sidebar, Summary, Filter } from 'components';
@@ -20,6 +21,9 @@ const HeaderLogo = styled.header`
   width: 100%;
   padding: 3rem 2rem;
 `
+const MascotLogo = styled.div`
+  margin-bottom: 3rem;
+`
 const Content = styled.section`
   width: 100%;
   padding: 0 2rem;
@@ -30,8 +34,8 @@ const Divider = styled.hr`
   margin: 0 auto;
   max-width: 50%;
   opacity: 0.25;
-  margin-bottom: 4rem;
-  border-bottom: 0.2rem solid ${({ color }) => color};
+  margin-bottom: 6rem;
+  ${''/* border-bottom: 0.2rem solid ${({ color }) => color};*/}
 `
 const Interests = styled.ul`
   max-width: 50%;
@@ -63,10 +67,6 @@ const FooterLinks = styled.div`
   }
 `
 
-const getInterestQuery = reduce((acc, val) => val.active
-  ? assoc(val.type, true, acc)
-  : acc, {})
-
 const Interest = ({ label, active }, index) =>
   <Button
     key={index}
@@ -76,21 +76,23 @@ const Interest = ({ label, active }, index) =>
 
 export default connect(({
   interests
-}) => 
+}) =>
   <Background color={Const.color.primary}>
     <HeaderLogo>
       <Logo color='white'/>
     </HeaderLogo>
     <Content>
-      <MascotShadow stroke='5' color='white'/>
+      <MascotLogo>
+        <MascotShadow stroke='5' color='white'/>
+      </MascotLogo>
       <H1>{Const.text.home.title}</H1>
       <H2>{Const.text.home.intro}</H2>
       <Divider color={Const.color.primaryDark}/>
       <Interests>
-        {addIndex(map)(Interest, interests)}
+        {mapIndex(Interest, interests)}
       </Interests>
       <Divider color={Const.color.primaryDark}/>
-      <Link to={{ pathname: 'search', query: getInterestQuery(interests) }}>
+      <Link to={{ pathname: 'search', query: interestToQuery(interests) }}>
         <Button label={Const.text.home.cta}/>
       </Link>
     </Content>

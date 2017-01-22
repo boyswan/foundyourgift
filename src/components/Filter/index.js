@@ -6,6 +6,8 @@ import { connect } from 'utils/helpers'
 import Const from 'utils/constants';
 import { Input, Slider, Button } from 'elements'
 import { Link } from 'react-router'
+import { addIndex, map } from 'ramda';
+import { interestToQuery } from 'utils'
 
 const Filter = styled.aside`
   width: 300px;
@@ -32,24 +34,30 @@ const Interests = styled.ul`
   margin-bottom: 2rem;
 `
 
-const Interest = ({ label, active }, index) =>
+const Interest = (router, interests) => ({ label, active }, index) =>
   <Button
     key={index}
     style={active ? 'selected' : 'primary' }
-    onClick={() => Actions.toggleInterest({ index, active: !active })}
+    onClick={() => {
+      Actions.toggleInterest({ index, active: !active, router })
+      // router.push({
+      //   ...router.location,
+      //   query: interestToQuery(interests)
+      // })
+    }}
     label={label}/>
 
-const Component = ({ interests, searchInput, budgetInput }) =>
+
+const Component = ({ router, interests, searchInput, budgetInput }) =>
   <Filter>
     <LogoWrap><Logo color={Const.color.primary}/></LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
-    <Link to="search" >test link here</Link>
     <Divider/>
     <Input item='searchInput' icon="Search" value={searchInput} label='Search'/>
     <Divider/>
     <Slider item='budgetInput' value={budgetInput} label='Budget'/>
     <Interests>
-      {addIndex(map)(Interest, interests)}
+      {addIndex(map)(Interest(router, interests), interests)}
     </Interests>
   </Filter>
 

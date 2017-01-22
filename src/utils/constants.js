@@ -7,7 +7,7 @@ const color = {
 }
 
 const interests = [
- { type: 'business', label: 'Business minded' },
+ { type: 'business', label: 'Entreprenurial' },
  { type: 'exercise', label: 'Fitness fanatic' },
  { type: 'gaming', label: 'Video gamer' },
  { type: 'health', label: 'Nature lover' },
@@ -20,7 +20,8 @@ const interests = [
 
 const text = {
   home: {
-    title: "Wandering what gift to buy?",
+    title: "Looking to buy the perfect gift?",
+    // (describe intro relations with humours situations) 
     intro: "Whether it’s for your boyfriend, wife, husband or girlfriend we’ll help you find the right gift for them.",
     cta: "Get started",
     amazon: "foundyourgift is a participant in the Amazon EU Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk"

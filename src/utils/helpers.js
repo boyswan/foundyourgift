@@ -1,6 +1,7 @@
 import store from "./store";
 import { connect as _connect } from 'react-redux';
 import { toSnakeCaseUpper } from './index';
+import { reduce, curry, identity, pipe, tail, map, head, split, assoc } from 'ramda';
 
 export const createActions = reduce(
   (acc, type) =>
@@ -20,3 +21,15 @@ export const createReducer =
 
 export const connect = (component, state = identity) =>
   _connect(state)(component)
+
+
+export const getParams = pipe(
+  tail,
+  split('&'),
+  map(pipe(split('='), head))
+)(window.location.search);
+
+// setInteretsFromParams :: [Object] -> [Object]
+export const setInteretsFromParams = map(x =>
+  getParams.includes(x.type) ? assoc('active', true, x) : x
+)
