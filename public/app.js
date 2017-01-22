@@ -34078,7 +34078,17 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.interestToQuery = exports.toSnakeCaseUpper = exports.fetch = exports.mapIndex = undefined;
+	exports.setInteretsFromParams = exports.getParams = exports.connect = exports.createReducer = exports.createActions = exports.interestToQuery = exports.toSnakeCaseUpper = exports.fetch = exports.mapIndex = undefined;
+	
+	var _extends2 = __webpack_require__(556);
+	
+	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _store = __webpack_require__(510);
+	
+	var _store2 = _interopRequireDefault(_store);
+	
+	var _reactRedux = __webpack_require__(480);
 	
 	var _axios = __webpack_require__(528);
 	
@@ -34100,6 +34110,34 @@
 	var interestToQuery = exports.interestToQuery = (0, _ramda.reduce)(function (acc, val) {
 	  return val.active ? (0, _ramda.assoc)(val.type, true, acc) : acc;
 	}, {});
+	
+	var createActions = exports.createActions = (0, _ramda.reduce)(function (acc, type) {
+	  return acc[type] = function (payload) {
+	    return _store2.default.dispatch((0, _extends3.default)({}, payload, { type: toSnakeCaseUpper(type) }));
+	  }, acc;
+	}, {});
+	
+	var createReducer = exports.createReducer = (0, _ramda.curry)(function (init, reducers, existingState, action) {
+	  var state = existingState ? existingState : init;
+	  var fn = reducers[action.type] || function (x) {
+	    return function (y) {
+	      return y;
+	    };
+	  };
+	  return typeof fn === "function" ? fn(action, state)(state) : _ramda.identity;
+	});
+	
+	var connect = exports.connect = function connect(component) {
+	  var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _ramda.identity;
+	  return (0, _reactRedux.connect)(state)(component);
+	};
+	
+	var getParams = exports.getParams = (0, _ramda.pipe)(_ramda.tail, (0, _ramda.split)('&'), (0, _ramda.map)((0, _ramda.pipe)((0, _ramda.split)('='), _ramda.head)))(window.location.search);
+	
+	// setInteretsFromParams :: [Object] -> [Object]
+	var setInteretsFromParams = exports.setInteretsFromParams = (0, _ramda.map)(function (x) {
+	  return getParams.includes(x.type) ? (0, _ramda.assoc)('active', true, x) : x;
+	});
 
 /***/ },
 /* 528 */
@@ -44439,7 +44477,7 @@
 	
 	var _ramda = __webpack_require__(553);
 	
-	var _helpers = __webpack_require__(555);
+	var _utils = __webpack_require__(527);
 	
 	var _constants = __webpack_require__(594);
 	
@@ -44462,75 +44500,30 @@
 	  }, index));
 	};
 	
-	exports.default = (0, _helpers.createReducer)({
-	  interests: (0, _helpers.setInteretsFromParams)(_constants2.default.interests),
+	// _append :: (Object) -> State -> State
+	var _append = function _append(_ref3, state) {
+	  var item = _ref3.item;
+	  return (0, _ramda.over)((0, _ramda.lensProp)('cart'), (0, _ramda.append)(item));
+	};
+	
+	var init = {
+	  interests: (0, _utils.setInteretsFromParams)(_constants2.default.interests),
+	  cart: [],
 	  searchResults: [],
 	  searchInput: '',
-	  budgetInput: 0
-	}, {
+	  budgetInput: 50
+	};
+	
+	exports.default = (0, _utils.createReducer)(init, {
 	  TOGGLE_INTEREST: _toggle,
 	  SET_INPUT: _set,
 	  SET_SLIDER: _set,
-	  SET_RESULTS: _set
-	
+	  SET_RESULTS: _set,
+	  SELECT_ITEM: _append
 	});
 
 /***/ },
-/* 555 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports.setInteretsFromParams = exports.getParams = exports.connect = exports.createReducer = exports.createActions = undefined;
-	
-	var _extends2 = __webpack_require__(556);
-	
-	var _extends3 = _interopRequireDefault(_extends2);
-	
-	var _store = __webpack_require__(510);
-	
-	var _store2 = _interopRequireDefault(_store);
-	
-	var _reactRedux = __webpack_require__(480);
-	
-	var _index = __webpack_require__(527);
-	
-	var _ramda = __webpack_require__(553);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var createActions = exports.createActions = (0, _ramda.reduce)(function (acc, type) {
-	  return acc[type] = function (payload) {
-	    return _store2.default.dispatch((0, _extends3.default)({}, payload, { type: (0, _index.toSnakeCaseUpper)(type) }));
-	  }, acc;
-	}, {});
-	
-	var createReducer = exports.createReducer = (0, _ramda.curry)(function (init, reducers, existingState, action) {
-	  var state = existingState ? existingState : init;
-	  var fn = reducers[action.type] || function (x) {
-	    return function (y) {
-	      return y;
-	    };
-	  };
-	  return typeof fn === "function" ? fn(action, state)(state) : _ramda.identity;
-	});
-	
-	var connect = exports.connect = function connect(component) {
-	  var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _ramda.identity;
-	  return (0, _reactRedux.connect)(state)(component);
-	};
-	
-	var getParams = exports.getParams = (0, _ramda.pipe)(_ramda.tail, (0, _ramda.split)('&'), (0, _ramda.map)((0, _ramda.pipe)((0, _ramda.split)('='), _ramda.head)))(window.location.search);
-	
-	// setInteretsFromParams :: [Object] -> [Object]
-	var setInteretsFromParams = exports.setInteretsFromParams = (0, _ramda.map)(function (x) {
-	  return getParams.includes(x.type) ? (0, _ramda.assoc)('active', true, x) : x;
-	});
-
-/***/ },
+/* 555 */,
 /* 556 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -45080,12 +45073,12 @@
 	  greyDark: '#EBEBEB'
 	};
 	
-	var interests = [{ type: 'business', label: 'Entreprenurial' }, { type: 'exercise', label: 'Fitness fanatic' }, { type: 'gaming', label: 'Video gamer' }, { type: 'health', label: 'Nature lover' }, { type: 'sports', label: 'Sports fan' }, { type: 'travel', label: 'Traveller' }, { type: 'arts', label: 'Creative' }, { type: 'technology', label: 'Tech geek' }, { type: 'music', label: 'Sound person' }];
+	var interests = [{ id: 'BU', type: 'business', label: 'Entreprenurial' }, { id: 'EX', type: 'exercise', label: 'Fitness fanatic' }, { id: 'GA', type: 'gaming', label: 'Video gamer' }, { id: 'HE', type: 'health', label: 'Nature lover' }, { id: 'SP', type: 'sports', label: 'Sports fan' }, { id: 'TR', type: 'travel', label: 'Traveller' }, { id: 'AR', type: 'arts', label: 'Creative' }, { id: 'TE', type: 'technology', label: 'Tech geek' }, { id: 'MU', type: 'music', label: 'Sound person' }];
 	
 	var text = {
 	  home: {
 	    title: "Looking to buy the perfect gift?",
-	    // (describe intro relations with humours situations) 
+	    // (describe intro relations with humours situations)
 	    intro: "Whether it’s for your boyfriend, wife, husband or girlfriend we’ll help you find the right gift for them.",
 	    cta: "Get started",
 	    amazon: "foundyourgift is a participant in the Amazon EU Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk"
@@ -50093,8 +50086,6 @@
 	
 	var _reactRouter = __webpack_require__(595);
 	
-	var _helpers = __webpack_require__(555);
-	
 	var _utils = __webpack_require__(527);
 	
 	var _svg = __webpack_require__(729);
@@ -50149,7 +50140,7 @@
 	    label: label });
 	};
 	
-	exports.default = (0, _helpers.connect)(function (_ref6) {
+	exports.default = (0, _utils.connect)(function (_ref6) {
 	  var interests = _ref6.interests;
 	  return _react2.default.createElement(
 	    Background,
@@ -58588,6 +58579,15 @@
 	    return _interopRequireDefault(_Heart).default;
 	  }
 	});
+	
+	var _Cross = __webpack_require__(873);
+	
+	Object.defineProperty(exports, 'Cross', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_Cross).default;
+	  }
+	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -58852,9 +58852,9 @@
 	  value: true
 	});
 	
-	var _helpers = __webpack_require__(555);
+	var _utils = __webpack_require__(527);
 	
-	exports.default = (0, _helpers.createActions)(['search', 'toggleInterest', 'setInput', 'setSlider']);
+	exports.default = (0, _utils.createActions)(['search', 'selectItem', 'removeItem', 'toggleInterest', 'setInput', 'setSlider']);
 
 /***/ },
 /* 737 */
@@ -58962,21 +58962,39 @@
 	
 	var _components = __webpack_require__(737);
 	
-	var _helpers = __webpack_require__(555);
-	
 	var _utils = __webpack_require__(527);
+	
+	var _ramda = __webpack_require__(553);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Grid = _styledComponents2.default.ul(_templateObject);
 	var Loader = _styledComponents2.default.div(_templateObject2);
+	var noItems = function noItems() {
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    ' no items '
+	  );
+	};
 	
-	exports.default = (0, _helpers.connect)(function (_ref) {
-	  var searchResults = _ref.searchResults;
+	var getBalance = (0, _ramda.reduce)(function (acc, _ref) {
+	  var price = _ref.price;
+	  return (0, _ramda.add)(acc, price);
+	}, 0);
+	
+	var filterResults = function filterResults(searchResults, budgetInput, cart) {
+	  return (0, _ramda.pipe)((0, _ramda.filter)((0, _ramda.pipe)((0, _ramda.prop)('price'), (0, _ramda.gt)(budgetInput - getBalance(cart)))), (0, _ramda.ifElse)((0, _ramda.pipe)((0, _ramda.prop)('length'), _ramda.isNil), noItems, (0, _utils.mapIndex)(_components.Card)))(searchResults);
+	};
+	
+	exports.default = (0, _utils.connect)(function (_ref2) {
+	  var searchResults = _ref2.searchResults,
+	      budgetInput = _ref2.budgetInput,
+	      cart = _ref2.cart;
 	  return _react2.default.createElement(
 	    Grid,
 	    null,
-	    searchResults ? (0, _utils.mapIndex)(_components.Card, searchResults) : _react2.default.createElement(Loader, null)
+	    searchResults ? filterResults(searchResults, budgetInput, cart) : _react2.default.createElement(Loader, null)
 	  );
 	});
 
@@ -59013,7 +59031,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _helpers = __webpack_require__(555);
+	var _utils = __webpack_require__(527);
 	
 	var _constants = __webpack_require__(594);
 	
@@ -59024,8 +59042,6 @@
 	var _reactRouter = __webpack_require__(595);
 	
 	var _ramda = __webpack_require__(553);
-	
-	var _utils = __webpack_require__(527);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59085,7 +59101,7 @@
 	  );
 	};
 	
-	exports.default = (0, _helpers.connect)(Component);
+	exports.default = (0, _utils.connect)(Component);
 
 /***/ },
 /* 740 */
@@ -59392,7 +59408,7 @@
 	      _ref2$min = _ref2.min,
 	      min = _ref2$min === undefined ? 0 : _ref2$min,
 	      _ref2$max = _ref2.max,
-	      max = _ref2$max === undefined ? 100 : _ref2$max;
+	      max = _ref2$max === undefined ? 500 : _ref2$max;
 	  return _react2.default.createElement(
 	    _styles.Container,
 	    null,
@@ -66303,7 +66319,9 @@
 	
 	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
 	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  ', '\n}\n'], ['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  ', '\n}\n']);
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  ', '\n'], ['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  ', '\n']),
+	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n'], ['\n']),
+	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n\n'], ['\n\n']);
 	
 	var _react = __webpack_require__(303);
 	
@@ -66313,20 +66331,101 @@
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
+	var _utils = __webpack_require__(527);
+	
+	var _ramda = __webpack_require__(553);
+	
+	var _svg = __webpack_require__(729);
+	
+	var _constants = __webpack_require__(594);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	var _actions = __webpack_require__(736);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Sidebar = _styledComponents2.default.aside(_templateObject, '' /* position: fixed;
 	                                                                   top: 0;
 	                                                                   right: 0;
 	                                                                   height: 100%;*/);
+	var Balance = _styledComponents2.default.div(_templateObject2);
+	var Image = _styledComponents2.default.image(_templateObject3);
+	var Content = _styledComponents2.default.div(_templateObject3);
+	var Item = _styledComponents2.default.li(_templateObject3);
+	var Cart = _styledComponents2.default.ul(_templateObject3);
+	var Remove = _styledComponents2.default.div(_templateObject3);
 	
-	exports.default = function () {
+	var getBalance = (0, _ramda.reduce)(function (acc, _ref) {
+	  var price = _ref.price;
+	  return (0, _ramda.add)(acc, price);
+	}, 0);
+	
+	var ItemComponent = function ItemComponent(_ref2, key) {
+	  var image = _ref2.image,
+	      price = _ref2.price,
+	      title = _ref2.title,
+	      id = _ref2.id;
+	  return _react2.default.createElement(
+	    Item,
+	    { key: key },
+	    _react2.default.createElement(Image, { alt: title, src: image }),
+	    _react2.default.createElement(
+	      Content,
+	      { secondary: _constants2.default.color.secondary, primary: _constants2.default.color.primary },
+	      _react2.default.createElement(
+	        'span',
+	        null,
+	        '\xA3',
+	        price
+	      ),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        title
+	      )
+	    ),
+	    _react2.default.createElement(
+	      Remove,
+	      { onClick: function onClick() {
+	          return _actions2.default.removeItem({ id: id });
+	        } },
+	      _react2.default.createElement(_svg.Cross, { color: _constants2.default.color.primary })
+	    )
+	  );
+	};
+	
+	exports.default = (0, _utils.connect)(function (_ref3) {
+	  var cart = _ref3.cart,
+	      budgetInput = _ref3.budgetInput;
 	  return _react2.default.createElement(
 	    Sidebar,
 	    null,
-	    'hi'
+	    _react2.default.createElement(
+	      Balance,
+	      null,
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        '\xA3',
+	        (budgetInput - getBalance(cart)).toFixed(2)
+	      ),
+	      _react2.default.createElement(
+	        'span',
+	        null,
+	        'Remaining'
+	      )
+	    ),
+	    _react2.default.createElement(
+	      Cart,
+	      null,
+	      'Your Cart',
+	      (0, _utils.mapIndex)(ItemComponent, cart)
+	    )
 	  );
-	};
+	});
 
 /***/ },
 /* 867 */
@@ -66342,9 +66441,10 @@
 	
 	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
 	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  background: red;\n  flex: 0 0 25rem;\n  height: 30rem;\n  position: relative;\n  margin: 1rem;\n'], ['\n  background: red;\n  flex: 0 0 25rem;\n  height: 30rem;\n  position: relative;\n  margin: 1rem;\n']),
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  ', '\n  flex: 0 0 25rem;\n  height: 33rem;\n  position: relative;\n  margin: 1rem;\n'], ['\n  ', '\n  flex: 0 0 25rem;\n  height: 33rem;\n  position: relative;\n  margin: 1rem;\n']),
 	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n  width: 100%;\n  height: 60%;\n  object-fit: cover;\n'], ['\n  width: 100%;\n  height: 60%;\n  object-fit: cover;\n']),
-	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n  width: 4.5rem;\n  height: 4.5rem;\n  border-radius: 10rem;\n  background: white;\n  position: absolute;\n  top: 1rem;\n  right: 1rem;\n  svg {\n    position: absolute;\n    left: 11px;\n    top: 13px;\n  }\n'], ['\n  width: 4.5rem;\n  height: 4.5rem;\n  border-radius: 10rem;\n  background: white;\n  position: absolute;\n  top: 1rem;\n  right: 1rem;\n  svg {\n    position: absolute;\n    left: 11px;\n    top: 13px;\n  }\n']);
+	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n  width: 4.3rem;\n  height: 4.3rem;\n  border-radius: 10rem;\n  background: white;\n  position: absolute;\n  top: 1rem;\n  right: 1rem;\n  cursor: pointer;\n  svg {\n    position: absolute;\n    left: 11px;\n    top: 13px;\n  }\n'], ['\n  width: 4.3rem;\n  height: 4.3rem;\n  border-radius: 10rem;\n  background: white;\n  position: absolute;\n  top: 1rem;\n  right: 1rem;\n  cursor: pointer;\n  svg {\n    position: absolute;\n    left: 11px;\n    top: 13px;\n  }\n']),
+	    _templateObject4 = (0, _taggedTemplateLiteral3.default)(['\n  padding: 1.5rem 1rem;\n  color: ', ';\n\n  span {\n    font-size: 2.3rem;\n    font-weight: 400;\n    letter-spacing: 1.1px;\n    margin-bottom: 0.6rem;\n    display: block;\n    color: ', ';\n  }\n  h1 {\n    font-size: 1.8rem;\n    font-weight: 300;\n    margin-bottom: 0.2rem;\n  }\n  p {\n    opacity: 0.75;\n    font-weight: 300;\n    font-size: 1.4rem;\n  }\n'], ['\n  padding: 1.5rem 1rem;\n  color: ', ';\n\n  span {\n    font-size: 2.3rem;\n    font-weight: 400;\n    letter-spacing: 1.1px;\n    margin-bottom: 0.6rem;\n    display: block;\n    color: ', ';\n  }\n  h1 {\n    font-size: 1.8rem;\n    font-weight: 300;\n    margin-bottom: 0.2rem;\n  }\n  p {\n    opacity: 0.75;\n    font-weight: 300;\n    font-size: 1.4rem;\n  }\n']);
 	
 	var _react = __webpack_require__(303);
 	
@@ -66354,42 +66454,66 @@
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
+	var _actions = __webpack_require__(736);
+	
+	var _actions2 = _interopRequireDefault(_actions);
+	
 	var _constants = __webpack_require__(594);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
 	var _svg = __webpack_require__(729);
 	
+	var _ramda = __webpack_require__(553);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Card = _styledComponents2.default.li(_templateObject);
-	
+	var Card = _styledComponents2.default.li(_templateObject, '' /* background: red;*/);
 	var Image = _styledComponents2.default.img(_templateObject2);
 	var Save = _styledComponents2.default.div(_templateObject3);
-	//
-	// const Title = styled.h3`
-	//
-	// `
-	// const Price = styled.span`
-	//
-	// `
+	var Content = _styledComponents2.default.div(_templateObject4, (0, _ramda.prop)('secondary'), (0, _ramda.prop)('primary'));
 	
-	exports.default = function (_ref, key) {
-	  var _ref$title = _ref.title,
-	      title = _ref$title === undefined ? '' : _ref$title,
-	      _ref$price = _ref.price,
-	      price = _ref$price === undefined ? '' : _ref$price,
-	      _ref$image = _ref.image,
-	      image = _ref$image === undefined ? '' : _ref$image;
+	exports.default = function (item, key) {
+	  var _item$title = item.title,
+	      title = _item$title === undefined ? '' : _item$title,
+	      _item$price = item.price,
+	      price = _item$price === undefined ? '' : _item$price,
+	      _item$description = item.description,
+	      description = _item$description === undefined ? '' : _item$description,
+	      _item$image = item.image,
+	      image = _item$image === undefined ? '' : _item$image;
+	
 	  return _react2.default.createElement(
 	    Card,
 	    { key: key },
 	    _react2.default.createElement(
 	      Save,
-	      null,
+	      { onClick: function onClick() {
+	          return _actions2.default.selectItem({ item: item });
+	        } },
 	      _react2.default.createElement(_svg.Heart, { color: _constants2.default.color.primary })
 	    ),
-	    _react2.default.createElement(Image, { src: image })
+	    _react2.default.createElement(Image, { src: image }),
+	    _react2.default.createElement(
+	      Content,
+	      { secondary: _constants2.default.color.secondary, primary: _constants2.default.color.primary },
+	      _react2.default.createElement(
+	        'span',
+	        null,
+	        '\xA3',
+	        price
+	      ),
+	      _react2.default.createElement(
+	        'h1',
+	        null,
+	        title
+	      ),
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        description
+	      )
+	    )
 	  );
 	};
 
@@ -66541,7 +66665,7 @@
 	
 	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
 	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  display: flex;\n  height: 100vh;\n  flex-direction: ', ';\n  justify-content: space-between;\n  background: ', ';\n'], ['\n  display: flex;\n  height: 100vh;\n  flex-direction: ', ';\n  justify-content: space-between;\n  background: ', ';\n']);
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  display: flex;\n  height: 100vh;\n  flex-direction: row;\n  justify-content: space-between;\n  background: ', ';\n'], ['\n  display: flex;\n  height: 100vh;\n  flex-direction: row;\n  justify-content: space-between;\n  background: ', ';\n']);
 	
 	var _react = __webpack_require__(303);
 	
@@ -66559,17 +66683,14 @@
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _helpers = __webpack_require__(555);
+	var _utils = __webpack_require__(527);
 	
 	var _components = __webpack_require__(737);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Background = _styledComponents2.default.div(_templateObject, function (_ref) {
-	  var row = _ref.row;
-	  return row ? 'row' : 'column';
-	}, function (_ref2) {
-	  var color = _ref2.color;
+	  var color = _ref.color;
 	  return color;
 	});
 	
@@ -66593,7 +66714,7 @@
 	
 	      return _react2.default.createElement(
 	        Background,
-	        { color: _constants2.default.color.grey, row: true },
+	        { color: _constants2.default.color.grey },
 	        _react2.default.createElement(_components.Filter, { router: router }),
 	        _react2.default.createElement(
 	          _components.Body,
@@ -66607,7 +66728,7 @@
 	  return Component;
 	}(_react2.default.Component);
 	
-	exports.default = (0, _helpers.connect)(Component);
+	exports.default = (0, _utils.connect)(Component);
 
 /***/ },
 /* 872 */
@@ -66644,6 +66765,37 @@
 	    Background,
 	    null,
 	    'no match'
+	  );
+	};
+
+/***/ },
+/* 873 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(303);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = function (_ref) {
+	  var _ref$color = _ref.color,
+	      color = _ref$color === undefined ? 'black' : _ref$color;
+	  return _react2.default.createElement(
+	    'svg',
+	    { width: '22px', height: '22px', viewBox: '1444 280 22 22', version: '1.1' },
+	    _react2.default.createElement(
+	      'g',
+	      { id: 'Group-4', stroke: 'none', strokeWidth: '1', fill: 'none', fillRule: 'evenodd', transform: 'translate(1446.000000, 282.000000)', strokeLinecap: 'round' },
+	      _react2.default.createElement('path', { d: 'M0.5,17.5 L17.0680415,0.931958474', id: 'Line-Copy', stroke: color, strokeWidth: '3', transform: 'translate(9.000000, 9.000000) scale(-1, 1) translate(-9.000000, -9.000000) ' }),
+	      _react2.default.createElement('path', { d: 'M0.5,17.5 L17.0680415,0.931958474', id: 'Line', stroke: color, strokeWidth: '3' })
+	    )
 	  );
 	};
 

@@ -11,24 +11,24 @@
 // product.call('ItemSearch', {SearchIndex: "Books", Keywords: "Javascript"}, fn)
 
 const data = [
-  { type: 'business', title: 'Canon SLR E2 Camera', price: "130.99", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
-  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' }
+  { type: 'business', title: 'Canon SLR E2 Camera', price: "130.99", description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' },
+  { type: 'business', title: 'Canon SLR E2 Camera', price: '130.99', description: "This is an example description", image: 'http://animal-dream.com/data_images/leaves/leaves2.jpg' }
 ]
 
 const bodyParser = require('body-parser');

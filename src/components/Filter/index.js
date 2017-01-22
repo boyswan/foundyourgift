@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Logo } from 'svg'
 import Actions from 'actions';
-import { connect } from 'utils/helpers'
+import { connect } from 'utils'
 import Const from 'utils/constants';
 import { Input, Slider, Button } from 'elements'
 import { Link } from 'react-router'

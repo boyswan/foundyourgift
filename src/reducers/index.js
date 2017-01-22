@@ -1,5 +1,5 @@
-import { set, lensProp, over, adjust, assoc } from 'ramda';
-import { createReducer, setInteretsFromParams } from 'utils/helpers';
+import { set, lensProp, over, adjust, assoc, append } from 'ramda';
+import { createReducer, setInteretsFromParams } from 'utils';
 import Const from 'utils/constants'
 
 
@@ -9,19 +9,27 @@ const _set = ({ item, value }, state) =>
 
 
 // _toggle :: (Number) -> State -> State
-const _toggle = ({ index }, state) => 
+const _toggle = ({ index }, state) =>
   over(lensProp('interests'), adjust(x => assoc('active', !x.active, x), index))
 
 
-export default createReducer({
+// _append :: (Object) -> State -> State
+const _append = ({ item }, state) =>
+  over(lensProp('cart'), append(item))
+
+
+const init = {
   interests: setInteretsFromParams(Const.interests),
+  cart: [],
   searchResults: [],
   searchInput: '',
-  budgetInput: 0
-}, {
+  budgetInput: 50
+}
+
+export default createReducer(init, {
   TOGGLE_INTEREST: _toggle,
   SET_INPUT: _set,
   SET_SLIDER: _set,
-  SET_RESULTS: _set
-
+  SET_RESULTS: _set,
+  SELECT_ITEM: _append
 })

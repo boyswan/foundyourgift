@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router';
-import { connect } from 'utils/helpers';
+import { connect } from 'utils';
 import { mapIndex, interestToQuery } from 'utils';
 import { Logo, MascotShadow } from 'svg'
 import Actions from 'actions';

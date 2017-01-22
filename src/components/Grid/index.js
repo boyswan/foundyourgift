@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
 import { Card } from 'components'
-import { connect } from 'utils/helpers';
+import { connect } from 'utils';
 import { mapIndex } from 'utils'
+import { pipe, filter, isNil, gt, prop, ifElse, reduce, add  } from 'ramda';
 
 const Grid = styled.ul`
   display: flex;
@@ -29,11 +30,25 @@ const Loader = styled.div`
   background: red;
   align-self: center;
 `
+const noItems = () => <div> no items </div>
+
+const getBalance = reduce((acc, { price }) => add(acc, price), 0)
+
+const filterResults = (searchResults, budgetInput, cart) => pipe(
+  filter(pipe(prop('price'), gt(budgetInput - getBalance(cart)))),
+  ifElse(
+    pipe(prop('length'), isNil),
+    noItems,
+    mapIndex(Card)
+  )
+)(searchResults)
 
 export default connect(({
-  searchResults
+  searchResults,
+  budgetInput,
+  cart
 }) =>
   <Grid>
-    {searchResults ? mapIndex(Card, searchResults) : <Loader/>}
+    {searchResults ? filterResults(searchResults, budgetInput, cart) : <Loader/>}
   </Grid>
 )
