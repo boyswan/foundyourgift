@@ -6,15 +6,23 @@ const Card = styled.div`
   flex: 0 0 25rem;
   height: 30rem;
   margin: 1rem;
-  ${''/* box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.04);*/}
 `
 const Image = styled.img`
   width: 100%;
   height: 60%;
   object-fit: cover;
 `
+//
+// const Title = styled.h3`
+//
+// `
+// const Price = styled.span`
+//
+// `
 
-export default key =>
+export default ({ title = '', price = '', image = '' }, key) =>
   <Card key={key}>
-    <Image src="http://animal-dream.com/data_images/leaves/leaves2.jpg"/>
+    <Image src={image}/>
+    {/* <Title>{title}</Title>
+    <Price>{price}</Price> */}
   </Card>

@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Logo } from 'svg'
+import Actions from 'actions';
 import { connect } from 'utils/helpers'
 import Const from 'utils/constants';
-import { Input, Slider, Dropdown, Tag } from 'elements'
+import { Input, Slider, Button } from 'elements'
 import { Link } from 'react-router'
 
 const Filter = styled.aside`
@@ -27,16 +28,29 @@ const Divider = styled.div`
   margin-bottom: 2rem;
   border-bottom: 0.2rem solid #EBEBEB;
 `
+const Interests = styled.ul`
+  margin-bottom: 2rem;
+`
 
-const Component = ({ searchInput, budgetInput, relationInput, ageInput, interestsInput }) =>
+const Interest = ({ label, active }, index) =>
+  <Button
+    key={index}
+    style={active ? 'selected' : 'primary' }
+    onClick={() => Actions.toggleInterest({ index, active: !active })}
+    label={label}/>
+
+const Component = ({ interests, searchInput, budgetInput }) =>
   <Filter>
     <LogoWrap><Logo color={Const.color.primary}/></LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
     <Link to="search" >test link here</Link>
     <Divider/>
-    <Input input='searchInput' icon="Search" value={searchInput} label='Search'/>
+    <Input item='searchInput' icon="Search" value={searchInput} label='Search'/>
     <Divider/>
-    <Slider input='budgetInput' value={budgetInput} label='Budget'/>
+    <Slider item='budgetInput' value={budgetInput} label='Budget'/>
+    <Interests>
+      {addIndex(map)(Interest, interests)}
+    </Interests>
   </Filter>
 
 export default connect(Component)

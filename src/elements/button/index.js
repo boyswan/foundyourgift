@@ -29,11 +29,15 @@ const styles = {
   selected: styled(Button)`
     background: white;
     color: red;
+  `,
+  small: styled(Button)`
+    padding: 1rem 1rem;
+    font-size: 1.4rem;
+    margin: 0 1rem 1rem 0rem;
   `
 }
 
 export default ({ style = 'primary', onClick, label }) => {
-  console.log('style', style)
   const Button = styles[style];
   return <Button {...{ onClick }}>{label}</Button>
 }

@@ -46,8 +46,8 @@ const Handle = styled.div`
   }
 `
 
-const handleSlider = curry((input, value) =>
-  Actions.setSlider({ input, value }));
+const handleSlider = curry((item, value) =>
+  Actions.setSlider({ item, value }));
 
 class SliderHandle extends Component {
   render() {
@@ -59,7 +59,7 @@ class SliderHandle extends Component {
   }
 }
 
-export default ({ input, value, label, defaultValue = 50, min = 0, max = 100 }) =>
+export default ({ item, value, label, defaultValue = 50, min = 0, max = 100 }) =>
   <Container>
     <Label>{label}</Label>
     <Value>£{value}</Value>
@@ -68,8 +68,8 @@ export default ({ input, value, label, defaultValue = 50, min = 0, max = 100 }) 
         value={value}
         tipFormatter={null}
         handle={<SliderHandle/>}
-        onChange={handleSlider(input)}
-        step={5}
+        onChange={handleSlider(item)}
+        // step={5}
         defaultValue={defaultValue}
         min={min}
         max={max}/>

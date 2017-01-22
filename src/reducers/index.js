@@ -1,23 +1,25 @@
 import { createReducer } from 'utils/helpers';
 import Const from 'utils/constants'
 
-// setInput :: (String, a) -> State -> State
-const setInput = ({ input, value }, state) =>
-  set(lensProp(input), value)
+// _set :: (String, a) -> State -> State
+const _set = ({ item, value }, state) =>
+  set(lensProp(item), value)
 
 
-// toggleInterest :: (Number) -> State -> State
-const toggleInterest = ({ index }, state) =>
+// _toggle :: (Number) -> State -> State
+const _toggle = ({ index }, state) =>
   over(lensProp('interests'), adjust(x => assoc('active', !x.active, x), index))
 
 
 export default createReducer({
   interests: Const.interests,
+  searchResults: [],
   searchInput: '',
   budgetInput: 0
 }, {
-  TOGGLE_INTEREST: toggleInterest,
-  SET_INPUT: setInput,
-  SET_SLIDER: setInput
+  TOGGLE_INTEREST: _toggle,
+  SET_INPUT: _set,
+  SET_SLIDER: _set,
+  SEARCH_RESULTS: _set
 
 })

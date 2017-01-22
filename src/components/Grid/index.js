@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from '../Card';
+import Actions from 'actions';
+import { Card } from 'components'
+import { connect } from 'utils/helpers';
 
-const Grid = styled.div`
+const Grid = styled.ul`
   display: flex;
   flex-wrap: wrap;
   list-style: none;
@@ -11,7 +13,19 @@ const Grid = styled.div`
   max-width: 1280px;
 `
 
-export default () =>
-  <Grid>
-    {addIndex(map)(Card, range(1, 100))}
-  </Grid>
+class Component extends React.Component {
+  componentDidMount() {
+    Actions.search(window.location)
+  }
+
+  render() {
+    const { searchResults } = this.props;
+    return (
+      <Grid>
+        {addIndex(map)(Card, searchResults)}
+      </Grid>
+    )
+  }
+}
+
+export default connect(Component)

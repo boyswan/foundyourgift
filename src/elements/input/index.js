@@ -34,13 +34,13 @@ const Icon = styled.div`
   top: 50%;
 `
 
-const handleInput = (input, value) => Actions.setInput({ input, value });
+const handleInput = (item, value) => Actions.setInput({ item, value });
 
-export default ({ input, value, label, icon, onClick = identity }) =>
+export default ({ item, value, label, icon, onClick = identity }) =>
   <Container>
     <Label>{label}</Label>
     <InputContainer>
-      <Input value={value} onChange={e => handleInput(input, e.target.value)}/>
+      <Input value={value} onChange={e => handleInput(item, e.target.value)}/>
       {icon ? <Icon onClick={onClick}>{icon}</Icon> : ''}
     </InputContainer>
   </Container>

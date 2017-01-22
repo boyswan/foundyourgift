@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Const from 'utils/constants';
-import { Summary, Filter, Body, Footer } from '../components';
+import { Summary, Filter, Body, Footer, Grid } from '../components';
 
 const Background = styled.div`
   display: flex;
@@ -14,6 +14,8 @@ const Background = styled.div`
 export default () =>
   <Background color={Const.color.grey} row >
     <Filter/>
-    <Body/>
+    <Body>
+      <Grid/>
+    </Body>
     <Summary/>
   </Background>
