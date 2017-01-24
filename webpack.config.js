@@ -3,6 +3,12 @@ const webpack = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
+const AWS = {
+  ACCESS_KEY: process.env.ACCESS_KEY,
+  SECRET_KEY: process.env.SECRET_KEY,
+  API_URL: process.env.API_URL
+}
+
 const config = {
   entry: {
     app: ['babel-polyfill', './src/app.js']
@@ -24,7 +30,11 @@ const config = {
       { test: /\.(ttf|eot|jpg|woff(2)?)(\?[a-z0-9]+)?$/, loader: 'file-loader' }
     ]
   },
-  plugins: [],
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.aws': AWS
+   })
+  ],
 };
 
 switch(NODE_ENV) {

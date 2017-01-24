@@ -1,4 +1,4 @@
-import { set, lensProp, over, adjust, assoc, append } from 'ramda';
+import { set, lensProp, over, adjust, reject, propEq, assoc, append } from 'ramda'
 import { createReducer, setInteretsFromParams } from 'utils';
 import Const from 'utils/constants'
 
@@ -18,11 +18,17 @@ const _append = ({ item }, state) =>
   over(lensProp('cart'), append(item))
 
 
+// _remove :: (Number) -> State -> State
+const _remove = ({ id }, state) =>
+  over(lensProp('cart'), reject(propEq('id', id)))
+
+
 const init = {
   interests: setInteretsFromParams(Const.interests),
   cart: [],
   searchResults: [],
   searchInput: '',
+  filterInput: 0,
   budgetInput: 50
 }
 
@@ -31,5 +37,6 @@ export default createReducer(init, {
   SET_INPUT: _set,
   SET_SLIDER: _set,
   SET_RESULTS: _set,
-  SELECT_ITEM: _append
+  SELECT_ITEM: _append,
+  REMOVE_ITEM: _remove
 })

@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Logo } from 'svg'
-import Actions from 'actions';
-import { connect } from 'utils'
-import Const from 'utils/constants';
 import { Input, Slider, Button } from 'elements'
 import { Link } from 'react-router'
-import { addIndex, map } from 'ramda';
-import { interestToQuery } from 'utils'
+import { connect, interestToQuery, mapIndex } from 'utils'
+import Actions from 'actions';
+import Const from 'utils/constants';
 
 const Filter = styled.aside`
   width: 300px;
@@ -38,17 +36,10 @@ const Interest = (router, interests) => ({ label, active }, index) =>
   <Button
     key={index}
     style={active ? 'selected' : 'primary' }
-    onClick={() => {
-      Actions.toggleInterest({ index, active: !active, router })
-      // router.push({
-      //   ...router.location,
-      //   query: interestToQuery(interests)
-      // })
-    }}
+    onClick={() => Actions.toggleInterest({ index, active: !active, router })}
     label={label}/>
 
-
-const Component = ({ router, interests, searchInput, budgetInput }) =>
+const Component = ({ router, interests, searchInput, budgetInput, filterInput }) =>
   <Filter>
     <LogoWrap><Logo color={Const.color.primary}/></LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
@@ -56,8 +47,9 @@ const Component = ({ router, interests, searchInput, budgetInput }) =>
     <Input item='searchInput' icon="Search" value={searchInput} label='Search'/>
     <Divider/>
     <Slider item='budgetInput' value={budgetInput} label='Budget'/>
+    {/* <Slider item='filterInput' value={filterInput} min={0} max={budgetInput} label='Filter'/> */}
     <Interests>
-      {addIndex(map)(Interest(router, interests), interests)}
+      {mapIndex(Interest(router, interests), interests)}
     </Interests>
   </Filter>
 

@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Actions from 'actions';
 import { Card } from 'components'
 import { connect } from 'utils';
-import { mapIndex } from 'utils'
-import { pipe, filter, isNil, gt, prop, ifElse, reduce, add  } from 'ramda';
+import { mapIndex, totalPrice, last } from 'utils'
+import { pipe, filter, isNil, gt, prop, anyPass,
+  ifElse, reject  } from 'ramda';
 
 const Grid = styled.ul`
   display: flex;
@@ -30,18 +31,30 @@ const Loader = styled.div`
   background: red;
   align-self: center;
 `
-const noItems = () => <div> no items </div>
+const NoResults = styled.div`
 
-const getBalance = reduce((acc, { price }) => add(acc, price), 0)
+`
 
-const filterResults = (searchResults, budgetInput, cart) => pipe(
-  filter(pipe(prop('price'), gt(budgetInput - getBalance(cart)))),
+const isOverBudget = (budgetInput, cart) => pipe(
+  prop('price'),
+  gt(budgetInput - totalPrice(cart))
+)
+
+const filterResults = last((budgetInput, cart) => pipe(
+  // filter(anyPass([
+  //   isOverBudget(budgetInput, cart),
+  //   // isInCart()
+  // ])),
+  filter(isOverBudget(budgetInput, cart)),
   ifElse(
     pipe(prop('length'), isNil),
     noItems,
     mapIndex(Card)
   )
-)(searchResults)
+))
+
+const noItems = () =>
+<NoResults> no items </NoResults>
 
 export default connect(({
   searchResults,
@@ -49,6 +62,6 @@ export default connect(({
   cart
 }) =>
   <Grid>
-    {searchResults ? filterResults(searchResults, budgetInput, cart) : <Loader/>}
+    {searchResults ? filterResults(budgetInput, cart, searchResults) : <Loader/>}
   </Grid>
 )

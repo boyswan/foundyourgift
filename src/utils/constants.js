@@ -1,3 +1,8 @@
+const api = {
+  API_URL: 'https://gfqrcx7vjd.execute-api.us-east-1.amazonaws.com/foundyourgift',
+  API_KEY: 'QuHdJW22No1T0vvZ7pzU9kTfDCXcc3l84wqXJLSb'
+}
+
 const color = {
   primary: '#F15959',
   primaryDark: '#c74949',
@@ -35,5 +40,6 @@ const text = {
 export default {
   color,
   interests,
-  text
+  text,
+  api
 }

@@ -1,11 +1,24 @@
 import store from "./store";
 import { connect as _connect } from 'react-redux';
 import axios from 'axios';
+import Const from 'utils/constants';
 import { reduce, curry, assoc, addIndex, map, pipe, head, tail, split,
-  replace, toLower, toUpper, identity } from 'ramda';
+  uncurryN, replace, toLower, toUpper, identity, add } from 'ramda';
+
+const getConfig = url => ({
+  method: 'GET',
+  url,
+  headers: {
+    "Content-Type": "application/json",
+    "x-api-key": Const.api.API_KEY
+  }
+})
 
 export const mapIndex = addIndex(map);
-export const fetch = url => axios.get(url).then(identity).catch(console.log)
+
+export const fetch = url => axios(getConfig(url))
+  .then(identity)
+  .catch(console.log)
 
 export const toSnakeCaseUpper = pipe(
   replace(/([A-Z])/g, str => `_${toLower(str)}`),
@@ -35,7 +48,6 @@ export const createReducer =
 export const connect = (component, state = identity) =>
   _connect(state)(component)
 
-
 export const getParams = pipe(
   tail,
   split('&'),
@@ -46,3 +58,9 @@ export const getParams = pipe(
 export const setInteretsFromParams = map(x =>
   getParams.includes(x.type) ? assoc('active', true, x) : x
 )
+
+
+export const totalPrice = reduce((acc, { price }) => add(acc, price), 0)
+
+// Push last argument into pipe, curry other arguments
+export const last = pipe(uncurryN(arguments.length), curry)

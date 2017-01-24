@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Actions from 'actions';
 import Const from 'utils/constants';
 import { Heart } from 'svg';
-import { prop } from 'ramda';
+import { prop, tail } from 'ramda';
 
 const Card = styled.li`
   ${''/* background: red;*/}
