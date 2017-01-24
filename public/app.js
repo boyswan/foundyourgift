@@ -31611,7 +31611,7 @@
 	
 	var _sagas2 = _interopRequireDefault(_sagas);
 	
-	var _reducers = __webpack_require__(592);
+	var _reducers = __webpack_require__(593);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -33920,9 +33920,9 @@
 	
 	var _utils = __webpack_require__(565);
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -34633,11 +34633,11 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -36193,6 +36193,52 @@
 
 /***/ },
 /* 591 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var api = {
+	  API_URL: 'https://gfqrcx7vjd.execute-api.us-east-1.amazonaws.com/foundyourgift',
+	  API_KEY: 'QuHdJW22No1T0vvZ7pzU9kTfDCXcc3l84wqXJLSb'
+	};
+	
+	var color = {
+	  primary: '#F15959',
+	  primaryDark: '#c74949',
+	  secondary: '#4674AB',
+	  grey: '#F6F6F6',
+	  greyDark: '#EBEBEB'
+	};
+	
+	var interests = [{ id: 'BU', type: 'business', label: 'Entreprenurial' }, { id: 'EX', type: 'exercise', label: 'Fitness fanatic' }, { id: 'GA', type: 'gaming', label: 'Video gamer' }, { id: 'HE', type: 'health', label: 'Nature lover' }, { id: 'SP', type: 'sports', label: 'Sports fan' }, { id: 'TR', type: 'travel', label: 'Traveller' }, { id: 'AR', type: 'arts', label: 'Creative' }, { id: 'TE', type: 'technology', label: 'Tech geek' }, { id: 'MU', type: 'music', label: 'Sound person' }];
+	
+	var text = {
+	  home: {
+	    title: "Looking to buy the perfect gift?",
+	    // (describe intro relations with humours situations)
+	    intro: "Whether it’s for your boyfriend, wife, husband or girlfriend we’ll help you find the right gift for them.",
+	    cta: "Get started",
+	    amazon: "foundyourgift is a participant in the Amazon EU Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk",
+	    amazon2: "CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON EU S.à r.l. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME."
+	  },
+	  search: {
+	    intro: "Brief intro copy goes here. talk about something not sure what to say but we have 3 lines worth of space."
+	  }
+	
+	};
+	
+	exports.default = {
+	  color: color,
+	  interests: interests,
+	  text: text,
+	  api: api
+	};
+
+/***/ },
+/* 592 */
 /***/ function(module, exports, __webpack_require__) {
 
 	//  Ramda v0.22.1
@@ -45029,7 +45075,7 @@
 
 
 /***/ },
-/* 592 */
+/* 593 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -45038,11 +45084,11 @@
 	  value: true
 	});
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
 	var _utils = __webpack_require__(565);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -45081,7 +45127,7 @@
 	  searchResults: [],
 	  searchInput: '',
 	  filterInput: 0,
-	  budgetInput: 50
+	  budgetInput: 125
 	};
 	
 	exports.default = (0, _utils.createReducer)(init, {
@@ -45092,51 +45138,6 @@
 	  SELECT_ITEM: _append,
 	  REMOVE_ITEM: _remove
 	});
-
-/***/ },
-/* 593 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var api = {
-	  API_URL: 'https://gfqrcx7vjd.execute-api.us-east-1.amazonaws.com/foundyourgift',
-	  API_KEY: 'QuHdJW22No1T0vvZ7pzU9kTfDCXcc3l84wqXJLSb'
-	};
-	
-	var color = {
-	  primary: '#F15959',
-	  primaryDark: '#c74949',
-	  secondary: '#4674AB',
-	  grey: '#F6F6F6',
-	  greyDark: '#EBEBEB'
-	};
-	
-	var interests = [{ id: 'BU', type: 'business', label: 'Entreprenurial' }, { id: 'EX', type: 'exercise', label: 'Fitness fanatic' }, { id: 'GA', type: 'gaming', label: 'Video gamer' }, { id: 'HE', type: 'health', label: 'Nature lover' }, { id: 'SP', type: 'sports', label: 'Sports fan' }, { id: 'TR', type: 'travel', label: 'Traveller' }, { id: 'AR', type: 'arts', label: 'Creative' }, { id: 'TE', type: 'technology', label: 'Tech geek' }, { id: 'MU', type: 'music', label: 'Sound person' }];
-	
-	var text = {
-	  home: {
-	    title: "Looking to buy the perfect gift?",
-	    // (describe intro relations with humours situations)
-	    intro: "Whether it’s for your boyfriend, wife, husband or girlfriend we’ll help you find the right gift for them.",
-	    cta: "Get started",
-	    amazon: "foundyourgift is a participant in the Amazon EU Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk"
-	  },
-	  search: {
-	    intro: "Brief intro copy goes here. talk about something not sure what to say but we have 3 lines worth of space."
-	  }
-	
-	};
-	
-	exports.default = {
-	  color: color,
-	  interests: interests,
-	  text: text,
-	  api: api
-	};
 
 /***/ },
 /* 594 */
@@ -50116,8 +50117,8 @@
 	    _templateObject5 = (0, _taggedTemplateLiteral3.default)(['\n  border: none;\n  margin: 0 auto;\n  max-width: 50%;\n  opacity: 0.25;\n  margin-bottom: 6rem;\n  ', '\n'], ['\n  border: none;\n  margin: 0 auto;\n  max-width: 50%;\n  opacity: 0.25;\n  margin-bottom: 6rem;\n  ', '\n']),
 	    _templateObject6 = (0, _taggedTemplateLiteral3.default)(['\n  max-width: 50%;\n  margin: 0 auto;\n  margin-bottom: 2rem;\n'], ['\n  max-width: 50%;\n  margin: 0 auto;\n  margin-bottom: 2rem;\n']),
 	    _templateObject7 = (0, _taggedTemplateLiteral3.default)(['\n  width: 100%;\n  padding: 3rem 2rem;\n  text-align: center;\n'], ['\n  width: 100%;\n  padding: 3rem 2rem;\n  text-align: center;\n']),
-	    _templateObject8 = (0, _taggedTemplateLiteral3.default)(['\n  max-width: 60rem;\n  margin: 0 auto;\n  font-size: 1.2rem;\n  color: ', ';\n'], ['\n  max-width: 60rem;\n  margin: 0 auto;\n  font-size: 1.2rem;\n  color: ', ';\n']),
-	    _templateObject9 = (0, _taggedTemplateLiteral3.default)(['\n  margin-bottom: 1rem;\n  color: ', ';\n  a {\n    font-size: 1.6rem;\n    margin: 0 0.5rem;\n    color: inherit;\n    transition: all 0.2s ease-in-out;\n    &:hover {\n      color: white;\n    }\n  }\n'], ['\n  margin-bottom: 1rem;\n  color: ', ';\n  a {\n    font-size: 1.6rem;\n    margin: 0 0.5rem;\n    color: inherit;\n    transition: all 0.2s ease-in-out;\n    &:hover {\n      color: white;\n    }\n  }\n']);
+	    _templateObject8 = (0, _taggedTemplateLiteral3.default)(['\n  ', '\n  margin: 0 auto;\n  font-size: 1.2rem;\n  color: ', ';\n'], ['\n  ', '\n  margin: 0 auto;\n  font-size: 1.2rem;\n  color: ', ';\n']),
+	    _templateObject9 = (0, _taggedTemplateLiteral3.default)(['\n  margin-bottom: 1rem;\n  color: ', ';\n  a {\n    font-size: 1.6rem;\n    margin: 0 0.5rem;\n    color: inherit;\n    ', '\n    &:hover {\n      color: white;\n    }\n  }\n'], ['\n  margin-bottom: 1rem;\n  color: ', ';\n  a {\n    font-size: 1.6rem;\n    margin: 0 0.5rem;\n    color: inherit;\n    ', '\n    &:hover {\n      color: white;\n    }\n  }\n']);
 	
 	var _react = __webpack_require__(303);
 	
@@ -50143,7 +50144,7 @@
 	
 	var _elements = __webpack_require__(740);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -50162,29 +50163,33 @@
 	var Divider = _styledComponents2.default.hr(_templateObject5, '' /* border-bottom: 0.2rem solid ${({ color }) => color};*/);
 	var Interests = _styledComponents2.default.ul(_templateObject6);
 	var Footer = _styledComponents2.default.footer(_templateObject7);
-	var Amazon = _styledComponents2.default.p(_templateObject8, function (_ref3) {
+	var Amazon = _styledComponents2.default.p(_templateObject8, '' /* max-width: 60rem;*/, function (_ref3) {
 	  var color = _ref3.color;
 	  return color;
 	});
 	var FooterLinks = _styledComponents2.default.div(_templateObject9, function (_ref4) {
 	  var color = _ref4.color;
 	  return color;
-	});
+	}, '' /* transition: all 0.2s ease-in-out;*/);
 	
-	var Interest = function Interest(_ref5, index) {
-	  var label = _ref5.label,
-	      active = _ref5.active;
-	  return _react2.default.createElement(_elements.Button, {
-	    key: index,
-	    style: active ? 'selected' : 'primary',
-	    onClick: function onClick() {
-	      return _actions2.default.toggleInterest({ index: index, active: !active });
-	    },
-	    label: label });
+	var Interest = function Interest(router) {
+	  return function (_ref5, index) {
+	    var label = _ref5.label,
+	        active = _ref5.active;
+	    return _react2.default.createElement(_elements.Button, {
+	      active: active,
+	      key: index,
+	      style: active ? 'selected' : 'primary',
+	      onClick: function onClick() {
+	        return _actions2.default.toggleInterest({ router: router, index: index, active: !active });
+	      },
+	      label: label });
+	  };
 	};
 	
 	exports.default = (0, _utils.connect)(function (_ref6) {
-	  var interests = _ref6.interests;
+	  var interests = _ref6.interests,
+	      router = _ref6.router;
 	  return _react2.default.createElement(
 	    Background,
 	    { color: _constants2.default.color.primary },
@@ -50215,41 +50220,24 @@
 	      _react2.default.createElement(
 	        Interests,
 	        null,
-	        (0, _utils.mapIndex)(Interest, interests)
+	        (0, _utils.mapIndex)(Interest(router), interests)
 	      ),
 	      _react2.default.createElement(Divider, { color: _constants2.default.color.primaryDark }),
 	      _react2.default.createElement(
 	        _reactRouter.Link,
 	        { to: { pathname: 'search', query: (0, _utils.interestToQuery)(interests) } },
-	        _react2.default.createElement(_elements.Button, { label: _constants2.default.text.home.cta })
+	        _react2.default.createElement(_elements.Button, { style: 'primary', label: _constants2.default.text.home.cta })
 	      )
 	    ),
 	    _react2.default.createElement(
 	      Footer,
 	      null,
 	      _react2.default.createElement(
-	        FooterLinks,
-	        { color: _constants2.default.color.primaryDark },
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'terms' },
-	          'Terms'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'about' },
-	          'About'
-	        ),
-	        _react2.default.createElement(
-	          _reactRouter.Link,
-	          { to: 'contact' },
-	          'Contact'
-	        )
-	      ),
-	      _react2.default.createElement(
 	        Amazon,
 	        { color: _constants2.default.color.primaryDark },
-	        _constants2.default.text.home.amazon
+	        _constants2.default.text.home.amazon,
+	        _react2.default.createElement('br', null),
+	        _constants2.default.text.home.amazon2
 	      )
 	    )
 	  );
@@ -58906,7 +58894,7 @@
 	      color = _ref$color === undefined ? 'black' : _ref$color;
 	  return _react2.default.createElement(
 	    'svg',
-	    { width: '22px', height: '22px', viewBox: '1444 280 22 22', version: '1.1' },
+	    { width: '16px', height: '16px', viewBox: '1444 280 22 22', version: '1.1' },
 	    _react2.default.createElement(
 	      'g',
 	      { id: 'Group-4', stroke: 'none', strokeWidth: '1', fill: 'none', fillRule: 'evenodd', transform: 'translate(1446.000000, 282.000000)', strokeLinecap: 'round' },
@@ -58928,7 +58916,7 @@
 	
 	var _utils = __webpack_require__(565);
 	
-	exports.default = (0, _utils.createActions)(['search', 'selectItem', 'removeItem', 'toggleInterest', 'setInput', 'setSlider']);
+	exports.default = (0, _utils.createActions)(['search', 'selectItem', 'removeItem', 'toggleInterest', 'setInput', 'setSlider', 'checkout']);
 
 /***/ },
 /* 737 */
@@ -58976,30 +58964,12 @@
 	  }
 	});
 	
-	var _Body = __webpack_require__(868);
-	
-	Object.defineProperty(exports, 'Body', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_Body).default;
-	  }
-	});
-	
 	var _Footer = __webpack_require__(869);
 	
 	Object.defineProperty(exports, 'Footer', {
 	  enumerable: true,
 	  get: function get() {
 	    return _interopRequireDefault(_Footer).default;
-	  }
-	});
-	
-	var _Sidebar = __webpack_require__(870);
-	
-	Object.defineProperty(exports, 'Sidebar', {
-	  enumerable: true,
-	  get: function get() {
-	    return _interopRequireDefault(_Sidebar).default;
 	  }
 	});
 
@@ -59039,7 +59009,7 @@
 	
 	var _utils = __webpack_require__(565);
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59118,7 +59088,7 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -59138,7 +59108,7 @@
 	        active = _ref.active;
 	    return _react2.default.createElement(_elements.Button, {
 	      key: index,
-	      style: active ? 'selected' : 'primary',
+	      style: active ? 'selectedSmallLight' : 'primarySmallLight',
 	      onClick: function onClick() {
 	        return _actions2.default.toggleInterest({ index: index, active: !active, router: router });
 	      },
@@ -59158,7 +59128,11 @@
 	    _react2.default.createElement(
 	      LogoWrap,
 	      null,
-	      _react2.default.createElement(_svg.Logo, { color: _constants2.default.color.primary })
+	      _react2.default.createElement(
+	        _reactRouter.Link,
+	        { to: { pathname: '/', query: (0, _utils.interestToQuery)(interests) } },
+	        _react2.default.createElement(_svg.Logo, { color: _constants2.default.color.primary })
+	      )
 	    ),
 	    _react2.default.createElement(
 	      Intro,
@@ -59168,7 +59142,7 @@
 	    _react2.default.createElement(Divider, null),
 	    _react2.default.createElement(_elements.Input, { item: 'searchInput', icon: 'Search', value: searchInput, label: 'Search' }),
 	    _react2.default.createElement(Divider, null),
-	    _react2.default.createElement(_elements.Slider, { item: 'budgetInput', value: budgetInput, label: 'Budget' }),
+	    _react2.default.createElement(_elements.Slider, { max: 250, item: 'budgetInput', value: budgetInput, label: 'Budget' }),
 	    _react2.default.createElement(
 	      Interests,
 	      null,
@@ -59215,6 +59189,24 @@
 	    return _interopRequireDefault(_Slider).default;
 	  }
 	});
+	
+	var _Sidebar = __webpack_require__(873);
+	
+	Object.defineProperty(exports, 'Sidebar', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_Sidebar).default;
+	  }
+	});
+	
+	var _Body = __webpack_require__(874);
+	
+	Object.defineProperty(exports, 'Body', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_Body).default;
+	  }
+	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -59233,9 +59225,12 @@
 	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
 	
 	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  transition: all 0.2s ease-in-out;\n  display: inline-block;\n  padding: 1.5rem 2rem;\n  border: 1px solid white;\n  font-size: 1.8rem;\n  cursor: pointer;\n  border-radius: 10rem;\n  font-weight: 100;\n  margin: 0 1rem 2rem 1rem;\n\n  &:hover {\n    transition: all 0.2s ease-in-out;\n  }\n'], ['\n  transition: all 0.2s ease-in-out;\n  display: inline-block;\n  padding: 1.5rem 2rem;\n  border: 1px solid white;\n  font-size: 1.8rem;\n  cursor: pointer;\n  border-radius: 10rem;\n  font-weight: 100;\n  margin: 0 1rem 2rem 1rem;\n\n  &:hover {\n    transition: all 0.2s ease-in-out;\n  }\n']),
-	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n    background: transparent;\n    color: white;\n    &:hover {\n      background: white;\n      color: #59a9ff;\n    }\n  '], ['\n    background: transparent;\n    color: white;\n    &:hover {\n      background: white;\n      color: #59a9ff;\n    }\n  ']),
-	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n    background: white;\n    color: red;\n  '], ['\n    background: white;\n    color: red;\n  ']),
-	    _templateObject4 = (0, _taggedTemplateLiteral3.default)(['\n    padding: 1rem 1rem;\n    font-size: 1.4rem;\n    margin: 0 1rem 1rem 0rem;\n  '], ['\n    padding: 1rem 1rem;\n    font-size: 1.4rem;\n    margin: 0 1rem 1rem 0rem;\n  ']);
+	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n  background: transparent;\n  color: white;\n  &:hover {\n    background: rgba(255, 255, 255, 0.5);\n    color: white;\n  }\n'], ['\n  background: transparent;\n  color: white;\n  &:hover {\n    background: rgba(255, 255, 255, 0.5);\n    color: white;\n  }\n']),
+	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n  background: white;\n  color: red;\n'], ['\n  background: white;\n  color: red;\n']),
+	    _templateObject4 = (0, _taggedTemplateLiteral3.default)(['\n  color: white;\n  background: ', ';\n  /*&:hover {\n    color: ', ';\n    background: rgba(255,255,255, 0.5);\n  }*/\n'], ['\n  color: white;\n  background: ', ';\n  /*&:hover {\n    color: ', ';\n    background: rgba(255,255,255, 0.5);\n  }*/\n']),
+	    _templateObject5 = (0, _taggedTemplateLiteral3.default)(['\n  ', '\n'], ['\n  ', '\n']),
+	    _templateObject6 = (0, _taggedTemplateLiteral3.default)(['\n  ', '\n  color: white;\n  background: ', '\n'], ['\n  ', '\n  color: white;\n  background: ', '\n']),
+	    _templateObject7 = (0, _taggedTemplateLiteral3.default)(['\n  ', '\n  color: ', ';\n  background: white;\n  &:hover {\n    color: ', ';\n    background: rgba(255,255,255, 0.5);\n  }\n'], ['\n  ', '\n  color: ', ';\n  background: white;\n  &:hover {\n    color: ', ';\n    background: rgba(255,255,255, 0.5);\n  }\n']);
 	
 	var _react = __webpack_require__(303);
 	
@@ -59245,15 +59240,27 @@
 	
 	var _styledComponents2 = _interopRequireDefault(_styledComponents);
 	
+	var _constants = __webpack_require__(591);
+	
+	var _constants2 = _interopRequireDefault(_constants);
+	
+	var _ramda = __webpack_require__(592);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Button = _styledComponents2.default.button(_templateObject);
 	
-	var styles = {
-	  primary: (0, _styledComponents2.default)(Button)(_templateObject2),
-	  selected: (0, _styledComponents2.default)(Button)(_templateObject3),
-	  small: (0, _styledComponents2.default)(Button)(_templateObject4)
+	var small = function small() {
+	  return '\n  padding: 1rem 1rem;\n  font-size: 1.4rem;\n  margin: 0 1rem 1rem 0rem;\n';
 	};
+	
+	var primary = (0, _styledComponents2.default)(Button)(_templateObject2);
+	var selected = (0, _styledComponents2.default)(Button)(_templateObject3);
+	var primaryLight = (0, _styledComponents2.default)(primary)(_templateObject4, (0, _ramda.prop)('primary'), (0, _ramda.prop)('primary'));
+	var selectedSmall = (0, _styledComponents2.default)(selected)(_templateObject5, small());
+	var primarySmall = (0, _styledComponents2.default)(primary)(_templateObject5, small());
+	var selectedSmallLight = (0, _styledComponents2.default)(selected)(_templateObject6, small(), (0, _ramda.prop)('primary'));
+	var primarySmallLight = (0, _styledComponents2.default)(primary)(_templateObject7, small(), (0, _ramda.prop)('secondary'), (0, _ramda.prop)('primary'));
 	
 	exports.default = function (_ref) {
 	  var _ref$style = _ref.style,
@@ -59261,10 +59268,23 @@
 	      onClick = _ref.onClick,
 	      label = _ref.label;
 	
-	  var Button = styles[style];
+	
+	  var Button = {
+	    primary: primary,
+	    selected: selected,
+	    primaryLight: primaryLight,
+	    selectedSmall: selectedSmall,
+	    primarySmall: primarySmall,
+	    selectedSmallLight: selectedSmallLight,
+	    primarySmallLight: primarySmallLight
+	  }[style];
+	
 	  return _react2.default.createElement(
 	    Button,
-	    { onClick: onClick },
+	    {
+	      primary: _constants2.default.color.primary,
+	      secondary: _constants2.default.color.secondary,
+	      onClick: onClick },
 	    label
 	  );
 	};
@@ -59435,7 +59455,7 @@
 	
 	__webpack_require__(864);
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -59483,8 +59503,7 @@
 	      defaultValue = _ref2$defaultValue === undefined ? 50 : _ref2$defaultValue,
 	      _ref2$min = _ref2.min,
 	      min = _ref2$min === undefined ? 0 : _ref2$min,
-	      _ref2$max = _ref2.max,
-	      max = _ref2$max === undefined ? 500 : _ref2$max;
+	      max = _ref2.max;
 	  return _react2.default.createElement(
 	    _styles.Container,
 	    null,
@@ -66395,9 +66414,15 @@
 	
 	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
 	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  ', '\n'], ['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  ', '\n']),
-	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n'], ['\n']),
-	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n\n'], ['\n\n']);
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  padding: 0 2rem;\n  overflow: auto;\n'], ['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  padding: 0 2rem;\n  overflow: auto;\n']),
+	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n  height: 12rem;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  color: ', ';\n  text-align: right;\n  h1 {\n    font-weight: 600;\n    font-size: 3.2rem;\n  }\n  span {\n    font-size: 1.4rem;\n  }\n'], ['\n  height: 12rem;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  color: ', ';\n  text-align: right;\n  h1 {\n    font-weight: 600;\n    font-size: 3.2rem;\n  }\n  span {\n    font-size: 1.4rem;\n  }\n']),
+	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n  height: 5rem;\n  border: 1px solid ', ';\n  background: ', ';\n  width: 5rem;\n  border-radius: 10rem;\n  margin-right: 2rem;\n'], ['\n  height: 5rem;\n  border: 1px solid ', ';\n  background: ', ';\n  width: 5rem;\n  border-radius: 10rem;\n  margin-right: 2rem;\n']),
+	    _templateObject4 = (0, _taggedTemplateLiteral3.default)(['\n  font-size: 1.6rem;\n  color: ', ';\n  margin-bottom: 2rem;\n  padding-bottom: 2rem;\n  font-weight: 300;\n  border-bottom: 1px solid ', ';\n'], ['\n  font-size: 1.6rem;\n  color: ', ';\n  margin-bottom: 2rem;\n  padding-bottom: 2rem;\n  font-weight: 300;\n  border-bottom: 1px solid ', ';\n']),
+	    _templateObject5 = (0, _taggedTemplateLiteral3.default)(['\n  color: ', ';\n  font-size: 1.6rem;\n  span {\n    font-weight: 400;\n  }\n  div {\n    opacity: 0.5;\n  }\n'], ['\n  color: ', ';\n  font-size: 1.6rem;\n  span {\n    font-weight: 400;\n  }\n  div {\n    opacity: 0.5;\n  }\n']),
+	    _templateObject6 = (0, _taggedTemplateLiteral3.default)(['\n  flex-direction: row;\n  display: flex;\n  width: 100%;\n  border-bottom: 1px solid ', ';\n  padding-bottom: 2rem;\n  margin-bottom: 2rem;\n  align-items: center;\n  position: relative;\n'], ['\n  flex-direction: row;\n  display: flex;\n  width: 100%;\n  border-bottom: 1px solid ', ';\n  padding-bottom: 2rem;\n  margin-bottom: 2rem;\n  align-items: center;\n  position: relative;\n']),
+	    _templateObject7 = (0, _taggedTemplateLiteral3.default)(['\n  display: flex;\n  flex-direction: column;\n'], ['\n  display: flex;\n  flex-direction: column;\n']),
+	    _templateObject8 = (0, _taggedTemplateLiteral3.default)(['\n  position: absolute;\n  right: 0;\n  cursor: pointer;\n'], ['\n  position: absolute;\n  right: 0;\n  cursor: pointer;\n']),
+	    _templateObject9 = (0, _taggedTemplateLiteral3.default)(['\n  \n'], ['\n  \n']);
 	
 	var _react = __webpack_require__(303);
 	
@@ -66409,11 +66434,13 @@
 	
 	var _utils = __webpack_require__(565);
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
 	var _svg = __webpack_require__(728);
 	
-	var _constants = __webpack_require__(593);
+	var _elements = __webpack_require__(740);
+	
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
@@ -66423,17 +66450,15 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var Sidebar = _styledComponents2.default.aside(_templateObject, '' /* position: fixed;
-	                                                                   top: 0;
-	                                                                   right: 0;
-	                                                                   height: 100%;*/);
-	var Balance = _styledComponents2.default.div(_templateObject2);
-	var Image = _styledComponents2.default.image(_templateObject3);
-	var Content = _styledComponents2.default.div(_templateObject3);
-	var Item = _styledComponents2.default.li(_templateObject3);
-	var Cart = _styledComponents2.default.ul(_templateObject3);
-	var Remove = _styledComponents2.default.div(_templateObject3);
-	
+	var Sidebar = _styledComponents2.default.aside(_templateObject);
+	var Balance = _styledComponents2.default.div(_templateObject2, (0, _ramda.prop)('color'));
+	var Image = _styledComponents2.default.img(_templateObject3, (0, _ramda.prop)('color'), (0, _ramda.prop)('color'));
+	var Label = _styledComponents2.default.h2(_templateObject4, (0, _ramda.prop)('color'), (0, _ramda.prop)('grey'));
+	var Content = _styledComponents2.default.div(_templateObject5, (0, _ramda.prop)('secondary'));
+	var Item = _styledComponents2.default.li(_templateObject6, (0, _ramda.prop)('color'));
+	var Cart = _styledComponents2.default.ul(_templateObject7);
+	var Remove = _styledComponents2.default.div(_templateObject8);
+	var ButtonWrap = _styledComponents2.default.div(_templateObject9);
 	var getBalance = (0, _ramda.reduce)(function (acc, _ref) {
 	  var price = _ref.price;
 	  return (0, _ramda.add)(acc, price);
@@ -66446,8 +66471,8 @@
 	      id = _ref2.id;
 	  return _react2.default.createElement(
 	    Item,
-	    { key: key },
-	    _react2.default.createElement(Image, { alt: title, src: image }),
+	    { key: key, color: _constants2.default.color.grey },
+	    _react2.default.createElement(Image, { color: _constants2.default.color.grey, alt: title, src: image }),
 	    _react2.default.createElement(
 	      Content,
 	      { secondary: _constants2.default.color.secondary, primary: _constants2.default.color.primary },
@@ -66458,7 +66483,7 @@
 	        price
 	      ),
 	      _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
 	        title
 	      )
@@ -66481,24 +66506,39 @@
 	    null,
 	    _react2.default.createElement(
 	      Balance,
-	      null,
+	      { color: _constants2.default.color.primary },
 	      _react2.default.createElement(
-	        'h1',
+	        'div',
 	        null,
-	        '\xA3',
-	        (budgetInput - getBalance(cart)).toFixed(2)
-	      ),
-	      _react2.default.createElement(
-	        'span',
-	        null,
-	        'Remaining'
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          '\xA3',
+	          (budgetInput - getBalance(cart)).toFixed(2)
+	        ),
+	        _react2.default.createElement(
+	          'span',
+	          null,
+	          'Remaining'
+	        )
 	      )
+	    ),
+	    _react2.default.createElement(
+	      Label,
+	      { color: _constants2.default.color.secondary, grey: _constants2.default.color.grey },
+	      'Your Cart'
 	    ),
 	    _react2.default.createElement(
 	      Cart,
 	      null,
-	      'Your Cart',
 	      (0, _utils.mapIndex)(ItemComponent, cart)
+	    ),
+	    _react2.default.createElement(
+	      ButtonWrap,
+	      null,
+	      _react2.default.createElement(_elements.Button, { style: 'primaryLight', onClick: function onClick() {
+	          return Action.checkout({ cart: cart });
+	        }, label: 'Checkout' })
 	    )
 	  );
 	});
@@ -66534,13 +66574,13 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
 	var _svg = __webpack_require__(728);
 	
-	var _ramda = __webpack_require__(591);
+	var _ramda = __webpack_require__(592);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -66594,47 +66634,7 @@
 	};
 
 /***/ },
-/* 868 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _taggedTemplateLiteral2 = __webpack_require__(649);
-	
-	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
-	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n'], ['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n']);
-	
-	var _react = __webpack_require__(303);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _styledComponents = __webpack_require__(659);
-	
-	var _styledComponents2 = _interopRequireDefault(_styledComponents);
-	
-	var _Grid = __webpack_require__(738);
-	
-	var _Grid2 = _interopRequireDefault(_Grid);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Body = _styledComponents2.default.article(_templateObject);
-	
-	exports.default = function (_ref) {
-	  var children = _ref.children;
-	  return _react2.default.createElement(
-	    Body,
-	    null,
-	    children
-	  );
-	};
-
-/***/ },
+/* 868 */,
 /* 869 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -66671,43 +66671,7 @@
 	};
 
 /***/ },
-/* 870 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _taggedTemplateLiteral2 = __webpack_require__(649);
-	
-	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
-	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n'], ['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n']);
-	
-	var _react = __webpack_require__(303);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _styledComponents = __webpack_require__(659);
-	
-	var _styledComponents2 = _interopRequireDefault(_styledComponents);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Sidebar = _styledComponents2.default.aside(_templateObject);
-	
-	exports.default = function (_ref) {
-	  var children = _ref.children;
-	  return _react2.default.createElement(
-	    Sidebar,
-	    null,
-	    children
-	  );
-	};
-
-/***/ },
+/* 870 */,
 /* 871 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -66755,13 +66719,15 @@
 	
 	var _actions2 = _interopRequireDefault(_actions);
 	
-	var _constants = __webpack_require__(593);
+	var _constants = __webpack_require__(591);
 	
 	var _constants2 = _interopRequireDefault(_constants);
 	
 	var _utils = __webpack_require__(565);
 	
 	var _components = __webpack_require__(737);
+	
+	var _elements = __webpack_require__(740);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -66793,7 +66759,7 @@
 	        { color: _constants2.default.color.grey },
 	        _react2.default.createElement(_components.Filter, { router: router }),
 	        _react2.default.createElement(
-	          _components.Body,
+	          _elements.Body,
 	          null,
 	          _react2.default.createElement(_components.Grid, null)
 	        ),
@@ -66841,6 +66807,80 @@
 	    Background,
 	    null,
 	    'no match'
+	  );
+	};
+
+/***/ },
+/* 873 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _taggedTemplateLiteral2 = __webpack_require__(649);
+	
+	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
+	
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n'], ['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n']);
+	
+	var _react = __webpack_require__(303);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _styledComponents = __webpack_require__(659);
+	
+	var _styledComponents2 = _interopRequireDefault(_styledComponents);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Sidebar = _styledComponents2.default.aside(_templateObject);
+	
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	  return _react2.default.createElement(
+	    Sidebar,
+	    null,
+	    children
+	  );
+	};
+
+/***/ },
+/* 874 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _taggedTemplateLiteral2 = __webpack_require__(649);
+	
+	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
+	
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n'], ['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n']);
+	
+	var _react = __webpack_require__(303);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _styledComponents = __webpack_require__(659);
+	
+	var _styledComponents2 = _interopRequireDefault(_styledComponents);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Body = _styledComponents2.default.article(_templateObject);
+	
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	  return _react2.default.createElement(
+	    Body,
+	    null,
+	    children
 	  );
 	};
 

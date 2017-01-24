@@ -35,18 +35,22 @@ const Interests = styled.ul`
 const Interest = (router, interests) => ({ label, active }, index) =>
   <Button
     key={index}
-    style={active ? 'selected' : 'primary' }
+    style={active ? 'selectedSmallLight' : 'primarySmallLight' }
     onClick={() => Actions.toggleInterest({ index, active: !active, router })}
     label={label}/>
 
 const Component = ({ router, interests, searchInput, budgetInput, filterInput }) =>
   <Filter>
-    <LogoWrap><Logo color={Const.color.primary}/></LogoWrap>
+    <LogoWrap>
+      <Link to={{ pathname: '/', query: interestToQuery(interests) }}>
+        <Logo color={Const.color.primary}/>
+      </Link>
+    </LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
     <Divider/>
     <Input item='searchInput' icon="Search" value={searchInput} label='Search'/>
     <Divider/>
-    <Slider item='budgetInput' value={budgetInput} label='Budget'/>
+    <Slider max={250} item='budgetInput' value={budgetInput} label='Budget'/>
     {/* <Slider item='filterInput' value={filterInput} min={0} max={budgetInput} label='Filter'/> */}
     <Interests>
       {mapIndex(Interest(router, interests), interests)}

@@ -60,7 +60,7 @@ class SliderHandle extends Component {
   }
 }
 
-export default ({ item, value, label, defaultValue = 50, min = 0, max = 500 }) =>
+export default ({ item, value, label, defaultValue = 50, min = 0, max }) =>
   <Container>
     <Label>{label}</Label>
     <Value>£{value}</Value>

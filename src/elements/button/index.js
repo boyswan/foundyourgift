@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Const from 'utils/constants';
+import { prop } from 'ramda';
 
 const Button = styled.button`
   transition: all 0.2s ease-in-out;
@@ -17,27 +19,69 @@ const Button = styled.button`
   }
 `
 
-const styles = {
-  primary: styled(Button)`
-    background: transparent;
+const small = () => `
+  padding: 1rem 1rem;
+  font-size: 1.4rem;
+  margin: 0 1rem 1rem 0rem;
+`
+
+const primary = styled(Button)`
+  background: transparent;
+  color: white;
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
     color: white;
-    &:hover {
-      background: white;
-      color: #59a9ff;
-    }
-  `,
-  selected: styled(Button)`
-    background: white;
-    color: red;
-  `,
-  small: styled(Button)`
-    padding: 1rem 1rem;
-    font-size: 1.4rem;
-    margin: 0 1rem 1rem 0rem;
-  `
-}
+  }
+`
+const selected = styled(Button)`
+  background: white;
+  color: red;
+`
+const primaryLight = styled(primary)`
+  color: white;
+  background: ${prop('primary')};
+  /*&:hover {
+    color: ${prop('primary')};
+    background: rgba(255,255,255, 0.5);
+  }*/
+`
+const selectedSmall = styled(selected)`
+  ${small()}
+`
+const primarySmall = styled(primary)`
+  ${small()}
+`
+const selectedSmallLight = styled(selected)`
+  ${small()}
+  color: white;
+  background: ${prop('primary')}
+`
+const primarySmallLight = styled(primary)`
+  ${small()}
+  color: ${prop('secondary')};
+  background: white;
+  &:hover {
+    color: ${prop('primary')};
+    background: rgba(255,255,255, 0.5);
+  }
+`
 
 export default ({ style = 'primary', onClick, label }) => {
-  const Button = styles[style];
-  return <Button {...{ onClick }}>{label}</Button>
+
+  const Button = ({
+    primary,
+    selected,
+    primaryLight,
+    selectedSmall,
+    primarySmall,
+    selectedSmallLight,
+    primarySmallLight
+  })[style];
+
+  return <Button
+    primary={Const.color.primary}
+    secondary={Const.color.secondary}
+    onClick={onClick}>
+      {label}
+    </Button>
 }

@@ -29,7 +29,7 @@ const init = {
   searchResults: [],
   searchInput: '',
   filterInput: 0,
-  budgetInput: 50
+  budgetInput: 125
 }
 
 export default createReducer(init, {

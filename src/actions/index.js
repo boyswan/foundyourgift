@@ -6,5 +6,6 @@ export default createActions([
   'removeItem',
   'toggleInterest',
   'setInput',
-  'setSlider'
+  'setSlider',
+  'checkout'
 ])

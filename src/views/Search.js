@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import Actions from 'actions';
 import Const from 'utils/constants';
 import { connect } from 'utils'
-import { Summary, Filter, Body, Footer, Grid } from 'components';
+import { Summary, Filter, Footer, Grid } from 'components';
+import { Body } from 'elements'
 
 const Background = styled.div`
   display: flex;
