@@ -8,7 +8,9 @@ phases:
       - npm run build
 artifacts:
   files:
-    - package.json
-    - appspec.yaml
-    - scripts/**/*
-    - public/**/*
+    - myApp.zip
+  # files:
+  #   - package.json
+  #   - appspec.yaml
+  #   - scripts/**/*
+  #   - public/**/*
