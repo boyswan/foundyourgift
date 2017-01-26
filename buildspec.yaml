@@ -9,6 +9,6 @@ phases:
 artifacts:
   files:
     - package.json
-    - appspec.yml
+    - appspec.yaml
     - scripts/**/*
     - public/**/*
