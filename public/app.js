@@ -58946,7 +58946,7 @@
 	  }
 	});
 	
-	var _Summary = __webpack_require__(866);
+	var _Summary = __webpack_require__(868);
 	
 	Object.defineProperty(exports, 'Summary', {
 	  enumerable: true,
@@ -58955,7 +58955,7 @@
 	  }
 	});
 	
-	var _Card = __webpack_require__(867);
+	var _Card = __webpack_require__(869);
 	
 	Object.defineProperty(exports, 'Card', {
 	  enumerable: true,
@@ -58964,7 +58964,7 @@
 	  }
 	});
 	
-	var _Footer = __webpack_require__(869);
+	var _Footer = __webpack_require__(870);
 	
 	Object.defineProperty(exports, 'Footer', {
 	  enumerable: true,
@@ -59190,7 +59190,7 @@
 	  }
 	});
 	
-	var _Sidebar = __webpack_require__(873);
+	var _Sidebar = __webpack_require__(866);
 	
 	Object.defineProperty(exports, 'Sidebar', {
 	  enumerable: true,
@@ -59199,7 +59199,7 @@
 	  }
 	});
 	
-	var _Body = __webpack_require__(874);
+	var _Body = __webpack_require__(867);
 	
 	Object.defineProperty(exports, 'Body', {
 	  enumerable: true,
@@ -66414,6 +66414,80 @@
 	
 	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
 	
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n'], ['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n']);
+	
+	var _react = __webpack_require__(303);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _styledComponents = __webpack_require__(659);
+	
+	var _styledComponents2 = _interopRequireDefault(_styledComponents);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Sidebar = _styledComponents2.default.aside(_templateObject);
+	
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	  return _react2.default.createElement(
+	    Sidebar,
+	    null,
+	    children
+	  );
+	};
+
+/***/ },
+/* 867 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _taggedTemplateLiteral2 = __webpack_require__(649);
+	
+	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
+	
+	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n'], ['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n']);
+	
+	var _react = __webpack_require__(303);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _styledComponents = __webpack_require__(659);
+	
+	var _styledComponents2 = _interopRequireDefault(_styledComponents);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Body = _styledComponents2.default.article(_templateObject);
+	
+	exports.default = function (_ref) {
+	  var children = _ref.children;
+	  return _react2.default.createElement(
+	    Body,
+	    null,
+	    children
+	  );
+	};
+
+/***/ },
+/* 868 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _taggedTemplateLiteral2 = __webpack_require__(649);
+	
+	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
+	
 	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  padding: 0 2rem;\n  overflow: auto;\n'], ['\n  width: 300px;\n  min-width: 300px;\n  background: white;\n  padding: 0 2rem;\n  overflow: auto;\n']),
 	    _templateObject2 = (0, _taggedTemplateLiteral3.default)(['\n  height: 12rem;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  color: ', ';\n  text-align: right;\n  h1 {\n    font-weight: 600;\n    font-size: 3.2rem;\n  }\n  span {\n    font-size: 1.4rem;\n  }\n'], ['\n  height: 12rem;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  color: ', ';\n  text-align: right;\n  h1 {\n    font-weight: 600;\n    font-size: 3.2rem;\n  }\n  span {\n    font-size: 1.4rem;\n  }\n']),
 	    _templateObject3 = (0, _taggedTemplateLiteral3.default)(['\n  height: 5rem;\n  border: 1px solid ', ';\n  background: ', ';\n  width: 5rem;\n  border-radius: 10rem;\n  margin-right: 2rem;\n'], ['\n  height: 5rem;\n  border: 1px solid ', ';\n  background: ', ';\n  width: 5rem;\n  border-radius: 10rem;\n  margin-right: 2rem;\n']),
@@ -66544,7 +66618,7 @@
 	});
 
 /***/ },
-/* 867 */
+/* 869 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66634,8 +66708,7 @@
 	};
 
 /***/ },
-/* 868 */,
-/* 869 */
+/* 870 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -66671,7 +66744,6 @@
 	};
 
 /***/ },
-/* 870 */,
 /* 871 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -66807,80 +66879,6 @@
 	    Background,
 	    null,
 	    'no match'
-	  );
-	};
-
-/***/ },
-/* 873 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _taggedTemplateLiteral2 = __webpack_require__(649);
-	
-	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
-	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n'], ['\n  width: 300px;\n  min-width: 300px;\n  padding: 6rem 0 0 6rem;\n']);
-	
-	var _react = __webpack_require__(303);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _styledComponents = __webpack_require__(659);
-	
-	var _styledComponents2 = _interopRequireDefault(_styledComponents);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Sidebar = _styledComponents2.default.aside(_templateObject);
-	
-	exports.default = function (_ref) {
-	  var children = _ref.children;
-	  return _react2.default.createElement(
-	    Sidebar,
-	    null,
-	    children
-	  );
-	};
-
-/***/ },
-/* 874 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _taggedTemplateLiteral2 = __webpack_require__(649);
-	
-	var _taggedTemplateLiteral3 = _interopRequireDefault(_taggedTemplateLiteral2);
-	
-	var _templateObject = (0, _taggedTemplateLiteral3.default)(['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n'], ['\n  flex: 1;\n  height: 100%;\n  overflow: auto;\n']);
-	
-	var _react = __webpack_require__(303);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _styledComponents = __webpack_require__(659);
-	
-	var _styledComponents2 = _interopRequireDefault(_styledComponents);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var Body = _styledComponents2.default.article(_templateObject);
-	
-	exports.default = function (_ref) {
-	  var children = _ref.children;
-	  return _react2.default.createElement(
-	    Body,
-	    null,
-	    children
 	  );
 	};
 

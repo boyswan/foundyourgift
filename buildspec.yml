@@ -10,5 +10,5 @@ artifacts:
   files:
     - package.json
     - appspec.yml
-    - deploy_scripts/**/*
+    - scripts/**/*
     - public/**/*

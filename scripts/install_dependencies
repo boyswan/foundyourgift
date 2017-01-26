@@ -1,0 +1,5 @@
+#!/bin/bash
+yum install -y nginx
+
+rm -rf /etc/nginx/nginx.conf
+rm -rf /etc/nginx/.htpasswd
