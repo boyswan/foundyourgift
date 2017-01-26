@@ -3,18 +3,18 @@ os: linux
 files:
   - source: /public
     destination: /var/www/foundyourgift
-  # - source: /nginx/nginx.conf
-  #   destination: /etc/nginx
-# hooks:
-#   BeforeInstall:
-#     - location: scripts/install_dependencies
-#       timeout: 300
-#       runas: root
-#   ApplicationStart:
-#     - location: scripts/start_server
-#       timeout: 300
-#       runas: root
-#   ApplicationStop:
-#     - location: scripts/stop_server
-#       timeout: 300
-#       runas: root
+  - source: /nginx/nginx.conf
+    destination: /etc/nginx
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 300
+      runas: root
