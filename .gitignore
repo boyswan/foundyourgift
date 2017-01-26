@@ -4,3 +4,8 @@ node_modules
 public/app.js
 public/app.js.map
 .env
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

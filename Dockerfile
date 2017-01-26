@@ -1,18 +1,37 @@
-FROM ubuntu:12.04
+# Set the base image to Ubuntu
+FROM ubuntu
 
+# File Author / Maintainer
+MAINTAINER Jack Boyces
+
+# Install Nginx
+
+# Add application repository URL to the default sources
+# RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/apt/sources.list
+
+# Update the repository
 RUN apt-get update
-RUN apt-get install -y nginx zip curl
 
+# Install necessary tools
+RUN apt-get install -y nano wget dialog net-tools
+
+# Download and Install Nginx
+RUN apt-get install -y nginx
+
+# Remove the default Nginx configuration file
+RUN rm -v /etc/nginx/nginx.conf
+
+# Copy a configuration file from the current directory
+ADD /nginx/nginx.conf /etc/nginx/
+
+
+ADD /public /var/www/foundyourgift
+
+# Append "daemon off;" to the configuration file
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-ADD /usr/share/nginx/www MyApp.zip
-RUN cd /usr/share/nginx/www/ && unzip MyApp.zip && rm -rf MyApp.zip
-
-RUN rm -v /etc/nginx/nginx.conf
-ADD /nginx/nginx.conf /etc/nginx/
-ADD public /var/www/foundyourgift
-
-
+# Expose ports
 EXPOSE 80
 
-CMD ["/usr/sbin/nginx", "-c", "/etc/nginx/nginx.conf"]
+# Set the default command to execute when creating a new container
+CMD service nginx start
