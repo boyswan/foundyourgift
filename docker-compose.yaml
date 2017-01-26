@@ -1,7 +1,0 @@
-app:
-  image: nginx:latest
-  volumes:
-    - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-    - ./public:/var/www/foundyourgift
-  ports:
-    - 80:80

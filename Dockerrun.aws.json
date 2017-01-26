@@ -1,32 +1,10 @@
 {
-  "AWSEBDockerrunVersion": 2,
-  "volumes": [
+  "AWSEBDockerrunVersion": "1",
+  "Volumes": [
     {
-      "name": "nginx-conf",
-      "host": {
-        "sourcePath": "/var/app/current/nginx/nginx.conf"
-      }
+      "ContainerDirectory": "/var/www/foundyourgift",
+      "HostDirectory": "/var/www/foundyourgift"
     }
   ],
-  "containerDefinitions": [
-    {
-      "name": "nginx",
-      "image": "nginx",
-      "essential": true,
-      "memory": 512,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 80
-        }
-      ],
-      "mountPoints": [
-        {
-          "sourceVolume": "nginx-conf",
-          "containerPath": "/etc/nginx/nginx.conf",
-          "readOnly": true
-        }
-      ]
-    }
-  ]
+  "Logging": "/var/eb_log"
 }
