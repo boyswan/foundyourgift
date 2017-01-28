@@ -76,7 +76,7 @@ const Remove = styled.div`
   cursor: pointer;
 `
 const ButtonWrap = styled.div`
-  
+
 `
 const getBalance = reduce((acc, { price }) => add(acc, price), 0)
 
@@ -108,7 +108,7 @@ export default connect(({
       {mapIndex(ItemComponent, cart)}
     </Cart>
     <ButtonWrap>
-      <Button style='primaryLight' onClick={() => Action.checkout({cart})} label="Checkout"/>
+      <Button style='primaryLight' onClick={() => Actions.checkout({ cart })} label="Checkout"/>
     </ButtonWrap>
   </Sidebar>
 )
