@@ -99,11 +99,11 @@ export default connect(({
       </Link>
     </Content>
     <Footer>
-      {/* <FooterLinks color={Const.color.primaryDark}>
+      <FooterLinks color={Const.color.primaryDark}>
         <Link to='terms'>Terms</Link>
-        <Link to='about'>About</Link>
-        <Link to='contact'>Contact</Link>
-      </FooterLinks> */}
+        {/* <Link to='about'>About</Link>
+        <Link to='contact'>Contact</Link> */}
+      </FooterLinks>
       <Amazon color={Const.color.primaryDark}>
         {Const.text.home.amazon}
         <br/>

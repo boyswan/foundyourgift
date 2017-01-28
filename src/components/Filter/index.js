@@ -31,6 +31,13 @@ const Divider = styled.div`
 const Interests = styled.ul`
   margin-bottom: 2rem;
 `
+const Terms = styled.span`
+  font-size: 1.6rem;
+  color: #b9b9b9;
+  position: absolute;
+  align-self: flex-end;
+  bottom: 3rem;
+`
 
 const Interest = (router, interests) => ({ label, active }, index) =>
   <Button
@@ -55,6 +62,9 @@ const Component = ({ router, interests, searchInput, budgetInput, filterInput })
     <Interests>
       {mapIndex(Interest(router, interests), interests)}
     </Interests>
+    <Link to='terms'>
+      <Terms>Terms & Conditions</Terms>
+    </Link>
   </Filter>
 
 export default connect(Component)
