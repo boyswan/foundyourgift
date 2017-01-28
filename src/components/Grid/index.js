@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
+import Const from 'utils/constants';
 import { Card } from 'components'
 import { connect } from 'utils';
+import { MascotSad } from 'svg';
 import { mapIndex, totalPrice, last } from 'utils'
 import { pipe, filter, isNil, gt, prop, anyPass,
   ifElse, reject  } from 'ramda';
@@ -31,8 +33,25 @@ const Loader = styled.div`
   background: red;
   align-self: center;
 `
-const NoResults = styled.div`
-
+const NoResults = styled.figure`
+  align-self: center;
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+  font-size: 3.2rem;
+  align-items: center;
+  color: ${prop('color')};
+  margin-bottom: 30rem;
+  max-width: 60%;
+  svg {
+    margin-bottom: 3rem;
+  }
+  h1 {
+    margin-bottom: 1rem;
+  }
+  p {
+    font-size: 2.2rem;
+  }
 `
 
 const isOverBudget = (budgetInput, cart) => pipe(
@@ -54,7 +73,11 @@ const filterResults = last((budgetInput, cart) => pipe(
 ))
 
 const noItems = () =>
-<NoResults> no items </NoResults>
+<NoResults color={Const.color.primary}>
+  <MascotSad color={Const.color.primary}/>
+  <h1>{Const.text.search.noResultsTitle}</h1>
+  <p>{Const.text.search.noResultsBody}</p>
+</NoResults>
 
 export default connect(({
   searchResults,
@@ -62,6 +85,7 @@ export default connect(({
   cart
 }) =>
   <Grid>
-    {searchResults ? filterResults(budgetInput, cart, searchResults) : <Loader/>}
+    {noItems()}
+    {/* {searchResults ? filterResults(budgetInput, cart, searchResults) : <Loader/>} */}
   </Grid>
 )

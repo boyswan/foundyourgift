@@ -1,5 +1,4 @@
 import 'app.css';
-// import 'utils/ramda';
 import React from 'react';
 import render from 'utils/render';
 import { Router, Route, Link, browserHistory } from 'react-router'

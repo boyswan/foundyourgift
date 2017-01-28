@@ -6,6 +6,7 @@
   "scripts": {
     "watch": "npm run build:src -- --watch",
     "build:src": "webpack",
+    "dev": "NODE_ENV=development webpack-dev-server ---inline --hot --quiet --config webpack.config.js",
     "build": "NODE_ENV=production webpack"
   },
   "author": "",
@@ -35,6 +36,7 @@
     "ramda-loader": "^0.4.3",
     "react-svg-loader": "^1.1.1",
     "style-loader": "^0.13.1",
+    "webpack-dev-server": "^1.16.2",
     "webpack": "^1.13.3"
   }
 }

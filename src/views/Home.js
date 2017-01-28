@@ -19,7 +19,7 @@ const Background = styled.div`
 `
 const HeaderLogo = styled.header`
   width: 100%;
-  padding: 3rem 2rem;
+  padding: 3rem 3rem;
 `
 const MascotLogo = styled.div`
   margin-bottom: 3rem;

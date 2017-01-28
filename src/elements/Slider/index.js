@@ -4,22 +4,23 @@ import Actions from 'actions';
 import { Container, Label } from 'styles';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { curry } from 'ramda';
+import Const from 'utils/constants';
+import { curry, prop } from 'ramda';
 
 const SliderContainer = styled.div`
   position: relative;
   .rc-slider-track {
-    background: #FF7373 !important;
-    height: 7px;
+    background: ${prop('color')} !important;
+    height: 0.7rem;
   }
   .rc-slider-rail {
-    height: 7px;
+    height: 0.7rem;
   }
 `
 
 const Value = styled(Label)`
   float: right;
-  color: #FF7373;
+  color: ${prop('color')};
   font-size: 1.8rem;
   font-weight: 600;
 `
@@ -29,12 +30,12 @@ const Handle = styled.div`
   height: 1.8rem;
   display: flex;
   top: 0;
-  background: #FF7373;
+  background: ${prop('primary')};
   border-radius: 10rem;
   position: absolute;
   left: 0%;
   justify-content: space-around;
-  padding: 3px;
+  padding: 0.3rem;
   align-items: center;
   margin-left: -1rem;
   cursor: pointer;
@@ -43,7 +44,7 @@ const Handle = styled.div`
     width: 0.2rem;
     height: 74%;
     border-radius: 0.5rem;
-    background: #DC6363;
+    background: ${prop('primaryDark')};
   }
 `
 
@@ -53,7 +54,10 @@ const handleSlider = curry((item, value) =>
 class SliderHandle extends Component {
   render() {
     return (
-      <Handle offset={this.props.offset}>
+      <Handle
+        primary={Const.color.primary}
+        primaryDark={Const.color.primaryDark}
+        offset={this.props.offset}>
         <span/><span/><span/>
       </Handle>
     )
@@ -62,9 +66,9 @@ class SliderHandle extends Component {
 
 export default ({ item, value, label, defaultValue = 50, min = 0, max }) =>
   <Container>
-    <Label>{label}</Label>
-    <Value>£{value}</Value>
-    <SliderContainer>
+    <Label color={Const.color.secondary}>{label}</Label>
+    <Value color={Const.color.primary}>£{value}</Value>
+    <SliderContainer color={Const.color.primary}>
       <Slider
         value={value}
         tipFormatter={null}

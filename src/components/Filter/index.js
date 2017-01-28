@@ -10,7 +10,7 @@ import Const from 'utils/constants';
 const Filter = styled.aside`
   width: 300px;
   min-width: 300px;
-  padding: 3rem 0 0 3rem;
+  padding: 3rem;
 `
 
 const LogoWrap = styled.div`
