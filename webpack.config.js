@@ -49,12 +49,12 @@ switch(NODE_ENV) {
   case 'development':{
     config.devtool = 'source-map'
     config.devServer = {
-          colors:             true,
-          contentBase:        './public',
-          historyApiFallback: true,
-          inline:             true,
-          progress:           true
-      }
+      colors:             true,
+      contentBase:        './public',
+      historyApiFallback: true,
+      inline:             true,
+      progress:           true
+    }
   }
   default:
     break;
