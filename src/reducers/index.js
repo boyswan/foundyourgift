@@ -23,6 +23,11 @@ const _remove = ({ id }, state) =>
   over(lensProp('cart'), reject(propEq('id', id)))
 
 
+  // var cart = {
+  //   'Item.1.ASIN': itemId,
+  //   'Item.1.Quantity': quantity
+  // }
+
 const init = {
   interests: setInteretsFromParams(Const.interests),
   cart: [],

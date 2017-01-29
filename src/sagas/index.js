@@ -11,8 +11,8 @@ function* search({ router: { push, location } }) {
 		const interests = yield select(state => state.interests)
 		yield push({ ...location, query: interestToQuery(interests) })
 
-		const { data } = yield _call(fetch, api(location.search))
-		yield put({ type: 'SET_RESULTS', item: 'searchResults', value: data })
+		const { data: { Items } } = yield _call(fetch, api(location.search))
+		yield put({ type: 'SET_RESULTS', item: 'searchResults', value: Items })
 
 	} catch (err) {
 		yield console.log(err)

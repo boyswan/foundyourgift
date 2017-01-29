@@ -21,7 +21,7 @@ const Grid = styled.ul`
   li {
     background: white;
     flex: 0 0 25rem;
-    height: 30rem;
+    height: 40rem;
     margin: 1rem;
     position: relative;
 
@@ -85,7 +85,7 @@ export default connect(({
   cart
 }) =>
   <Grid>
-    {noItems()}
-    {/* {searchResults ? filterResults(budgetInput, cart, searchResults) : <Loader/>} */}
+    {/* {noItems()} */}
+    {searchResults ? filterResults(budgetInput, cart, searchResults) : <Loader/>}
   </Grid>
 )

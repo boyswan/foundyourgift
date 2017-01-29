@@ -3,19 +3,19 @@ import styled from 'styled-components';
 import Actions from 'actions';
 import Const from 'utils/constants';
 import { Heart } from 'svg';
-import { prop, tail } from 'ramda';
+import { prop, tail, map } from 'ramda';
 
 const Card = styled.li`
-  ${''/* background: red;*/}
-  flex: 0 0 25rem;
-  height: 33rem;
+  flex: 0 0 50%;
+  height: 60rem;
   position: relative;
   margin: 1rem;
 `
 const Image = styled.img`
   width: 100%;
   height: 60%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 2rem;
 `
 const Save = styled.div`
   width: 4.3rem;
@@ -26,6 +26,8 @@ const Save = styled.div`
   top: 1rem;
   right: 1rem;
   cursor: pointer;
+  border: 1px solid ${prop('color')};
+
   svg {
     position: absolute;
     left: 11px;
@@ -56,18 +58,20 @@ const Content = styled.div`
   }
 `
 
+const feature = x => <p>{x}</p>
+
 export default (item, key) => {
-  const { title = '', price = '', description = '', image = '' } = item;
+  const { title = '', price = 0, features = {}, image = '' } = item;
   return (
     <Card key={key}>
-      <Save onClick={() => Actions.selectItem({ item })}>
+      <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item })}>
         <Heart color={Const.color.primary}/>
       </Save>
       <Image src={image}/>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
         <span>£{price}</span>
         <h1>{title}</h1>
-        <p>{description}</p>
+        {/* {map(feature, features)} */}
       </Content>
     </Card>
   )

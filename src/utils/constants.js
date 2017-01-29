@@ -12,15 +12,15 @@ const color = {
 }
 
 const interests = [
- { id: 'BU', type: 'business', label: 'Entreprenurial' },
- { id: 'EX', type: 'exercise', label: 'Fitness fanatic' },
- { id: 'GA', type: 'gaming', label: 'Video gamer' },
- { id: 'HE', type: 'health', label: 'Nature lover' },
- { id: 'SP', type: 'sports', label: 'Sports fan' },
- { id: 'TR', type: 'travel', label: 'Traveller' },
- { id: 'AR', type: 'arts', label: 'Creative' },
- { id: 'TE', type: 'technology', label: 'Tech geek' },
- { id: 'MU', type: 'music', label: 'Sound person' }
+ { type: 'business', label: 'Entreprenurial' },
+ { type: 'exercise', label: 'Fitness fanatic' },
+ { type: 'gaming', label: 'Video gamer' },
+ { type: 'health', label: 'Nature lover' },
+ { type: 'sports', label: 'Sports fan' },
+ { type: 'travel', label: 'Traveller' },
+ { type: 'arts', label: 'Creative' },
+ { type: 'tech', label: 'Tech geek' },
+ { type: 'music', label: 'Sound person' }
 ]
 
 const text = {
