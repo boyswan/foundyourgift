@@ -8,7 +8,6 @@ import { Body } from 'elements'
 
 const Background = styled.div`
   display: flex;
-  height: 100vh;
   flex-direction: row;
   justify-content: space-between;
   background: ${({ color }) => color};

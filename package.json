@@ -14,6 +14,7 @@
   "dependencies": {
     "aws-lib": "^0.3.0",
     "axios": "^0.15.3",
+    "moment": "^2.17.1",
     "ramda": "^0.22.1",
     "rc-slider": "^5.4.3",
     "react": "^15.4.1",
@@ -36,7 +37,7 @@
     "ramda-loader": "^0.4.3",
     "react-svg-loader": "^1.1.1",
     "style-loader": "^0.13.1",
-    "webpack-dev-server": "^1.16.2",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }

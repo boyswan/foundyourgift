@@ -55,10 +55,11 @@ const Component = ({ router, interests, searchInput, budgetInput, filterInput })
     </LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
     <Divider/>
-    <Input item='searchInput' icon="Search" value={searchInput} label='Search'/>
-    <Divider/>
+    {/* <Input item='searchInput' icon="Search" value={searchInput} label='Search'/>
+    <Divider/> */}
     <Slider max={250} item='budgetInput' value={budgetInput} label='Budget'/>
     {/* <Slider item='filterInput' value={filterInput} min={0} max={budgetInput} label='Filter'/> */}
+
     <Interests>
       {mapIndex(Interest(router, interests), interests)}
     </Interests>

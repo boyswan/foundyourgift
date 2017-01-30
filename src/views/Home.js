@@ -7,12 +7,11 @@ import { Logo, MascotShadow } from 'svg'
 import Actions from 'actions';
 import { Summary, Filter } from 'components';
 import { H1, H2 } from 'styles';
-import { Sidebar, Button } from 'elements';
+import { Sidebar, Button, Slider } from 'elements';
 import Const, { text } from 'utils/constants';
 
 const Background = styled.div`
   display: flex;
-  height: 100vh;
   flex-direction: ${({ row }) => row ? 'row' : 'column'};
   justify-content: space-between;
   background: ${({ color }) => color};
@@ -78,6 +77,7 @@ const Interest = router => ({ label, active }, index) =>
 export default connect(({
   interests,
   router,
+  budgetInput
 }) =>
   <Background color={Const.color.primary}>
     <HeaderLogo>
@@ -90,6 +90,7 @@ export default connect(({
       <H1>{Const.text.home.title}</H1>
       <H2>{Const.text.home.intro}</H2>
       <Divider color={Const.color.primaryDark}/>
+      <Slider style="light" max={250} item='budgetInput' value={budgetInput} label='Budget'/>
       <Interests>
         {mapIndex(Interest(router), interests)}
       </Interests>

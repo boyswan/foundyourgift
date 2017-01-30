@@ -33,7 +33,7 @@ const text = {
     amazon2: "CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON EU S.à r.l. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME."
   },
   search: {
-    intro: "Brief intro copy goes here. talk about something not sure what to say but we have 3 lines worth of space.",
+    intro: "Whether it’s for your boyfriend, wife, husband or girlfriend we’ll help you find the right gift for them.",
     noResultsTitle: "All gone!",
     noResultsBody: "Sorry, but there's no more results available. Try increasing your budget, or changing your search terms."
   }

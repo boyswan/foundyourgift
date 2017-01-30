@@ -4,16 +4,18 @@ import Actions from 'actions';
 import Const from 'utils/constants';
 import { Heart } from 'svg';
 import { prop, tail, map } from 'ramda';
+import Moment from 'moment';
 
 const Card = styled.li`
   flex: 0 0 50%;
-  height: 60rem;
+  height: 33rem;
   position: relative;
   margin: 1rem;
+  overflow: hidden;
 `
 const Image = styled.img`
   width: 100%;
-  height: 60%;
+  height: 58%;
   object-fit: contain;
   padding: 2rem;
 `
@@ -50,18 +52,21 @@ const Content = styled.div`
     font-size: 1.8rem;
     font-weight: 300;
     margin-bottom: 0.2rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 5rem;
   }
   p {
-    opacity: 0.75;
+    color: #b9b9b9;
     font-weight: 300;
     font-size: 1.4rem;
   }
 `
 
-const feature = x => <p>{x}</p>
-
 export default (item, key) => {
-  const { title = '', price = 0, features = {}, image = '' } = item;
+  const { title = '', price = 0, features = {}, image = '', timestamp } = item;
   return (
     <Card key={key}>
       <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item })}>
@@ -71,7 +76,7 @@ export default (item, key) => {
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
         <span>£{price}</span>
         <h1>{title}</h1>
-        {/* {map(feature, features)} */}
+        <p>Last updated {Moment(timestamp).fromNow()}</p>
       </Content>
     </Card>
   )

@@ -1,31 +1,28 @@
-import { takeEvery } from 'redux-saga';
-import { call as _call, put, fork, select } from 'redux-saga/effects';
-import { fetch, interestToQuery } from 'utils';
-import { identity, concat } from 'ramda'
-import Const from 'utils/constants'
+import { takeLatest } from 'redux-saga';
+import { fork } from 'redux-saga/effects';
+import { updateBudget, search } from 'sagas/helpers'
 
-const api = concat(`${Const.api.API_URL}/search`)
+const Ui = [
+	fork(function* () {
+		yield* takeLatest('SET_SLIDER', updateBudget)
+	}),
+	fork(function* () {
+		yield* takeLatest('REMOVE_ITEM', updateBudget)
+	}),
+	fork(function* () {
+		yield* takeLatest('SELECT_ITEM', updateBudget)
+	})
+]
 
-function* search({ router: { push, location } }) {
-	try {
-		const interests = yield select(state => state.interests)
-		yield push({ ...location, query: interestToQuery(interests) })
-
-		const { data: { Items } } = yield _call(fetch, api(location.search))
-		yield put({ type: 'SET_RESULTS', item: 'searchResults', value: Items })
-
-	} catch (err) {
-		yield console.log(err)
-	}
-}
+const Api = [
+	fork(function* () {
+		yield* takeLatest('SEARCH', search)
+	}),
+	fork(function* () {
+		yield* takeLatest('TOGGLE_INTEREST', search)
+	})
+]
 
 export default function* root() {
-  yield [
-		fork(function* () {
-			yield* takeEvery('SEARCH', search)
-		}),
-		fork(function* () {
-			yield* takeEvery('TOGGLE_INTEREST', search)
-		})
-  ]
+  yield [ ...Api, ...Ui ]
 }

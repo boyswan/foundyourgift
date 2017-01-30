@@ -7,7 +7,7 @@ import { connect } from 'utils';
 import { MascotSad } from 'svg';
 import { mapIndex, totalPrice, last } from 'utils'
 import { pipe, filter, isNil, gt, prop, anyPass,
-  ifElse, reject  } from 'ramda';
+  ifElse, reject, cond, T, identity  } from 'ramda';
 
 const Grid = styled.ul`
   display: flex;
@@ -16,15 +16,15 @@ const Grid = styled.ul`
   margin: 0 auto;
   justify-content: center;
   max-width: 1280px;
-  height: 100%;
+  height: 100vh;
 
   li {
     background: white;
     flex: 0 0 25rem;
-    height: 40rem;
+    height: 33rem;
     margin: 1rem;
     position: relative;
-
+    border-radius: 0.5rem;
   }
 `
 const Loader = styled.div`
@@ -82,10 +82,13 @@ const noItems = () =>
 export default connect(({
   searchResults,
   budgetInput,
+  remainingBudget,
   cart
 }) =>
   <Grid>
-    {/* {noItems()} */}
-    {searchResults ? filterResults(budgetInput, cart, searchResults) : noItems()}
+    {cond([
+      [() => searchResults.length && Number(remainingBudget), () => filterResults(budgetInput, cart, searchResults)],
+      [T, () => noItems()]
+    ])(T)}
   </Grid>
 )

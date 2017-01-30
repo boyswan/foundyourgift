@@ -3,7 +3,7 @@ import { connect as _connect } from 'react-redux';
 import axios from 'axios';
 import Const from 'utils/constants';
 import { reduce, curry, assoc, addIndex, map, pipe, head, tail, split,
-  uncurryN, replace, toLower, toUpper, identity, add } from 'ramda';
+  uncurryN, replace, toLower, toUpper, identity, add, clamp } from 'ramda';
 
 const getConfig = url => ({
   method: 'GET',
@@ -52,11 +52,11 @@ export const getParams = pipe(
   tail,
   split('&'),
   map(pipe(split('='), head))
-)(window.location.search);
+);
 
 // setInteretsFromParams :: [Object] -> [Object]
 export const setInteretsFromParams = map(x =>
-  getParams.includes(x.type) ? assoc('active', true, x) : x
+  getParams(window.location.search).includes(x.type) ? assoc('active', true, x) : x
 )
 
 
@@ -64,3 +64,6 @@ export const totalPrice = reduce((acc, { price }) => add(acc, price), 0)
 
 // Push last argument into pipe, curry other arguments
 export const last = pipe(uncurryN(arguments.length), curry)
+
+export const getBalance = reduce((acc, { price }) => add(acc, price), 0)
+export const formatBalance = (budgetInput, cart) => clamp(0, 9999999, (budgetInput - getBalance(cart))).toFixed(2)
