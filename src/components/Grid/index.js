@@ -72,7 +72,7 @@ const filterResults = last((budgetInput, cart) => pipe(
   )
 ))
 
-const NoItems = () =>
+const noItems = () =>
 <NoResults color={Const.color.primary}>
   <MascotSad color={Const.color.primary}/>
   <h1>{Const.text.search.noResultsTitle}</h1>
@@ -86,6 +86,6 @@ export default connect(({
 }) =>
   <Grid>
     {/* {noItems()} */}
-    {searchResults ? filterResults(budgetInput, cart, searchResults) : NoItems()}
+    {searchResults ? filterResults(budgetInput, cart, searchResults) : noItems()}
   </Grid>
 )
