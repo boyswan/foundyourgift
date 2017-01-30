@@ -86,6 +86,6 @@ export default connect(({
 }) =>
   <Grid>
     {/* {noItems()} */}
-    {searchResults ? filterResults(budgetInput, cart, searchResults) : noItems()}
+    {searchResults ? filterResults(budgetInput, cart, searchResults) : NoItems()}
   </Grid>
 )
