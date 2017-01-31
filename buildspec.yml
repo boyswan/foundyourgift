@@ -9,7 +9,6 @@ phases:
 artifacts:
   files:
     - package.json
-    - appspec.yml
     - buildspec.yml
     - Dockerfile
     - Dockerrun.aws.json
