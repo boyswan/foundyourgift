@@ -5,6 +5,7 @@ import Const from 'utils/constants';
 import { Card } from 'components'
 import { connect } from 'utils';
 import { MascotSad } from 'svg';
+import { InfiniteLoader, List } from 'react-virtualized'
 import { mapIndex, totalPrice, last } from 'utils'
 import { pipe, filter, isNil, gt, prop, anyPass,
   ifElse, reject, cond, T, identity  } from 'ramda';
@@ -72,6 +73,62 @@ const filterResults = last((budgetInput, cart) => pipe(
   )
 ))
 
+const InfinteList = ({
+  /** Are there more items to load? (This information comes from the most recent API request.) */
+  hasNextPage,
+  /** Are we currently loading a page of items? (This may be an in-flight flag in your Redux store for example.) */
+  isNextPageLoading,
+  /** List of items loaded so far */
+  list,
+  /** Callback function (eg. Redux action-creator) responsible for loading the next page of items */
+  loadNextPage
+}) => {
+  // If there are more items to be loaded then add an extra row to hold a loading indicator.
+  const rowCount = hasNextPage
+    ? list.size + 1
+    : list.size
+
+  // Only load 1 page of items at a time.
+  // Pass an empty callback to InfiniteLoader in case it asks us to load more than once.
+  const loadMoreRows = isNextPageLoading
+    ? () => {}
+    : loadNextPage
+
+  // Every row is loaded except for our loading indicator row.
+  const isRowLoaded = ({ index }) => !hasNextPage || index < list.size
+
+  // Render a list item or a loading indicator.
+  const rowRenderer = ({ index, key, style }) => {
+
+    const content = !isRowLoaded({ index })
+      ? 'Loading...'
+      : list.getIn([index, 'name'])
+
+    return (
+      <div key={key} style={style} >
+        {content}
+      </div>
+    )
+  }
+
+  return (
+    <InfiniteLoader
+      isRowLoaded={isRowLoaded}
+      loadMoreRows={loadMoreRows}
+      rowCount={rowCount}
+    >
+      {({ onRowsRendered, registerChild }) => (
+        <List
+          ref={registerChild}
+          onRowsRendered={onRowsRendered}
+          rowRenderer={rowRenderer}
+          {...otherProps}
+        />
+      )}
+    </InfiniteLoader>
+  )
+}
+
 const noItems = () =>
 <NoResults color={Const.color.primary}>
   <MascotSad color={Const.color.primary}/>
@@ -86,9 +143,14 @@ export default connect(({
   cart
 }) =>
   <Grid>
-    {cond([
+    <InfinteList
+      hasNextPage={false}
+      isNextPageLoading={false}
+      list={searchResults}
+      loadNextPage={()=>{}}/>
+    {/* {cond([
       [() => searchResults.length && Number(remainingBudget), () => filterResults(budgetInput, cart, searchResults)],
       [T, () => noItems()]
-    ])(T)}
+    ])(T)} */}
   </Grid>
 )
