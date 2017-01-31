@@ -12,5 +12,4 @@ artifacts:
     - buildspec.yml
     - Dockerfile
     - Dockerrun.aws.json
-    - scripts/**/*
     - public/**/*
