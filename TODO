@@ -1,0 +1,14 @@
+Database
+- Decide on all categories
+- Make sure it runs daily
+- Look at setting productId as category -> Query instead of scan
+
+API
+- Implement cart
+
+Client
+- Styling
+- View each product
+- Mobile
+- React virtualized
+- Lazy loading

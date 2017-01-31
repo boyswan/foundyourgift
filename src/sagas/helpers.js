@@ -14,7 +14,7 @@ export function* search({ router: { push, location } }) {
 	} catch (err) {
 		yield console.log(err)
 	}
-}
+};
 
 export function* updateBudget() {
 	try {
