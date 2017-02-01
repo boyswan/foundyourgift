@@ -11,6 +11,9 @@ const Ui = [
 	}),
 	fork(function* () {
 		yield* takeLatest('SELECT_ITEM', updateBudget)
+	}),
+	fork(function* () {
+		yield* takeLatest('FORCE_UPDATE', updateBudget)
 	})
 ]
 

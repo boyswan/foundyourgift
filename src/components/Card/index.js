@@ -65,10 +65,10 @@ const Content = styled.div`
   }
 `
 
-export default (item, key) => {
+export default ({ item }) => {
   const { title = '', price = 0, features = {}, image = '', timestamp } = item;
   return (
-    <Card key={key}>
+    <Card>
       <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item })}>
         <Heart color={Const.color.primary}/>
       </Save>

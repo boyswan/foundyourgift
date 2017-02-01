@@ -7,6 +7,13 @@
   outline: none;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
 html {
   font-size: 10px;
 }

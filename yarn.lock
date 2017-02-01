@@ -905,6 +905,10 @@ base64-js@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
+batch-processor@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/batch-processor/-/batch-processor-1.0.0.tgz#75c95c32b748e0850d10c2b168f6bdbe9891ace8"
+
 batch@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.5.3.tgz#3f3414f380321743bfc1042f9a83ff1d5824d464"
@@ -1542,6 +1546,12 @@ ecc-jsbn@~0.1.1:
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
+
+element-resize-detector@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.1.8.tgz#f293ce063d170ff9dab6a3a3e25d801b49fec3bf"
+  dependencies:
+    batch-processor "^1.0.0"
 
 emojis-list@^2.0.0:
   version "2.1.0"
@@ -2500,6 +2510,10 @@ lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.2.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
+lodash@4.15.0:
+  version "4.15.0"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.15.0.tgz#3162391d8f0140aa22cf8f6b3c34d6b7f63d3aa9"
+
 longest@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
@@ -3410,6 +3424,14 @@ react-router:
     invariant "^2.2.1"
     loose-envify "^1.2.0"
     warning "^3.0.0"
+
+react-sizeme:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.2.0.tgz#f5b23126a014aafc97fb8b0b5af1575f7e9bbed2"
+  dependencies:
+    element-resize-detector "1.1.8"
+    invariant "^2.2.0"
+    lodash "4.15.0"
 
 react-svg-loader:
   version "1.1.1"
