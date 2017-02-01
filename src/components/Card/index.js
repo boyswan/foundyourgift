@@ -12,13 +12,13 @@ const Card = styled.li`
   position: relative;
   margin: 1rem;
   overflow: hidden;
-`
+`;
 const Image = styled.img`
   width: 100%;
   height: 58%;
   object-fit: contain;
   padding: 2rem;
-`
+`;
 const Save = styled.div`
   width: 4.3rem;
   height: 4.3rem;
@@ -35,7 +35,7 @@ const Save = styled.div`
     left: 11px;
     top: 13px;
   }
-`
+`;
 const Content = styled.div`
   padding: 1.5rem 1rem;
   color: ${prop('secondary')};
@@ -63,21 +63,22 @@ const Content = styled.div`
     font-weight: 300;
     font-size: 1.4rem;
   }
-`
+`;
 
 export default ({ item }) => {
   const { title = '', price = 0, features = {}, image = '', timestamp } = item;
   return (
     <Card>
       <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item })}>
-        <Heart color={Const.color.primary}/>
+        <Heart color={Const.color.primary} />
       </Save>
-      <Image src={image}/>
+      <Image src={image} />
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
         <span>£{price}</span>
         <h1>{title}</h1>
+        {JSON.stringify(timestamp)}
         <p>Last updated {Moment(timestamp).fromNow()}</p>
       </Content>
     </Card>
-  )
-}
+  );
+};

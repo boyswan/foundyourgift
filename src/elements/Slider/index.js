@@ -16,8 +16,7 @@ const primary = styled.div`
   .rc-slider-rail {
     height: 0.7rem;
   }
-`
-
+`;
 const light = styled(primary)`
   width: 50%;
   margin: 0 auto;
@@ -31,15 +30,13 @@ const light = styled(primary)`
     border-radius: 50px;
 
   }
-`
-
+`;
 const Value = styled(Label)`
   float: right;
   color: ${prop('color')};
   font-size: 1.8rem;
   font-weight: 600;
-`
-
+`;
 const Handle = styled.div`
   width: 1.8rem;
   height: 1.8rem;
@@ -61,10 +58,9 @@ const Handle = styled.div`
     border-radius: 0.5rem;
     background: ${prop('primaryDark')};
   }
-`
+`;
 
-const handleSlider = curry((item, value) =>
-  Actions.setSlider({ item, value }));
+const handleSlider = curry((item, value) => Actions.setSlider({ item, value }));
 
 class SliderHandle extends Component {
   render() {
@@ -72,43 +68,33 @@ class SliderHandle extends Component {
       <Handle
         primary={Const.color.primary}
         primaryDark={Const.color.primaryDark}
-        offset={this.props.offset}>
-        <span/><span/><span/>
+        offset={this.props.offset}
+      >
+        <span /><span /><span />
       </Handle>
-    )
+    );
   }
 }
 
-export default ({
-  item,
-  value,
-  label,
-  defaultValue = 50,
-  min = 0,
-  max,
-  style = 'primary'
-}) => {
-
-  const SliderTheme = ({
-    primary,
-    light
-  })[style];
+export default ({ item, value, label, defaultValue = 50, min = 0, max, style = 'primary' }) => {
+  const SliderTheme = ({ primary, light })[style];
 
   return (
     <Container>
       <SliderTheme color={Const.color.primary}>
-      <Label color={Const.color.secondary}>{label}</Label>
-      <Value color={Const.color.primary}>£{value}</Value>
+        <Label color={Const.color.secondary}>{label}</Label>
+        <Value color={Const.color.primary}>£{value}</Value>
         <Slider
           value={value}
           tipFormatter={null}
-          handle={<SliderHandle/>}
+          handle={<SliderHandle />}
           onChange={handleSlider(item)}
           // step={5}
           defaultValue={defaultValue}
           min={min}
-          max={max}/>
+          max={max}
+        />
       </SliderTheme>
     </Container>
-  )
-}
+  );
+};

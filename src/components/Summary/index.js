@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect, mapIndex } from 'utils'
+import { connect, mapIndex } from 'utils';
 import { reduce, add, prop, clamp } from 'ramda';
 import { Cross } from 'svg';
 import { Button } from 'elements';
@@ -14,7 +14,7 @@ const Sidebar = styled.aside`
   overflow: auto;
   display: flex;
   flex-direction: column;
-`
+`;
 const Balance = styled.div`
   height: 20rem;
   display: flex;
@@ -33,7 +33,7 @@ const Balance = styled.div`
     margin-bottom: 2rem;
     display: block;
   }
-`
+`;
 const Image = styled.img`
   height: 5rem;
   border: 1px solid ${prop('color')};
@@ -41,7 +41,7 @@ const Image = styled.img`
   width: 5rem;
   border-radius: 10rem;
   margin-right: 2rem;
-`
+`;
 const Label = styled.h2`
   font-size: 1.6rem;
   color: ${prop('color')};
@@ -50,7 +50,7 @@ const Label = styled.h2`
   font-weight: 300;
   width: 100%;
   text-align: left;
-`
+`;
 const Content = styled.div`
   color: ${prop('secondary')};
   font-size: 1.6rem;
@@ -65,7 +65,7 @@ const Content = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
-`
+`;
 const Item = styled.li`
   flex-direction: row;
   display: flex;
@@ -76,7 +76,7 @@ const Item = styled.li`
   align-items: center;
   position: relative;
   min-height: 7.5rem;
-`
+`;
 const Cart = styled.ul`
   display: flex;
   flex-direction: column;
@@ -84,12 +84,12 @@ const Cart = styled.ul`
   overflow-y: auto;
   padding: 0 2rem;
   height: calc(100vh - 34rem);
-`
+`;
 const Remove = styled.div`
   position: absolute;
   right: 0;
   cursor: pointer;
-`
+`;
 const ButtonWrap = styled.div`
   height: 14rem;
   padding: 2rem;
@@ -99,31 +99,27 @@ const ButtonWrap = styled.div`
   button {
     width: 20rem;
   }
-`
+`;
 const Total = styled.span`
   font-size: 1.8rem;
   margin-bottom: 1rem;
   color: ${prop('color')};
-`
+`;
 
-const ItemComponent = ({ image, price, title, productId  }, key) =>
+const ItemComponent = ({ image, price, title, productId }, key) => (
   <Item key={key} color={Const.color.grey}>
-    <Image color={Const.color.grey} alt={title} src={image}/>
+    <Image color={Const.color.grey} alt={title} src={image} />
     <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <span>£{price}</span>
-        <div>{title}</div>
+      <span>£{price}</span>
+      <div>{title}</div>
     </Content>
     <Remove onClick={() => Actions.removeItem({ productId })}>
-      <Cross color={Const.color.primary}/>
+      <Cross color={Const.color.primary} />
     </Remove>
   </Item>
+);
 
-export default connect(({
-  cart,
-  budgetInput,
-  remainingBudget,
-  total
-}) =>
+export default connect(({ cart, budgetInput, remainingBudget, total }) => (
   <Sidebar>
     <Balance color={Const.color.primary}>
       <div>
@@ -137,7 +133,7 @@ export default connect(({
     </Cart>
     <ButtonWrap>
       <Total color={Const.color.primary}>Total: £{total.toFixed(2)}</Total>
-      <Button style='primaryLight' onClick={() => Actions.checkout({ cart })} label="Checkout"/>
+      <Button style="primaryLight" onClick={() => Actions.checkout({ cart })} label="Checkout" />
     </ButtonWrap>
   </Sidebar>
-)
+));

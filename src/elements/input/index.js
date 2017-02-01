@@ -11,7 +11,7 @@ const InputContainer = styled.div`
   &:hover {
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   }
-`
+`;
 const Input = styled.input`
   transition: all 0.2s ease-in-out;
   display: inline-block;
@@ -23,7 +23,7 @@ const Input = styled.input`
   font-size: 1.4rem;
   color: #4875A9;
   width: ${({ icon }) => icon ? '100%' : '85%'};
-`
+`;
 
 const Icon = styled.div`
   display: inline-block;
@@ -32,15 +32,16 @@ const Icon = styled.div`
   right: 1rem;
   transform: translatey(-50%);
   top: 50%;
-`
+`;
 
 const handleInput = (item, value) => Actions.setInput({ item, value });
 
-export default ({ item, value, label, icon, onClick }) =>
+export default ({ item, value, label, icon, onClick }) => (
   <Container>
     <Label>{label}</Label>
     <InputContainer>
-      <Input value={value} onChange={e => handleInput(item, e.target.value)}/>
+      <Input value={value} onChange={e => handleInput(item, e.target.value)} />
       {icon ? <Icon onClick={onClick}>{icon}</Icon> : ''}
     </InputContainer>
   </Container>
+);
