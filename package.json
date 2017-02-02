@@ -7,19 +7,24 @@
     "watch": "npm run build:src -- --watch",
     "build:src": "webpack",
     "dev": "NODE_ENV=development webpack-dev-server ---inline --hot --quiet --config webpack.config.js",
-    "build": "NODE_ENV=production webpack"
+    "build": "NODE_ENV=production webpack",
+    "buildprod": "NODE_ENV=production webpack"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "aws-lib": "^0.3.0",
     "axios": "^0.15.3",
+    "moment": "^2.17.1",
     "ramda": "^0.22.1",
     "rc-slider": "^5.4.3",
     "react": "^15.4.1",
+    "react-addons-shallow-compare": "^15.4.2",
     "react-dom": "^15.4.1",
     "react-redux": "^4.4.6",
     "react-router": "^3.0.2",
+    "react-sizeme": "^2.2.0",
+    "react-virtualized": "^8.11.4",
     "redux": "^3.6.0",
     "redux-saga": "^0.14.2",
     "styled-components": "^1.1.2"
@@ -33,10 +38,11 @@
     "babel-preset-stage-2": "^6.18.0",
     "css-loader": "^0.26.1",
     "eslint-plugin-react": "^6.9.0",
+    "html-webpack-plugin": "^2.28.0",
     "ramda-loader": "^0.4.3",
     "react-svg-loader": "^1.1.1",
     "style-loader": "^0.13.1",
-    "webpack-dev-server": "^1.16.2",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   }
 }

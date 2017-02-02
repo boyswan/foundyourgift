@@ -7,6 +7,13 @@
   outline: none;
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
 html {
   font-size: 10px;
 }
@@ -21,8 +28,6 @@ a {
 }
 
 body {
-  height: 100vh;
-  width: 100vw;
   font-family: 'Source Sans Pro', sans-serif;
   background: #F6F6F6;
 }

@@ -5,6 +5,8 @@ import { Router, Route, Link, browserHistory } from 'react-router'
 import { Home, Search, NoMatch, Terms } from 'views';
 import Actions from 'actions';
 
+document.title = 'foundyourgift'
+
 render((
   <Router history={browserHistory}>
     <Route path="/" component={Home}/>

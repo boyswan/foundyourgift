@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -10,13 +11,14 @@ const AWS = {
 }
 
 const config = {
+  context: __dirname,
   entry: {
     app: ['babel-polyfill', './src/app.js']
   },
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: '[name].js',
-    publicPath: path.resolve(__dirname, 'public')
+    publicPath: ''
   },
   resolve: {
     modulesDirectories: ['node_modules', 'src'],
@@ -33,6 +35,9 @@ const config = {
   plugins: [
     new webpack.DefinePlugin({
       'process.aws': AWS
+   }),
+   new HtmlWebpackPlugin({
+     template:  path.resolve(__dirname, 'src/index.ejs')
    })
   ],
 };

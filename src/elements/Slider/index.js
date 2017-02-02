@@ -7,7 +7,7 @@ import 'rc-slider/assets/index.css';
 import Const from 'utils/constants';
 import { curry, prop } from 'ramda';
 
-const SliderContainer = styled.div`
+const primary = styled.div`
   position: relative;
   .rc-slider-track {
     background: ${prop('color')} !important;
@@ -15,6 +15,21 @@ const SliderContainer = styled.div`
   }
   .rc-slider-rail {
     height: 0.7rem;
+  }
+`
+
+const light = styled(primary)`
+  width: 50%;
+  margin: 0 auto;
+  .rc-slider-track {
+    background: white !important;
+    height: 1.7rem;
+    border-radius: 50px;
+  }
+  .rc-slider-rail {
+    height: 1.7rem;
+    border-radius: 50px;
+
   }
 `
 
@@ -64,19 +79,36 @@ class SliderHandle extends Component {
   }
 }
 
-export default ({ item, value, label, defaultValue = 50, min = 0, max }) =>
-  <Container>
-    <Label color={Const.color.secondary}>{label}</Label>
-    <Value color={Const.color.primary}>£{value}</Value>
-    <SliderContainer color={Const.color.primary}>
-      <Slider
-        value={value}
-        tipFormatter={null}
-        handle={<SliderHandle/>}
-        onChange={handleSlider(item)}
-        // step={5}
-        defaultValue={defaultValue}
-        min={min}
-        max={max}/>
-    </SliderContainer>
-  </Container>
+export default ({
+  item,
+  value,
+  label,
+  defaultValue = 50,
+  min = 0,
+  max,
+  style = 'primary'
+}) => {
+
+  const SliderTheme = ({
+    primary,
+    light
+  })[style];
+
+  return (
+    <Container>
+      <SliderTheme color={Const.color.primary}>
+      <Label color={Const.color.secondary}>{label}</Label>
+      <Value color={Const.color.primary}>£{value}</Value>
+        <Slider
+          value={value}
+          tipFormatter={null}
+          handle={<SliderHandle/>}
+          onChange={handleSlider(item)}
+          // step={5}
+          defaultValue={defaultValue}
+          min={min}
+          max={max}/>
+      </SliderTheme>
+    </Container>
+  )
+}

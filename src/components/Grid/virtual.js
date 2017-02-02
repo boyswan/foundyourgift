@@ -5,8 +5,9 @@ import Const from 'utils/constants';
 import { Card } from 'components'
 import { connect } from 'utils';
 import { MascotSad } from 'svg';
+import { List } from 'react-virtualized';
 import { mapIndex, totalPrice, last } from 'utils'
-import { pipe, filter, isNil, gt, prop, anyPass,
+import { pipe, filter, isNil, gt, prop, anyPass, splitEvery,
   ifElse, reject, cond, T, identity  } from 'ramda';
 
 const Grid = styled.ul`
@@ -53,24 +54,12 @@ const NoResults = styled.figure`
     font-size: 2.2rem;
   }
 `
-
-const isOverBudget = (budgetInput, cart) => pipe(
-  prop('price'),
-  gt(budgetInput - totalPrice(cart))
-)
-
-const filterResults = last((budgetInput, cart) => pipe(
-  // filter(anyPass([
-  //   isOverBudget(budgetInput, cart),
-  //   // isInCart()
-  // ])),
-  filter(isOverBudget(budgetInput, cart)),
-  ifElse(
-    pipe(prop('length'), isNil),
-    noItems,
-    mapIndex(Card)
-  )
-))
+const CardWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: flex-row;
+  justify-content: center;
+`
 
 const noItems = () =>
 <NoResults color={Const.color.primary}>
@@ -79,16 +68,29 @@ const noItems = () =>
   <p>{Const.text.search.noResultsBody}</p>
 </NoResults>
 
+const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item) =>
+  <div key={key} style={style}>
+    <CardWrap>
+      <Card item={item[index][0]}/>
+      <Card item={item[index][1]}/>
+      <Card item={item[index][2]}/>
+    </CardWrap>
+  </div>
+
 export default connect(({
   searchResults,
   budgetInput,
   remainingBudget,
+  availableProducts,
   cart
-}) =>
+}) => console.log(availableProducts.length) ||
   <Grid>
-    {cond([
-      [() => searchResults.length && Number(remainingBudget), () => filterResults(budgetInput, cart, searchResults)],
-      [T, () => noItems()]
-    ])(T)}
+    <List
+      width={window.innerWidth - 600}
+      height={window.innerHeight}
+      rowCount={Math.floor(availableProducts.length)}
+      rowHeight={380}
+      rowRenderer={x => rowRenderer(x, availableProducts)}
+    />
   </Grid>
 )
