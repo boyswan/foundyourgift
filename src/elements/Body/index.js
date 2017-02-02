@@ -6,9 +6,10 @@ const Body = styled.article`
   height: 100%;
   overflow: auto;
   background: #f1f1f1;
-`
+`;
 
-export default ({ children }) =>
+export default ({ children }) => (
   <Body>
     {children}
   </Body>
+);

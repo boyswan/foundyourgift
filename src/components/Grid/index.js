@@ -2,12 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
 import Const from 'utils/constants';
-import { Card } from 'components'
+import { Card } from 'components';
 import { connect } from 'utils';
 import { MascotSad } from 'svg';
-import { mapIndex, totalPrice, last } from 'utils'
-import { pipe, filter, isNil, gt, prop, anyPass,
-  ifElse, reject, cond, T, identity  } from 'ramda';
+import { mapIndex, totalPrice, last } from 'utils';
+import { pipe, filter, isNil, gt, prop, anyPass, ifElse, reject, cond, T, identity } from 'ramda';
 
 const Grid = styled.ul`
   display: flex;
@@ -26,13 +25,13 @@ const Grid = styled.ul`
     position: relative;
     border-radius: 0.5rem;
   }
-`
+`;
 const Loader = styled.div`
   width: 50px;
   height: 50px;
   background: red;
   align-self: center;
-`
+`;
 const NoResults = styled.figure`
   align-self: center;
   flex-direction: column;
@@ -52,43 +51,37 @@ const NoResults = styled.figure`
   p {
     font-size: 2.2rem;
   }
-`
+`;
 
-const isOverBudget = (budgetInput, cart) => pipe(
-  prop('price'),
-  gt(budgetInput - totalPrice(cart))
-)
+const isOverBudget = (budgetInput, cart) => pipe(prop('price'), gt(budgetInput - totalPrice(cart)));
 
-const filterResults = last((budgetInput, cart) => pipe(
-  // filter(anyPass([
-  //   isOverBudget(budgetInput, cart),
-  //   // isInCart()
-  // ])),
-  filter(isOverBudget(budgetInput, cart)),
-  ifElse(
-    pipe(prop('length'), isNil),
-    noItems,
-    mapIndex(Card)
+const filterResults = last(
+  (budgetInput, cart) => pipe(
+    // filter(anyPass([
+    //   isOverBudget(budgetInput, cart),
+    //   // isInCart()
+    // ])),
+    filter(isOverBudget(budgetInput, cart)),
+    ifElse(pipe(prop('length'), isNil), noItems, mapIndex(Card))
   )
-))
+);
 
-const noItems = () =>
-<NoResults color={Const.color.primary}>
-  <MascotSad color={Const.color.primary}/>
-  <h1>{Const.text.search.noResultsTitle}</h1>
-  <p>{Const.text.search.noResultsBody}</p>
-</NoResults>
+const noItems = () => (
+  <NoResults color={Const.color.primary}>
+    <MascotSad color={Const.color.primary} />
+    <h1>{Const.text.search.noResultsTitle}</h1>
+    <p>{Const.text.search.noResultsBody}</p>
+  </NoResults>
+);
 
-export default connect(({
-  searchResults,
-  budgetInput,
-  remainingBudget,
-  cart
-}) =>
+export default connect(({ searchResults, budgetInput, remainingBudget, cart }) => (
   <Grid>
     {cond([
-      [() => searchResults.length && Number(remainingBudget), () => filterResults(budgetInput, cart, searchResults)],
-      [T, () => noItems()]
+      [
+        () => searchResults.length && Number(remainingBudget),
+        () => filterResults(budgetInput, cart, searchResults)
+      ],
+      [ T, () => noItems() ]
     ])(T)}
   </Grid>
-)
+));

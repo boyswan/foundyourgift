@@ -5,9 +5,10 @@ const Sidebar = styled.aside`
   width: 350px;
   min-width: 350px;
   padding: 6rem 0 0 6rem;
-`
+`;
 
-export default ({ children }) =>
+export default ({ children }) => (
   <Sidebar>
     {children}
   </Sidebar>
+);
