@@ -14,3 +14,4 @@ artifacts:
     - Dockerfile
     - Dockerrun.aws.json
     - public/**/*
+    - nginx/**/*
