@@ -11,5 +11,4 @@ Client
 - Styling
 - View each product
 - Mobile
-- React virtualized
-- Lazy loading
+- Add sitemap (via react router generator)
