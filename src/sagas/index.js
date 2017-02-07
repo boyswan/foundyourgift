@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga';
 import { fork } from 'redux-saga/effects';
-import { updateBudget, search, checkout } from 'sagas/helpers';
+import { updateBudget, search } from 'sagas/helpers';
 
 const Ui = [
   fork(function*() {
@@ -23,9 +23,6 @@ const Api = [
   }),
   fork(function*() {
     yield* takeLatest('TOGGLE_INTEREST', search);
-  }),
-  fork(function*() {
-    yield* takeLatest('CHECKOUT', checkout);
   })
 ];
 

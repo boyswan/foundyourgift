@@ -2,22 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
 import Const from 'utils/constants';
-import { Heart } from 'svg';
+import { Heart, Cart, ShowMore } from 'svg';
 import { prop, tail, map } from 'ramda';
+import { Button } from 'elements';
 import Moment from 'moment';
 
 const Card = styled.li`
-  flex: 0 0 50%;
-  height: 33rem;
-  position: relative;
+  background: white;
+  flex: 0 0 30rem;
+  height: 100%;
   margin: 1rem;
-  overflow: hidden;
+  position: relative;
+  border-radius: 0.5rem;
+  .card_dim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(158, 154, 154, 0.1);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &:hover {
+    .card_dim {
+      opacity: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+  }
 `;
 const Image = styled.img`
   width: 100%;
-  height: 58%;
+  height: 100%;
   object-fit: contain;
-  padding: 2rem;
+  padding: 4rem;
 `;
 const Save = styled.div`
   width: 4.3rem;
@@ -25,20 +46,22 @@ const Save = styled.div`
   border-radius: 10rem;
   background: white;
   position: absolute;
+  z-index: 1;
   top: 1rem;
   right: 1rem;
   cursor: pointer;
-  border: 1px solid ${prop('color')};
-
-  svg {
-    position: absolute;
-    left: 11px;
-    top: 13px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const More = styled(Save)`
+  top: 0.8rem;
+  right: 0.9rem;
 `;
 const Content = styled.div`
-  padding: 1.5rem 1rem;
+  padding: 1.8rem;
   color: ${prop('secondary')};
+  position: relative;
 
   span {
     font-size: 2.3rem;
@@ -57,26 +80,42 @@ const Content = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     height: 5rem;
+    line-height: 2.4rem;
   }
   p {
-    color: #b9b9b9;
+    margin-top: 0.8rem;
+    color: #a29d9d;
     font-weight: 300;
     font-size: 1.4rem;
   }
+`;
+const ImageWrap = styled.div`
+  height: 64%;
 `;
 
 export default ({ item }) => {
   const { title = '', price = 0, features = {}, image = '', timestamp } = item;
   return (
     <Card>
-      <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item })}>
-        <Heart color={Const.color.primary} />
+      <Save
+        color={Const.color.grey}
+        onClick={() => Actions.setCurrent({ item: 'currentProduct', value: item })}
+      >
+        <ShowMore color={Const.color.primary} />
       </Save>
-      <Image src={image} />
+      <ImageWrap>
+        <div className="card_dim">
+          <Button
+            style="primaryLight"
+            label="Add to cart"
+            onClick={() => Actions.selectItem({ item })}
+          />
+        </div>
+        <Image src={image} />
+      </ImageWrap>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
         <span>£{price}</span>
         <h1>{title}</h1>
-        {JSON.stringify(timestamp)}
         <p>Last updated {Moment(timestamp).fromNow()}</p>
       </Content>
     </Card>

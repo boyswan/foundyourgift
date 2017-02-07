@@ -15,6 +15,7 @@ const Background = styled.div`
   flex-direction: ${({ row }) => row ? 'row' : 'column'};
   justify-content: space-between;
   background: ${({ color }) => color};
+  width: 100%;
 `;
 const HeaderLogo = styled.header`
   width: 100%;
@@ -89,7 +90,10 @@ export default connect(({ interests, router, budgetInput }) => (
       <H1>{Const.text.home.title}</H1>
       <H2>{Const.text.home.intro}</H2>
       <Divider color={Const.color.primaryDark} />
-      <Slider style="light" max={250} item="budgetInput" value={budgetInput} label="Budget" />
+      {
+
+          /* <Slider style="light" max={250} item="budgetInput" value={budgetInput} label="Budget" /> */
+      }
       <Interests>
         {mapIndex(Interest(router), interests)}
       </Interests>

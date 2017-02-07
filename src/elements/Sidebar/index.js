@@ -1,14 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import Const from 'utils/constants';
+import { prop } from 'ramda';
 
 const Sidebar = styled.aside`
-  width: 350px;
-  min-width: 350px;
-  padding: 6rem 0 0 6rem;
+  width: ${prop('width')}px;
+  min-width: ${prop('width')}px;
+  padding: ${prop('padding')};
+  background: ${prop('background')};
 `;
 
-export default ({ children }) => (
-  <Sidebar>
+export default ({ children, background, padding = '3rem' }) => (
+  <Sidebar background={background} padding={padding} width={Const.ui.sidebarWidth}>
     {children}
   </Sidebar>
 );

@@ -4,13 +4,12 @@ import { Logo } from 'svg';
 import { Input, Slider, Button } from 'elements';
 import { Link } from 'react-router';
 import { connect, interestToQuery, mapIndex } from 'utils';
+import { prop } from 'ramda';
 import Actions from 'actions';
 import Const from 'utils/constants';
 
 const Filter = styled.aside`
-  width: 300px;
-  min-width: 300px;
-  padding: 3rem;
+  width: 100%;
 `;
 const LogoWrap = styled.div`
   margin-bottom: 2rem;
@@ -48,7 +47,7 @@ const Interest = (router, interests) =>
   );
 
 const Component = ({ router, interests, searchInput, budgetInput, filterInput }) => (
-  <Filter>
+  <Filter width={Const.ui.sidebarWidth}>
     <LogoWrap>
       <Link to={{ pathname: '/', query: interestToQuery(interests) }}>
         <Logo color={Const.color.primary} />
@@ -56,9 +55,7 @@ const Component = ({ router, interests, searchInput, budgetInput, filterInput })
     </LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
     <Divider />
-    {}
     <Slider max={250} item="budgetInput" value={budgetInput} label="Budget" />
-    {}
     <Interests>
       {mapIndex(Interest(router, interests), interests)}
     </Interests>

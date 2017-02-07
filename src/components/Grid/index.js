@@ -2,11 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import Actions from 'actions';
 import Const from 'utils/constants';
-import { Card } from 'components';
+import { Card, Product } from 'components';
 import { connect } from 'utils';
 import { MascotSad } from 'svg';
-import { mapIndex, totalPrice, last } from 'utils';
-import { pipe, filter, isNil, gt, prop, anyPass, ifElse, reject, cond, T, identity } from 'ramda';
+import { Modal } from 'elements';
+import { List } from 'react-virtualized';
+import { mapIndex, totalPrice, last, activeInterests } from 'utils';
+import {
+  pipe,
+  filter,
+  isNil,
+  gt,
+  prop,
+  anyPass,
+  splitEvery,
+  ifElse,
+  reject,
+  cond,
+  T,
+  identity
+} from 'ramda';
 
 const Grid = styled.ul`
   display: flex;
@@ -16,15 +31,6 @@ const Grid = styled.ul`
   justify-content: center;
   max-width: 1280px;
   height: 100vh;
-
-  li {
-    background: white;
-    flex: 0 0 25rem;
-    height: 33rem;
-    margin: 1rem;
-    position: relative;
-    border-radius: 0.5rem;
-  }
 `;
 const Loader = styled.div`
   width: 50px;
@@ -40,7 +46,6 @@ const NoResults = styled.figure`
   font-size: 3.2rem;
   align-items: center;
   color: ${prop('color')};
-  margin-bottom: 30rem;
   max-width: 60%;
   svg {
     margin-bottom: 3rem;
@@ -52,21 +57,21 @@ const NoResults = styled.figure`
     font-size: 2.2rem;
   }
 `;
+const CardWrap = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: flex-row;
+  justify-content: center;
+  height: 90%;
+`;
 
-const isOverBudget = (budgetInput, cart) => pipe(prop('price'), gt(budgetInput - totalPrice(cart)));
-
-const filterResults = last(
-  (budgetInput, cart) => pipe(
-    // filter(anyPass([
-    //   isOverBudget(budgetInput, cart),
-    //   // isInCart()
-    // ])),
-    filter(isOverBudget(budgetInput, cart)),
-    ifElse(pipe(prop('length'), isNil), noItems, mapIndex(Card))
-  )
+const Loading = () => (
+  <NoResults color={Const.color.primary}>
+    Loading ...
+  </NoResults>
 );
 
-const noItems = () => (
+const NoItems = () => (
   <NoResults color={Const.color.primary}>
     <MascotSad color={Const.color.primary} />
     <h1>{Const.text.search.noResultsTitle}</h1>
@@ -74,14 +79,53 @@ const noItems = () => (
   </NoResults>
 );
 
-export default connect(({ searchResults, budgetInput, remainingBudget, cart }) => (
-  <Grid>
-    {cond([
-      [
-        () => searchResults.length && Number(remainingBudget),
-        () => filterResults(budgetInput, cart, searchResults)
-      ],
-      [ T, () => noItems() ]
-    ])(T)}
-  </Grid>
-));
+const NoInterestsSelected = () => (
+  <NoResults color={Const.color.primary}>
+    <MascotSad color={Const.color.primary} />
+    <h1>What are you looking for ...</h1>
+    <p>Select some search times to find stuff!</p>
+  </NoResults>
+);
+
+const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item) => (
+  <div key={key} style={style}>
+    <CardWrap>
+      <Card item={item[index][0]} />
+      <Card item={item[index][1]} />
+      <Card item={item[index][2]} />
+    </CardWrap>
+  </div>
+);
+
+const Products = ({ availableProducts }) => (
+  <List
+    width={window.innerWidth - Const.ui.sidebarWidth * 2}
+    height={window.innerHeight}
+    rowCount={availableProducts.length}
+    rowHeight={480}
+    rowRenderer={x => rowRenderer(x, availableProducts)}
+  />
+);
+
+export default connect(
+  (
+    {
+      searchResults,
+      interests,
+      budgetInput,
+      remainingBudget,
+      availableProducts,
+      cart,
+      currentProduct
+    }
+  ) => console.log(interests) ||
+    <Grid>
+      {currentProduct.title ? <Modal><Product currentProduct={currentProduct} /></Modal> : ''}
+      {cond([
+        [() => availableProducts.length, () => <Products availableProducts={availableProducts} />],
+        // [ !budgetInput, () => <NoBudget /> ],
+        [() => !activeInterests(interests), () => <NoInterestsSelected />],
+        [identity, () => <NoItems />]
+      ])(T)}
+    </Grid>
+);

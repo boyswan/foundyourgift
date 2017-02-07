@@ -27,6 +27,7 @@ const init = {
   searchResults: [],
   availableProducts: [],
   searchInput: '',
+  currentProduct: {},
   filterInput: 0,
   budgetInput: 125,
   remainingBudget: 125
@@ -41,5 +42,7 @@ export default createReducer(init, {
   SET_TOTAL: _set,
   SET_RESULTS: _set,
   SELECT_ITEM: _append,
-  REMOVE_ITEM: _remove
+  SET_CURRENT: _set,
+  REMOVE_ITEM: _remove,
+  REMOVE_CURRENT: _set
 });

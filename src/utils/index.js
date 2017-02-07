@@ -15,6 +15,7 @@ import {
   split,
   filter,
   concat,
+  propEq,
   gt,
   prop,
   isNil,
@@ -39,10 +40,8 @@ export const fetch = url => axios(getConfig(url)).then(identity).catch(console.l
 
 export const toSnakeCaseUpper = pipe(replace(/([A-Z])/g, str => `_${toLower(str)}`), toUpper);
 
-export const interestToQuery = reduce(
-  (acc, val) => val.active ? assoc(val.type, true, acc) : acc,
-  {}
-);
+export const interestToQuery = reduce((acc, val) => val.active ? assoc(val.type, true, acc) : acc, {
+});
 
 export const createActions = reduce(
   (acc, type) =>
@@ -75,13 +74,13 @@ export const formatBalance = (budgetInput, cart) =>
 export const isOverBudget = (budgetInput, cart) =>
   pipe(prop('price'), gt(budgetInput - totalPrice(cart)));
 
-export const filterResults = last(
-  (budgetInput, cart) =>
-    pipe(filter(isOverBudget(budgetInput, cart)), filter(pipe(prop('length'), isNil)))
-);
+export const filterResults = last((budgetInput, cart) =>
+  pipe(filter(isOverBudget(budgetInput, cart)), filter(pipe(prop('length'), isNil))));
 
 export const getCartQuery = pipe(
   map(({ productId }) => `${productId}=${1}`),
   join('&'),
   concat('?')
 );
+
+export const activeInterests = filter(propEq('active', 'true'));

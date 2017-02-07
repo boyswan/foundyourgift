@@ -13,21 +13,21 @@ const Button = styled.button`
   border-radius: 10rem;
   font-weight: 100;
   margin: 0 1rem 2rem 1rem;
-
   &:hover {
     transition: all 0.2s ease-in-out;
   }
 `;
 
 const small = () => `
-  padding: 1rem 1rem;
+  padding: 1rem 1.5rem;
   font-size: 1.4rem;
-  margin: 0 1rem 1rem 0rem;
+  margin: 0 1.5rem 1.5rem 0rem;
 `;
 
 const primary = styled(Button)`
   background: transparent;
   color: white;
+  border: 1px solid white;
   &:hover {
     background: rgba(255, 255, 255, 0.5);
     color: white;
@@ -35,15 +35,16 @@ const primary = styled(Button)`
 `;
 const selected = styled(Button)`
   background: white;
-  color: red;
+  color: ${prop('primary')};
+  border: 1px solid white;
 `;
 const primaryLight = styled(primary)`
   color: white;
   background: ${prop('primary')};
-  /*&:hover {
-    color: ${prop('primary')};
-    background: rgba(255,255,255, 0.5);
-  }*/
+  border: 1px solid ${prop('primary')};
+  &:hover {
+    background: ${prop('primary')};
+  }
 `;
 const selectedSmall = styled(selected)`
   ${small()}
@@ -54,12 +55,14 @@ const primarySmall = styled(primary)`
 const selectedSmallLight = styled(selected)`
   ${small()}
   color: white;
+  border: 1px solid ${prop('primary')};
   background: ${prop('primary')}
 `;
-const primarySmallLight = styled(primary)`
+const primarySmallLight = styled(primaryLight)`
   ${small()}
   color: ${prop('secondary')};
   background: white;
+  border: 1px solid white;
   &:hover {
     color: ${prop('primary')};
     background: rgba(255,255,255, 0.5);

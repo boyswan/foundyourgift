@@ -3,10 +3,15 @@ const api = {
   API_KEY: 'QuHdJW22No1T0vvZ7pzU9kTfDCXcc3l84wqXJLSb'
 };
 
+const ui = {
+  sidebarWidth: 400
+};
+
 const color = {
-  primary: '#F15959',
+  primary: '#FF7270',
   primaryDark: '#c74949',
-  secondary: '#4674AB',
+  // secondary: '#4674AB',
+  secondary: '#a9a9a9',
   grey: '#F6F6F6',
   greyDark: '#EBEBEB'
 };
@@ -39,4 +44,4 @@ const text = {
   }
 };
 
-export default { color, interests, text, api };
+export default { color, interests, text, api, ui };

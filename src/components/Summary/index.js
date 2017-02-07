@@ -8,8 +8,7 @@ import Const from 'utils/constants';
 import Actions from 'actions';
 
 const Sidebar = styled.aside`
-  width: 300px;
-  min-width: 300px;
+  width: 100%;
   background: white;
   overflow: auto;
   display: flex;
@@ -22,8 +21,8 @@ const Balance = styled.div`
   align-items: center;
   flex-direction: column;
   color: ${prop('color')};
-  padding: 2rem;
   text-align: right;
+  padding-right: 3rem;
   h1 {
     font-weight: 600;
     font-size: 4.2rem;
@@ -51,13 +50,23 @@ const Label = styled.h2`
   width: 100%;
   text-align: left;
 `;
+const ItemContent = styled.div`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  &:hover{
+    opacity: 0.75;
+  }
+`;
 const Content = styled.div`
   color: ${prop('secondary')};
-  font-size: 1.6rem;
   span {
+    color: ${prop('primary')};
     font-weight: 400;
+    font-size: 1.8rem;
   }
   div {
+    font-size: 1.6rem;
     padding-right: 4rem;
     opacity: 0.5;
     overflow: hidden;
@@ -82,8 +91,8 @@ const Cart = styled.ul`
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
-  padding: 0 2rem;
   height: calc(100vh - 34rem);
+  padding-right: 3rem;
 `;
 const Remove = styled.div`
   position: absolute;
@@ -91,11 +100,10 @@ const Remove = styled.div`
   cursor: pointer;
 `;
 const ButtonWrap = styled.div`
-  height: 14rem;
-  padding: 2rem;
   align-items: center;
   flex-direction: column;
   display: flex;
+  padding-right: 3rem;
   button {
     width: 20rem;
   }
@@ -106,21 +114,26 @@ const Total = styled.span`
   color: ${prop('color')};
 `;
 
-const ItemComponent = ({ image, price, title, productId }, key) => (
-  <Item key={key} color={Const.color.grey}>
-    <Image color={Const.color.grey} alt={title} src={image} />
-    <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-      <span>£{price}</span>
-      <div>{title}</div>
-    </Content>
-    <Remove onClick={() => Actions.removeItem({ productId })}>
-      <Cross color={Const.color.primary} />
-    </Remove>
-  </Item>
-);
+const ItemComponent = (item, key) => {
+  const { image, price, title, productId } = item;
+  return (
+    <Item key={key} color={Const.color.grey}>
+      <ItemContent onClick={() => Actions.setCurrent({ item: 'currentProduct', value: item })}>
+        <Image color={Const.color.grey} alt={title} src={image} />
+        <Content secondary={Const.color.secondary} primary={Const.color.primary}>
+          <span>£{price}</span>
+          <div>{title}</div>
+        </Content>
+      </ItemContent>
+      <Remove onClick={() => Actions.removeItem({ productId })}>
+        <Cross color={'#a9a9a9'} />
+      </Remove>
+    </Item>
+  );
+};
 
 export default connect(({ cart, budgetInput, remainingBudget, total }) => (
-  <Sidebar>
+  <Sidebar width={Const.ui.sidebarWidth}>
     <Balance color={Const.color.primary}>
       <div>
         <h1>£{remainingBudget}</h1>
