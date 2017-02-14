@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Logo } from 'svg';
-import { Input, Slider, Button } from 'elements';
-import { Link } from 'react-router';
-import { connect, interestToQuery, mapIndex } from 'utils';
-import { prop } from 'ramda';
-import Actions from 'actions';
-import Const from 'utils/constants';
+import React from "react";
+import styled from "styled-components";
+import { Logo } from "svg";
+import { Input, Slider, Button } from "elements";
+import { Link } from "react-router";
+import { connect, interestToQuery, mapIndex } from "utils";
+import { prop } from "ramda";
+import Actions from "actions";
+import Const from "utils/constants";
 
 const Filter = styled.aside`
   width: 100%;
@@ -40,7 +40,7 @@ const Interest = (router, interests) =>
   ({ label, active }, index) => (
     <Button
       key={index}
-      style={active ? 'selectedSmallLight' : 'primarySmallLight'}
+      style={active ? "selectedSmallLight" : "primarySmallLight"}
       onClick={() => Actions.toggleInterest({ index, active: !active, router })}
       label={label}
     />
@@ -49,7 +49,7 @@ const Interest = (router, interests) =>
 const Component = ({ router, interests, searchInput, budgetInput, filterInput }) => (
   <Filter width={Const.ui.sidebarWidth}>
     <LogoWrap>
-      <Link to={{ pathname: '/', query: interestToQuery(interests) }}>
+      <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
         <Logo color={Const.color.primary} />
       </Link>
     </LogoWrap>

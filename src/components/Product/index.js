@@ -1,11 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import Const from 'utils/constants';
-import { Button } from 'elements';
-import { Cart } from 'svg';
-import { prop, tail, map, identity, pipe, addIndex, take } from 'ramda';
-import Moment from 'moment';
+import React from "react";
+import styled from "styled-components";
+import Actions from "actions";
+import Const from "utils/constants";
+import { Button } from "elements";
+import { Cart } from "svg";
+import { formatPrice } from "utils";
+import { prop, tail, map, identity, pipe, addIndex, take } from "ramda";
+import Moment from "moment";
 
 const Product = styled.div`
   flex: 0 0 50%;
@@ -23,7 +24,7 @@ const ImageWrap = styled.div`
   height: 50%;
 `;
 const Image = styled.img`
-  ${'' /* width: 50rem;
+  ${"" /* width: 50rem;
   width: 50rem;*/}
   padding: 2rem;
   object-fit: contain;
@@ -65,7 +66,7 @@ const FeatureWrap = styled.div`
 `;
 const Content = styled.div`
   padding: 1.5rem 1rem;
-  color: ${prop('secondary')};
+  color: ${prop("secondary")};
   position: relative;
 
   span {
@@ -74,7 +75,7 @@ const Content = styled.div`
     letter-spacing: 1.1px;
     margin-bottom: 1.6rem;
     display: block;
-    color: ${prop('primary')};
+    color: ${prop("primary")};
   }
   h1 {
     font-size: 1.8rem;
@@ -100,18 +101,27 @@ const Gallery = ({ image, imageSet }) => (
 );
 export default ({ currentProduct }) => {
   const {
-    title = '',
+    title = "",
     price = 0,
-    features = [],
-    image = '',
-    brand,
+    feature1,
+    feature2,
+    feature3,
+    feature4,
+    feature5,
+    image1,
+    image2,
+    image3,
+    image4,
+    image5,
+    image = "",
     publisher,
-    imageSet,
     description,
     timestamp,
     url
   } = currentProduct;
-  console.log('imageSet', imageSet);
+
+  const features = [feature1, feature2, feature3, feature4, feature5];
+  const imageSet = [image1, image2, image3, image4, image5];
   return (
     <Product>
       <Gallery image={image} imageSet={imageSet} />
@@ -119,15 +129,15 @@ export default ({ currentProduct }) => {
         <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item: currentProduct })}>
           <Cart color={Const.color.primary} />
         </Save>
-        <span>£{price}</span>
-        {publisher !== 'null' ? <h2>{publisher}</h2> : ''}
-        {brand !== 'null' && brand !== publisher ? <h2>{brand}</h2> : ''}
+        <span>{formatPrice(price)}</span>
+        <h2>{publisher}</h2> : ""}
         <h1>{title}</h1>
+        <p>
+          Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product."
+        </p>
         <Body>
-          {description !== 'null' ? <p>{description}</p> : ''}
-          {features.length
-            ? <FeatureWrap>{features.map((x, i) => <Feature key={i}>{x}</Feature>)}</FeatureWrap>
-            : ''}
+          <p>{description}</p>
+          <FeatureWrap>{features.map((x, i) => <Feature key={i}>{x}</Feature>)}</FeatureWrap>
         </Body>
         <p>Last updated {Moment(timestamp).fromNow()}</p>
         <a target="_blank" href={url}>

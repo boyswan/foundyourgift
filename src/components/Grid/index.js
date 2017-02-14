@@ -1,13 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import Const from 'utils/constants';
-import { Card, Product } from 'components';
-import { connect } from 'utils';
-import { MascotSad } from 'svg';
-import { Modal } from 'elements';
-import { List } from 'react-virtualized';
-import { mapIndex, totalPrice, last, activeInterests } from 'utils';
+import React from "react";
+import styled from "styled-components";
+import Actions from "actions";
+import Const from "utils/constants";
+import { Card, Product } from "components";
+import { connect } from "utils";
+import { MascotSad } from "svg";
+import { Modal } from "elements";
+import { List } from "react-virtualized";
+import { mapIndex, totalPrice, last, activeInterests } from "utils";
+import { withWindowDimensions as Wind } from "utils/window";
 import {
   pipe,
   filter,
@@ -21,7 +22,7 @@ import {
   cond,
   T,
   identity
-} from 'ramda';
+} from "ramda";
 
 const Grid = styled.ul`
   display: flex;
@@ -31,6 +32,8 @@ const Grid = styled.ul`
   justify-content: center;
   max-width: 1280px;
   height: 100vh;
+  position: relative;
+  overflow: auto;
 `;
 const Loader = styled.div`
   width: 50px;
@@ -45,7 +48,7 @@ const NoResults = styled.figure`
   text-align: center;
   font-size: 3.2rem;
   align-items: center;
-  color: ${prop('color')};
+  color: ${prop("color")};
   max-width: 60%;
   svg {
     margin-bottom: 3rem;
@@ -79,14 +82,6 @@ const NoItems = () => (
   </NoResults>
 );
 
-const NoInterestsSelected = () => (
-  <NoResults color={Const.color.primary}>
-    <MascotSad color={Const.color.primary} />
-    <h1>What are you looking for ...</h1>
-    <p>Select some search times to find stuff!</p>
-  </NoResults>
-);
-
 const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item) => (
   <div key={key} style={style}>
     <CardWrap>
@@ -107,25 +102,41 @@ const Products = ({ availableProducts }) => (
   />
 );
 
-export default connect(
-  (
-    {
-      searchResults,
-      interests,
-      budgetInput,
-      remainingBudget,
-      availableProducts,
-      cart,
-      currentProduct
-    }
-  ) => console.log(interests) ||
-    <Grid>
-      {currentProduct.title ? <Modal><Product currentProduct={currentProduct} /></Modal> : ''}
-      {cond([
-        [() => availableProducts.length, () => <Products availableProducts={availableProducts} />],
-        // [ !budgetInput, () => <NoBudget /> ],
-        [() => !activeInterests(interests), () => <NoInterestsSelected />],
-        [identity, () => <NoItems />]
-      ])(T)}
-    </Grid>
-);
+export default connect((
+  {
+    status: { loading },
+    searchResults,
+    interests,
+    budgetInput,
+    remainingBudget,
+    availableProducts,
+    cart,
+    currentProduct
+  }
+) => (
+  <Grid>
+    <Modal active={currentProduct.title}><Product currentProduct={currentProduct} /></Modal>
+    <Modal active={loading}>loading .....</Modal>
+    {cond([
+      [() => availableProducts.length, () => <Products availableProducts={availableProducts} />],
+      [
+        () => !activeInterests(interests),
+        () => (
+          <NoItems
+            title="What are you looking for ..."
+            body="Select some search times to find stuff!"
+          />
+        )
+      ],
+      [
+        identity,
+        () => (
+          <NoItems
+            title={Const.text.search.noResultsTitle}
+            body={Const.text.search.noResultsBody}
+          />
+        )
+      ]
+    ])(T)}
+  </Grid>
+));

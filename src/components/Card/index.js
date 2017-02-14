@@ -1,11 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import Const from 'utils/constants';
-import { Heart, Cart, ShowMore } from 'svg';
-import { prop, tail, map } from 'ramda';
-import { Button } from 'elements';
-import Moment from 'moment';
+import React from "react";
+import styled from "styled-components";
+import Actions from "actions";
+import Const from "utils/constants";
+import { Heart, Cart, ShowMore } from "svg";
+import { prop, tail, map } from "ramda";
+import { Button } from "elements";
+import Moment from "moment";
+import { formatPrice } from "utils";
 
 const Card = styled.li`
   background: white;
@@ -60,7 +61,7 @@ const More = styled(Save)`
 `;
 const Content = styled.div`
   padding: 1.8rem;
-  color: ${prop('secondary')};
+  color: ${prop("secondary")};
   position: relative;
 
   span {
@@ -69,7 +70,7 @@ const Content = styled.div`
     letter-spacing: 1.1px;
     margin-bottom: 0.6rem;
     display: block;
-    color: ${prop('primary')};
+    color: ${prop("primary")};
   }
   h1 {
     font-size: 1.8rem;
@@ -94,12 +95,12 @@ const ImageWrap = styled.div`
 `;
 
 export default ({ item }) => {
-  const { title = '', price = 0, features = {}, image = '', timestamp } = item;
+  const { title = "", price = 0, features = {}, image = "", currentTimestamp } = item;
   return (
     <Card>
       <Save
         color={Const.color.grey}
-        onClick={() => Actions.setCurrent({ item: 'currentProduct', value: item })}
+        onClick={() => Actions.setCurrent({ item: "currentProduct", value: item })}
       >
         <ShowMore color={Const.color.primary} />
       </Save>
@@ -114,9 +115,9 @@ export default ({ item }) => {
         <Image src={image} />
       </ImageWrap>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <span>£{price}</span>
+        <span>{formatPrice(price)}</span>
         <h1>{title}</h1>
-        <p>Last updated {Moment(timestamp).fromNow()}</p>
+        <p>Last updated {Moment(currentTimestamp).fromNow()}</p>
       </Content>
     </Card>
   );

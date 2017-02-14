@@ -1,31 +1,25 @@
-import { takeLatest } from 'redux-saga';
-import { fork } from 'redux-saga/effects';
-import { updateBudget, search } from 'sagas/helpers';
+import { takeLatest } from "redux-saga";
+import { fork, throttle } from "redux-saga/effects";
+import { updateBudget, updateAvailable, updateParams, hydrate, checkout } from "sagas/helpers";
 
-const Ui = [
-  fork(function*() {
-    yield* takeLatest('SET_SLIDER', updateBudget);
-  }),
-  fork(function*() {
-    yield* takeLatest('REMOVE_ITEM', updateBudget);
-  }),
-  fork(function*() {
-    yield* takeLatest('SELECT_ITEM', updateBudget);
-  }),
-  fork(function*() {
-    yield* takeLatest('FORCE_UPDATE', updateBudget);
-  })
-];
+const Ui = [fork(function*() {
+    yield* takeLatest("HYDRATE", hydrate);
+  }), fork(function*() {
+    yield* takeLatest("SET_SLIDER", updateBudget);
+  }), fork(function*() {
+    yield* takeLatest("REMOVE_ITEM", updateBudget);
+  }), fork(function*() {
+    yield* takeLatest("SELECT_ITEM", updateBudget);
+  }), fork(function*() {
+    yield* takeLatest("SET_RESULTS", updateAvailable);
+  })];
 
-const Api = [
-  fork(function*() {
-    yield* takeLatest('SEARCH', search);
-  }),
-  fork(function*() {
-    yield* takeLatest('TOGGLE_INTEREST', search);
-  })
-];
+const Api = [fork(function*() {
+    yield* takeLatest("CHECKOUT", checkout);
+  }), fork(function*() {
+    yield* takeLatest("TOGGLE_INTEREST", updateParams);
+  })];
 
 export default function* root() {
-  yield [ ...Api, ...Ui ];
+  yield [...Api, ...Ui];
 }

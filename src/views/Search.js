@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import Const from 'utils/constants';
-import { connect } from 'utils';
-import { Summary, Filter, Footer, Grid } from 'components';
-import { Body, Sidebar } from 'elements';
+import React from "react";
+import styled from "styled-components";
+import Actions from "actions";
+import Const from "utils/constants";
+import { connect } from "utils";
+import { Summary, Filter, Footer, Grid } from "components";
+import { Body, Sidebar } from "elements";
 
 const Background = styled.div`
   display: flex;
@@ -16,7 +16,13 @@ const Background = styled.div`
 
 class Component extends React.Component {
   componentDidMount() {
-    Actions.search({ router: this.props.router });
+    Actions.hydrate({ router: this.props.router });
+    window.addEventListener("resize", () => {
+      Actions.setDimensions({
+        item: "dimensions",
+        value: { width: window.innerWidth, height: window.innerHeight }
+      });
+    });
   }
 
   render() {

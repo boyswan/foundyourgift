@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { connect, mapIndex } from 'utils';
-import { reduce, add, prop, clamp } from 'ramda';
-import { Cross } from 'svg';
-import { Button } from 'elements';
-import Const from 'utils/constants';
-import Actions from 'actions';
+import React from "react";
+import styled from "styled-components";
+import { connect, mapIndex, formatPrice } from "utils";
+import { reduce, add, prop, clamp } from "ramda";
+import { Cross } from "svg";
+import { Button } from "elements";
+import Const from "utils/constants";
+import Actions from "actions";
 
 const Sidebar = styled.aside`
   width: 100%;
@@ -20,7 +20,7 @@ const Balance = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  color: ${prop('color')};
+  color: ${prop("color")};
   text-align: right;
   padding-right: 3rem;
   h1 {
@@ -34,17 +34,19 @@ const Balance = styled.div`
   }
 `;
 const Image = styled.img`
-  height: 5rem;
-  border: 1px solid ${prop('color')};
-  background: ${prop('color')};
+  border: 1px solid ${prop("color")};
+  background: ${prop("color")};
   width: 5rem;
+  height: 5rem;
+  min-width: 5rem;
+  min-height: 5rem;
   border-radius: 10rem;
   margin-right: 2rem;
 `;
 const Label = styled.h2`
   font-size: 1.6rem;
-  color: ${prop('color')};
-  border-bottom: 1px solid ${prop('grey')};
+  color: ${prop("color")};
+  border-bottom: 1px solid ${prop("grey")};
   padding-bottom: 2rem;
   font-weight: 300;
   width: 100%;
@@ -59,9 +61,9 @@ const ItemContent = styled.div`
   }
 `;
 const Content = styled.div`
-  color: ${prop('secondary')};
+  color: ${prop("secondary")};
   span {
-    color: ${prop('primary')};
+    color: ${prop("primary")};
     font-weight: 400;
     font-size: 1.8rem;
   }
@@ -79,7 +81,7 @@ const Item = styled.li`
   flex-direction: row;
   display: flex;
   width: 100%;
-  border-bottom: 1px solid ${prop('color')};
+  border-bottom: 1px solid ${prop("color")};
   padding-bottom: 2rem;
   margin-bottom: 2rem;
   align-items: center;
@@ -111,22 +113,22 @@ const ButtonWrap = styled.div`
 const Total = styled.span`
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: ${prop('color')};
+  color: ${prop("color")};
 `;
 
 const ItemComponent = (item, key) => {
   const { image, price, title, productId } = item;
   return (
     <Item key={key} color={Const.color.grey}>
-      <ItemContent onClick={() => Actions.setCurrent({ item: 'currentProduct', value: item })}>
+      <ItemContent onClick={() => Actions.setCurrent({ item: "currentProduct", value: item })}>
         <Image color={Const.color.grey} alt={title} src={image} />
         <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-          <span>£{price}</span>
+          <span>{formatPrice(price)}</span>
           <div>{title}</div>
         </Content>
       </ItemContent>
       <Remove onClick={() => Actions.removeItem({ productId })}>
-        <Cross color={'#a9a9a9'} />
+        <Cross color={"#a9a9a9"} />
       </Remove>
     </Item>
   );
@@ -145,7 +147,7 @@ export default connect(({ cart, budgetInput, remainingBudget, total }) => (
       {mapIndex(ItemComponent, cart)}
     </Cart>
     <ButtonWrap>
-      <Total color={Const.color.primary}>Total: £{total.toFixed(2)}</Total>
+      <Total color={Const.color.primary}>Total: {formatPrice(total)}</Total>
       <Button style="primaryLight" onClick={() => Actions.checkout({ cart })} label="Checkout" />
     </ButtonWrap>
   </Sidebar>
