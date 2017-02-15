@@ -39,7 +39,6 @@ const Background = styled.div`
 `;
 
 export default ({ active, children }) => {
-  console.log("active", active);
   return (
     <Modal active={active}>
       <Child>{children}</Child>

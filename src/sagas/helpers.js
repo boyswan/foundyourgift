@@ -21,7 +21,7 @@ const cartUrl = concat(`${Const.api.API_URL}/cart`);
 
 export function* hydrate(route) {
   try {
-    const cart = yield JSON.parse(localStorage.getItem("cart"));
+    const cart = yield JSON.parse(localStorage.getItem("cart") || "[]");
     yield put({ type: "SET_CART", item: "cart", value: cart });
     yield updateParams(route);
   } catch (err) {
