@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Actions from "actions";
 import Const from "utils/constants";
 import { connect } from "utils";
-import { Summary, Filter, Footer, Grid } from "components";
+import { Summary, Filter, Grid } from "components";
 import { Body, Sidebar } from "elements";
 
 const Background = styled.div`
@@ -18,7 +18,7 @@ class Component extends React.Component {
   componentDidMount() {
     Actions.hydrate({ router: this.props.router });
     window.addEventListener("resize", () => {
-      Actions.setDimensions({
+      Actions.getDimensions({
         item: "dimensions",
         value: { width: window.innerWidth, height: window.innerHeight }
       });

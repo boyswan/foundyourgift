@@ -10,11 +10,13 @@ import { formatPrice } from "utils";
 
 const Card = styled.li`
   background: white;
-  flex: 0 0 30rem;
+  ${"" /* flex: 0 0 30rem;*/}
   height: 100%;
+  width: 33%;
   margin: 1rem;
   position: relative;
   border-radius: 0.5rem;
+
   .card_dim {
     position: absolute;
     left: 0;
@@ -40,6 +42,14 @@ const Image = styled.img`
   height: 100%;
   object-fit: contain;
   padding: 4rem;
+`;
+const Type = styled.div`
+  color: #a29d9d;
+  position: absolute;
+  top: 2.2rem;
+  left: 2rem;
+  font-weight: 100;
+  font-size: 1.4rem;
 `;
 const Save = styled.div`
   width: 4.3rem;
@@ -81,6 +91,7 @@ const Content = styled.div`
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     height: 5rem;
+    letter-spacing: 0.4px;
     line-height: 2.4rem;
   }
   p {
@@ -95,9 +106,18 @@ const ImageWrap = styled.div`
 `;
 
 export default ({ item }) => {
-  const { title = "", price = 0, features = {}, image = "", currentTimestamp } = item;
+  const {
+    title = "",
+    salePrice = 0,
+    price = 0,
+    searchType,
+    features = {},
+    image = "",
+    currentTimestamp
+  } = item;
   return (
     <Card>
+      <Type secondary={Const.color.greyDark}>{searchType}</Type>
       <Save
         color={Const.color.grey}
         onClick={() => Actions.setCurrent({ item: "currentProduct", value: item })}
@@ -115,9 +135,9 @@ export default ({ item }) => {
         <Image src={image} />
       </ImageWrap>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <span>{formatPrice(price)}</span>
+        <span>{formatPrice(salePrice.length ? salePrice : price)}</span>
         <h1>{title}</h1>
-        <p>Last updated {Moment(currentTimestamp).fromNow()}</p>
+        <p> Last updated {Moment(currentTimestamp).fromNow()}</p>
       </Content>
     </Card>
   );

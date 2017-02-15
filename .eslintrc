@@ -19,7 +19,7 @@ rules:
     - unix
   quotes:
     - error
-    - single
+    - double
   semi:
     - error
     - always
@@ -36,5 +36,7 @@ plugins:
   - react
 extends:
   - eslint:recommended
+  - plugin:react/recommended
+  - prettier
 globals:
   __DEV__: true

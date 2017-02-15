@@ -5,7 +5,7 @@ import { Container, Label } from "styles";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Const from "utils/constants";
-import { curry, prop } from "ramda";
+import { prop } from "ramda";
 
 const primary = styled.div`
   position: relative;
@@ -87,17 +87,8 @@ export default class extends React.Component {
     this.setState({ val });
   }
 
-  componentDidMount() {
-    window.addEventListener("resize", () => {
-      Actions.setDimensions({
-        item: "dimensions",
-        value: { width: window.innerWidth, height: window.innerHeight }
-      });
-    });
-  }
-
   render() {
-    const { item, value, label, defaultValue = 50, min = 0, max, style = "primary" } = this.props;
+    const { item, label, defaultValue = 50, min = 0, max, style = "primary" } = this.props;
     const SliderTheme = ({ primary, light })[style];
     return (
       <Container>

@@ -2,6 +2,7 @@ import { createActions } from "utils";
 
 export default createActions([
   "hydrate",
+  "getDimensions",
   "selectItem",
   "removeItem",
   "removeCurrent",
@@ -10,6 +11,5 @@ export default createActions([
   "setSlider",
   "selectSlider",
   "setCurrent",
-  "setDimensions",
   "checkout"
 ]);

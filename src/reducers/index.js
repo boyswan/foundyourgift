@@ -1,29 +1,29 @@
 import { set, lensProp, over, adjust, reject, propEq, assoc, append, merge, __ } from "ramda";
-import { createReducer, setInteretsFromParams, formatBalance } from "utils";
+import { createReducer, setInteretsFromParams } from "utils";
 import Const from "utils/constants";
 
 // _set :: (String, a) -> State -> State
-const _set = ({ item, value }, state) => set(lensProp(item), value);
+const _set = ({ item, value }) => set(lensProp(item), value);
 
 // _toggle :: (Number) -> State -> State222
-const _toggle = ({ index }, state) =>
+const _toggle = ({ index }) =>
   over(lensProp("interests"), adjust(x => assoc("active", !x.active, x), index));
 
 // _append :: (Object) -> State -> State
-const _append = ({ item }, state) => over(lensProp("cart"), append(item));
+const _append = ({ item }) => over(lensProp("cart"), append(item));
 
 // _remove :: (Number) -> State -> State
-const _remove = ({ productId }, state) =>
-  over(lensProp("cart"), reject(propEq("productId", productId)));
+const _remove = ({ productId }) => over(lensProp("cart"), reject(propEq("productId", productId)));
 
 // _remove :: (Number) -> State -> State
-const _merge = ({ item, value }, state) => over(lensProp(item), merge(__, value));
+const _merge = ({ item, value }) => over(lensProp(item), merge(__, value));
 
 const init = {
   status: {
     loading: false
   },
-  dimensions: {},
+  breakpoint: 3,
+  dimensions: { width: window.innerWidth, height: window.innerHeight },
   interests: setInteretsFromParams(Const.interests),
   total: 0,
   cart: [],
@@ -40,6 +40,7 @@ const init = {
 export default createReducer(init, {
   TOGGLE_INTEREST: _toggle,
   AVAILABLE_PRODUCTS: _set,
+  SET_BREAKPOINT: _set,
   SET_DIMENSIONS: _set,
   SET_INPUT: _set,
   SET_SLIDER: _set,

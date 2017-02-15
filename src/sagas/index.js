@@ -1,6 +1,13 @@
 import { takeLatest } from "redux-saga";
 import { fork, throttle } from "redux-saga/effects";
-import { updateBudget, updateAvailable, updateParams, hydrate, checkout } from "sagas/helpers";
+import {
+  updateBudget,
+  updateAvailable,
+  updateDimensionss,
+  updateParams,
+  hydrate,
+  checkout
+} from "sagas/helpers";
 
 const Ui = [fork(function*() {
     yield* takeLatest("HYDRATE", hydrate);
@@ -12,6 +19,8 @@ const Ui = [fork(function*() {
     yield* takeLatest("SELECT_ITEM", updateBudget);
   }), fork(function*() {
     yield* takeLatest("SET_RESULTS", updateAvailable);
+  }), fork(function*() {
+    yield throttle(100, "GET_DIMENSIONS", updateDimensionss);
   })];
 
 const Api = [fork(function*() {

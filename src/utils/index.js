@@ -19,6 +19,9 @@ import {
   gt,
   prop,
   sortBy,
+  cond,
+  lt,
+  always,
   uniq,
   isNil,
   __,
@@ -27,6 +30,7 @@ import {
   toLower,
   splitEvery,
   dropLast,
+  T,
   toUpper,
   identity,
   add,
@@ -56,7 +60,7 @@ export const createActions = reduce(
 
 export const createReducer = curry((init, reducers, existingState, action) => {
   const state = existingState ? existingState : init;
-  const fn = reducers[action.type] || (x => y => y);
+  const fn = reducers[action.type] || (() => y => y);
   return typeof fn === "function" ? fn(action, state)(state) : identity;
 });
 
@@ -77,7 +81,11 @@ export const isOverBudget = (budgetInput, cart) =>
   pipe(prop("price"), gt(budgetInput - totalPrice(cart)));
 
 export const filterResults = uncurryN(2, (budgetInput, cart) =>
-  pipe(filter(isOverBudget(budgetInput * 100, cart)), filter(pipe(prop("length"), isNil))));
+  pipe(
+    filter(isOverBudget(budgetInput * 100, cart)),
+    filter(pipe(prop("length"), isNil)),
+    sortBy(prop("random"))
+  ));
 
 export const getCartQuery = pipe(map(({ asin }) => `${asin}=${1}`), join("&"), concat("?"));
 
@@ -85,12 +93,9 @@ export const formatPrice = price => `£${(price / 100).toFixed(2)}`;
 
 export const activeInterests = filter(propEq("active", "true"));
 
-export const removeLastRowForSafety = pipe(
-  filterResults,
-  sortBy(prop("random")),
-  splitEvery(3),
-  dropLast(1)
-);
+export const getBreakpoint = cond([[gt(__, 1555), always(3)], [T, always(2)]]);
+
+export const getColumn = pipe(splitEvery, dropLast(1));
 
 export const updateCacheWithRes = pipe(concat, uniq);
 
@@ -107,3 +112,8 @@ export const checkCacheToUrl = uncurryN(2, cache =>
     join("&"),
     concat("?")
   ));
+
+export const _test = uncurryN(2, (budgetInput, cart) =>
+  pipe(filter(isOverBudget(budgetInput * 100, cart)), filter(pipe(prop("length"), isNil))));
+
+export const _fn = pipe(_test, sortBy(prop("random")), splitEvery(3), dropLast(1));
