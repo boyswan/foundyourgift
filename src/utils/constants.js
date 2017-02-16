@@ -5,7 +5,8 @@ const api = {
 
 const ui = {
   sidebarWidth: 400,
-  defaultBudget: 125
+  defaultBudget: 125,
+  breakpoints: { giant: 1170, desktop: 992, tablet: 768, mobile: 376 }
 };
 
 const color = {

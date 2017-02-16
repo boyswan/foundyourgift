@@ -1,28 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Actions from "actions";
 import Const from "utils/constants";
 import { Card, Product } from "components";
 import { connect } from "utils";
 import { MascotSad } from "svg";
 import { Modal } from "elements";
 import { List } from "react-virtualized";
-import { mapIndex, totalPrice, last, activeInterests } from "utils";
-import { withWindowDimensions as Wind } from "utils/window";
-import {
-  pipe,
-  filter,
-  isNil,
-  gt,
-  prop,
-  anyPass,
-  splitEvery,
-  ifElse,
-  reject,
-  cond,
-  T,
-  identity
-} from "ramda";
+import { activeInterests } from "utils";
+import { prop, cond, T, identity } from "ramda";
 
 const Grid = styled.ul`
   display: flex;
@@ -34,12 +19,6 @@ const Grid = styled.ul`
   height: 100vh;
   position: relative;
   overflow: auto;
-`;
-const Loader = styled.div`
-  width: 50px;
-  height: 50px;
-  background: red;
-  align-self: center;
 `;
 const NoResults = styled.figure`
   align-self: center;
@@ -61,11 +40,13 @@ const NoResults = styled.figure`
   }
 `;
 const CardWrap = styled.div`
-  width: 100%;
+  ${"" /* width: 100%; */}
   display: flex;
   flex-direction: flex-row;
   justify-content: center;
   height: 90%;
+  width: 90%;
+  margin: 0 auto;
 `;
 
 const Loading = () => (
@@ -82,43 +63,56 @@ const NoItems = () => (
   </NoResults>
 );
 
-const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item) => (
+const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item, breakpoint) => (
   <div key={key} style={style}>
-    <CardWrap>
-      <Card item={item[index][0]} />
-      <Card item={item[index][1]} />
-      <Card item={item[index][2]} />
-    </CardWrap>
+    {breakpoint === 1
+      ? <CardWrap>
+          <Card breakpoint={breakpoint} item={item[index][0]} />
+        </CardWrap>
+      : breakpoint === 2
+          ? <CardWrap>
+              <Card breakpoint={breakpoint} item={item[index][0]} />
+              <Card breakpoint={breakpoint} item={item[index][1]} />
+            </CardWrap>
+          : breakpoint === 3
+              ? <CardWrap>
+                  <Card breakpoint={breakpoint} item={item[index][0]} />
+                  <Card breakpoint={breakpoint} item={item[index][1]} />
+                  <Card breakpoint={breakpoint} item={item[index][2]} />
+                </CardWrap>
+              : ""}
   </div>
 );
 
-const Products = ({ availableProducts }) => (
+const Products = ({ width, breakpoint, availableProducts }) => (
   <List
-    width={window.innerWidth - Const.ui.sidebarWidth * 2}
+    // width={breakpoint === 1 ? width : width - Const.ui.sidebarWidth * 2}
+    width={width}
     height={window.innerHeight}
     rowCount={availableProducts.length}
     rowHeight={480}
-    rowRenderer={x => rowRenderer(x, availableProducts)}
+    rowRenderer={x => rowRenderer(x, availableProducts, breakpoint)}
   />
 );
 
 export default connect((
   {
     status: { loading },
-    searchResults,
     interests,
-    budgetInput,
-    remainingBudget,
+    breakpoint,
+    currentProduct,
     availableProducts,
-    cart,
-    currentProduct
+    dimensions: { width }
   }
 ) => (
   <Grid>
     <Modal active={currentProduct.title}><Product currentProduct={currentProduct} /></Modal>
     <Modal active={loading}>loading .....</Modal>
     {cond([
-      [() => availableProducts.length, () => <Products availableProducts={availableProducts} />],
+      [
+        () => availableProducts.length,
+        () => <Products {...{ breakpoint, width, availableProducts }} />
+      ],
       [
         () => !activeInterests(interests),
         () => (

@@ -7,7 +7,6 @@ import {
   totalPrice,
   getCartQuery,
   filterResults,
-  _fn,
   updateCacheWithRes,
   getColumn,
   checkCache,
@@ -71,14 +70,8 @@ export function* updateAvailable() {
     const formatAvailable = pipe(pick, values, flatten);
     const available = formatAvailable(currentSelected(interests), searchResults);
     const availableProducts = filterResults(budgetInput, cart, available);
-    // console.log("availableProducts", availableProducts.length);
     const columnProducts = getColumn(breakpoint, availableProducts);
-
-    // console.log("columnProducts", columnProducts.length);
-
-    const dog = _fn(budgetInput, cart, available);
-
-    yield put({ type: "AVAILABLE_PRODUCTS", item: "availableProducts", value: dog });
+    yield put({ type: "AVAILABLE_PRODUCTS", item: "availableProducts", value: columnProducts });
     yield put({ type: "SET_STATUS", item: "status", value: { loading: false } });
   } catch (err) {
     yield console.log(err);
@@ -101,7 +94,6 @@ export function* updateBudget() {
 
 export function* updateDimensionss({ value }) {
   try {
-    const { availableProducts, dimensions: { width } } = yield select(identity);
     yield put({ type: "SET_DIMENSIONS", item: "dimensions", value });
     yield put({ type: "SET_BREAKPOINT", item: "breakpoint", value: getBreakpoint(value.width) });
     yield updateAvailable();

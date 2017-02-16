@@ -9,25 +9,35 @@ import {
   checkout
 } from "sagas/helpers";
 
-const Ui = [fork(function*() {
+const Ui = [
+  fork(function*() {
     yield* takeLatest("HYDRATE", hydrate);
-  }), fork(function*() {
+  }),
+  fork(function*() {
     yield* takeLatest("SET_SLIDER", updateBudget);
-  }), fork(function*() {
+  }),
+  fork(function*() {
     yield* takeLatest("REMOVE_ITEM", updateBudget);
-  }), fork(function*() {
+  }),
+  fork(function*() {
     yield* takeLatest("SELECT_ITEM", updateBudget);
-  }), fork(function*() {
+  }),
+  fork(function*() {
     yield* takeLatest("SET_RESULTS", updateAvailable);
-  }), fork(function*() {
-    yield throttle(100, "GET_DIMENSIONS", updateDimensionss);
-  })];
+  }),
+  fork(function*() {
+    yield throttle(500, "GET_DIMENSIONS", updateDimensionss);
+  })
+];
 
-const Api = [fork(function*() {
+const Api = [
+  fork(function*() {
     yield* takeLatest("CHECKOUT", checkout);
-  }), fork(function*() {
+  }),
+  fork(function*() {
     yield* takeLatest("TOGGLE_INTEREST", updateParams);
-  })];
+  })
+];
 
 export default function* root() {
   yield [...Api, ...Ui];

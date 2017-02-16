@@ -17,6 +17,7 @@ import {
   concat,
   propEq,
   gt,
+  allPass,
   prop,
   sortBy,
   cond,
@@ -93,7 +94,11 @@ export const formatPrice = price => `£${(price / 100).toFixed(2)}`;
 
 export const activeInterests = filter(propEq("active", "true"));
 
-export const getBreakpoint = cond([[gt(__, 1555), always(3)], [T, always(2)]]);
+export const getBreakpoint = cond([
+  [gt(__, Const.ui.breakpoints.desktop), always(3)],
+  [allPass([lt(__, Const.ui.breakpoints.desktop), gt(__, Const.ui.breakpoints.tablet)]), always(2)],
+  [T, always(1)]
+]);
 
 export const getColumn = pipe(splitEvery, dropLast(1));
 
@@ -112,8 +117,3 @@ export const checkCacheToUrl = uncurryN(2, cache =>
     join("&"),
     concat("?")
   ));
-
-export const _test = uncurryN(2, (budgetInput, cart) =>
-  pipe(filter(isOverBudget(budgetInput * 100, cart)), filter(pipe(prop("length"), isNil))));
-
-export const _fn = pipe(_test, sortBy(prop("random")), splitEvery(3), dropLast(1));

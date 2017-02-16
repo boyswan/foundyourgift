@@ -29,13 +29,13 @@ class Component extends React.Component {
     const { router } = this.props;
     return (
       <Background color={Const.color.grey}>
-        <Sidebar>
+        <Sidebar side="left">
           <Filter router={router} />
         </Sidebar>
         <Body>
           <Grid />
         </Body>
-        <Sidebar padding="3rem 0 3rem 3rem" background="white">
+        <Sidebar side="right">
           <Summary />
         </Sidebar>
       </Background>

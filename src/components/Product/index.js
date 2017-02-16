@@ -5,7 +5,7 @@ import Const from "utils/constants";
 import { Button } from "elements";
 import { Cart } from "svg";
 import { formatPrice } from "utils";
-import { prop, tail, map, identity, pipe, addIndex, take } from "ramda";
+import { prop, map, pipe, addIndex, take } from "ramda";
 import Moment from "moment";
 
 const Product = styled.div`

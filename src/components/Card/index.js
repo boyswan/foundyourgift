@@ -12,7 +12,8 @@ const Card = styled.li`
   background: white;
   ${"" /* flex: 0 0 30rem;*/}
   height: 100%;
-  width: 33%;
+  width: ${({ breakpoint }) => breakpoint == 1 ? "100%" : breakpoint == 2 ? "50%" : "33.3%"};
+  min-width: ${({ breakpoint }) => breakpoint == 1 ? "100%" : breakpoint == 2 ? "50%" : "33.3%"};
   margin: 1rem;
   position: relative;
   border-radius: 0.5rem;
@@ -105,18 +106,17 @@ const ImageWrap = styled.div`
   height: 64%;
 `;
 
-export default ({ item }) => {
+export default ({ item = {}, breakpoint }) => {
   const {
     title = "",
     salePrice = 0,
     price = 0,
     searchType,
-    features = {},
     image = "",
     currentTimestamp
   } = item;
   return (
-    <Card>
+    <Card breakpoint={breakpoint}>
       <Type secondary={Const.color.greyDark}>{searchType}</Type>
       <Save
         color={Const.color.grey}
@@ -135,7 +135,7 @@ export default ({ item }) => {
         <Image src={image} />
       </ImageWrap>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <span>{formatPrice(salePrice.length ? salePrice : price)}</span>
+        <span>{formatPrice(salePrice > 1 ? salePrice : price)}</span>
         <h1>{title}</h1>
         <p> Last updated {Moment(currentTimestamp).fromNow()}</p>
       </Content>
