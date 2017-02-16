@@ -11,7 +11,7 @@ const Sidebar = styled.aside`
 
 const Left = styled(Sidebar)`
   padding: 3rem;
-  background: #f1f1f1;
+  background: #F6F6F6;
   ${media.tablet`
     position: fixed;
     z-index: 44;

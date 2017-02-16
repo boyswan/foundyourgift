@@ -190,14 +190,6 @@ autoprefixer@^6.3.1:
     postcss "^5.2.8"
     postcss-value-parser "^3.2.3"
 
-aws-lib:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/aws-lib/-/aws-lib-0.3.0.tgz#213c04bb357a7c6764bc099f58cb6336a957d198"
-  dependencies:
-    sax "0.1.x"
-    underscore "~1.5.2"
-    xml2js "0.1.x"
-
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -942,10 +934,6 @@ base64-js@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
-batch-processor@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/batch-processor/-/batch-processor-1.0.0.tgz#75c95c32b748e0850d10c2b168f6bdbe9891ace8"
-
 batch@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.5.3.tgz#3f3414f380321743bfc1042f9a83ff1d5824d464"
@@ -1638,12 +1626,6 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-element-resize-detector@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/element-resize-detector/-/element-resize-detector-1.1.8.tgz#f293ce063d170ff9dab6a3a3e25d801b49fec3bf"
-  dependencies:
-    batch-processor "^1.0.0"
-
 emojis-list@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/emojis-list/-/emojis-list-2.1.0.tgz#4daa4d9db00f9819880c79fa457ae5b09a1fd389"
@@ -1778,6 +1760,12 @@ escope@^3.6.0:
     es6-weak-map "^2.0.1"
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
+
+eslint-config-prettier@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-1.2.0.tgz#7f87a9af62d9a5ee525849a24b662893e82b7bdc"
+  dependencies:
+    get-stdin "^5.0.1"
 
 eslint-plugin-react:
   version "6.9.0"
@@ -2147,6 +2135,10 @@ generate-object-property@^1.1.0:
 get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
+
+get-stdin@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-5.0.1.tgz#122e161591e21ff4c52530305693f20e6393a398"
 
 getpass@^0.1.1:
   version "0.1.6"
@@ -2840,10 +2832,6 @@ lodash.uniq@^4.3.0:
 lodash@^4.0.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
-
-lodash@4.15.0:
-  version "4.15.0"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.15.0.tgz#3162391d8f0140aa22cf8f6b3c34d6b7f63d3aa9"
 
 longest@^1.0.1:
   version "1.0.1"
@@ -3780,14 +3768,6 @@ react-router:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-sizeme:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-sizeme/-/react-sizeme-2.2.0.tgz#f5b23126a014aafc97fb8b0b5af1575f7e9bbed2"
-  dependencies:
-    element-resize-detector "1.1.8"
-    invariant "^2.2.0"
-    lodash "4.15.0"
-
 react-svg-loader:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-svg-loader/-/react-svg-loader-1.1.1.tgz#ac9ffa098b620f26581a03594505244346c00d76"
@@ -4088,13 +4068,9 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
-sax@>=0.1.1, sax@~1.2.1:
+sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
-
-sax@0.1.x:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/sax/-/sax-0.1.5.tgz#d1829a6120fa01665eb4dbff6c43f29fd6d61471"
 
 semver@~5.3.0, "semver@2 || 3 || 4 || 5":
   version "5.3.0"
@@ -4547,10 +4523,6 @@ underscore@~1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.4.4.tgz#61a6a32010622afa07963bf325203cf12239d604"
 
-underscore@~1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.5.2.tgz#1335c5e4f5e6d33bbb4b006ba8c86a00f556de08"
-
 uniq@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
@@ -4793,12 +4765,6 @@ write@^0.2.1:
 xml-char-classes@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/xml-char-classes/-/xml-char-classes-1.0.0.tgz#64657848a20ffc5df583a42ad8a277b4512bbc4d"
-
-xml2js@0.1.x:
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.1.14.tgz#5274e67f5a64c5f92974cd85139e0332adc6b90c"
-  dependencies:
-    sax ">=0.1.1"
 
 xtend@^4.0.0:
   version "4.0.1"
