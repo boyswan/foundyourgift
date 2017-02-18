@@ -118,10 +118,7 @@ export default ({ item = {}, breakpoint }) => {
   return (
     <Card breakpoint={breakpoint}>
       <Type secondary={Const.color.greyDark}>{searchType}</Type>
-      <Save
-        color={Const.color.grey}
-        onClick={() => Actions.setCurrent({ item: "currentProduct", value: item })}
-      >
+      <Save color={Const.color.grey} onClick={() => Actions.setCurrent({ value: item })}>
         <ShowMore color={Const.color.primary} />
       </Save>
       <ImageWrap>
@@ -129,7 +126,7 @@ export default ({ item = {}, breakpoint }) => {
           <Button
             style="primaryLight"
             label="Add to cart"
-            onClick={() => Actions.selectItem({ item })}
+            onClick={() => Actions.addItem({ item })}
           />
         </div>
         <Image src={image} />

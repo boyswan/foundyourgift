@@ -126,7 +126,7 @@ export default ({ currentProduct }) => {
     <Product>
       <Gallery image={image} imageSet={imageSet} />
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <Save color={Const.color.grey} onClick={() => Actions.selectItem({ item: currentProduct })}>
+        <Save color={Const.color.grey} onClick={() => Actions.addItem({ item: currentProduct })}>
           <Cart color={Const.color.primary} />
         </Save>
         <span>{formatPrice(price)}</span>

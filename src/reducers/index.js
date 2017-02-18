@@ -3,20 +3,20 @@ import { createReducer, setInteretsFromParams } from "utils";
 import Const from "utils/constants";
 
 // _set :: (String, a) -> State -> State
-const _set = ({ item, value }) => set(lensProp(item), value);
+const _set = lens => ({ value }) => set(lens, value);
 
 // _toggle :: (Number) -> State -> State222
-const _toggle = ({ index }) =>
-  over(lensProp("interests"), adjust(x => assoc("active", !x.active, x), index));
+const _toggle = lens =>
+  ({ index }) => over(lens, adjust(x => assoc("active", !x.active, x), index));
 
 // _append :: (Object) -> State -> State
-const _append = ({ item }) => over(lensProp("cart"), append(item));
+const _append = lens => ({ item }) => over(lens, append(item));
 
 // _remove :: (Number) -> State -> State
-const _remove = ({ productId }) => over(lensProp("cart"), reject(propEq("productId", productId)));
+const _remove = lens => ({ productId }) => over(lens, reject(propEq("productId", productId)));
 
 // _remove :: (Number) -> State -> State
-const _merge = ({ item, value }) => over(lensProp(item), merge(__, value));
+const _merge = lens => ({ value }) => over(lens, merge(__, value));
 
 const init = {
   status: {
@@ -38,21 +38,20 @@ const init = {
 };
 
 export default createReducer(init, {
-  TOGGLE_INTEREST: _toggle,
-  AVAILABLE_PRODUCTS: _set,
-  SET_BREAKPOINT: _set,
-  SET_DIMENSIONS: _set,
-  SET_INPUT: _set,
-  SET_SLIDER: _set,
-  SET_BUDGET: _set,
-  SET_TOTAL: _set,
-  SET_CURRENT: _set,
-  SET_CACHE: _set,
-  SET_CART: _set,
-  SET_RESULTS: _merge,
-  SET_STATUS: _merge,
-  SElECT_SLIDER: _set,
-  SELECT_ITEM: _append,
-  REMOVE_ITEM: _remove,
-  REMOVE_CURRENT: _set
+  TOGGLE_INTEREST: _toggle(lensProp("interests")),
+  AVAILABLE_PRODUCTS: _set(lensProp("availableProducts")),
+  SET_BREAKPOINT: _set(lensProp("breakpoint")),
+  SET_DIMENSIONS: _set(lensProp("dimensions")),
+  SET_INPUT: _set(lensProp("input")),
+  SET_SLIDER: _set(lensProp("budgetInput")),
+  SET_BUDGET: _set(lensProp("remainingBudget")),
+  SET_TOTAL: _set(lensProp("total")),
+  SET_CURRENT: _set(lensProp("currentProduct")),
+  SET_CACHE: _set(lensProp("cache")),
+  SET_CART: _set(lensProp("cart")),
+  SET_RESULTS: _merge(lensProp("searchResults")),
+  SET_STATUS: _merge(lensProp("status")),
+  ADD_ITEM: _append(lensProp("cart")),
+  REMOVE_ITEM: _remove(lensProp("cart")),
+  REMOVE_CURRENT: _set(lensProp("input"))
 });

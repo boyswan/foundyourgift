@@ -120,7 +120,7 @@ const ItemComponent = (item, key) => {
   const { image, price, title, productId } = item;
   return (
     <Item key={key} color={Const.color.grey}>
-      <ItemContent onClick={() => Actions.setCurrent({ item: "currentProduct", value: item })}>
+      <ItemContent onClick={() => Actions.setCurrent({ value: item })}>
         <Image color={Const.color.grey} alt={title} src={image} />
         <Content secondary={Const.color.secondary} primary={Const.color.primary}>
           <span>{formatPrice(price)}</span>

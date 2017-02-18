@@ -42,7 +42,7 @@ export default ({ active, children }) => {
   return (
     <Modal active={active}>
       <Child>{children}</Child>
-      <Background onClick={() => Actions.removeCurrent({ item: "currentProduct", value: {} })} />
+      <Background onClick={() => Actions.removeCurrent({ value: {} })} />
     </Modal>
   );
 };
