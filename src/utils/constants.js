@@ -5,7 +5,7 @@ const api = {
 
 const ui = {
   sidebarWidth: 400,
-  defaultBudget: 125,
+  defaultBudget: 12500,
   breakpoints: { desktop: 992, tablet: 768, mobile: 376 }
 };
 
@@ -45,5 +45,4 @@ const text = {
     noResultsBody: "Sorry, but there's no more results available. Try increasing your budget, or changing your search terms."
   }
 };
-
 export default { color, interests, text, api, ui };

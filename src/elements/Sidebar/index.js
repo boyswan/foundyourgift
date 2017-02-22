@@ -13,32 +13,35 @@ const Left = styled(Sidebar)`
   padding: 3rem;
   background: #F6F6F6;
   ${media.tablet`
+    width: 100vw;
     position: fixed;
     z-index: 44;
     height: 100vh;
-    transform: translateX(-100%);
+    padding: 3rem;
+    padding-top: 11rem;
+    transform: translateX(${x => x.active ? 0 : "-100%"});
     transition: all 0.2s ease-in-out;
     `}
 `;
 
 const Right = styled(Sidebar)`
-  padding:3rem 0 3rem 3rem;
+  padding: 0rem 0 3rem 3rem;
   background: white;
   ${media.tablet`
+    width: 100vw;
     position: fixed;
     z-index: 44;
     height: 100vh;
-    transform: translateX(100%);
+    padding: 3rem;
+    padding-top: 11rem;
+    transform: translateX(${x => x.active ? 0 : "-100%"});
     right: 0;
     transition: all 0.2s ease-in-out;
     `}
 `;
 
-export default ({ side, children }) => {
-  const Side = ({ left: Left, right: Right })[side];
-  return (
-    <Side width={Const.ui.sidebarWidth}>
-      {children}
-    </Side>
-  );
-};
+export default ({ side, children, filter, summary }) => console.log(filter) ||
+({
+  left: <Left width={Const.ui.sidebarWidth} active={filter}> {children} </Left>,
+  right: <Right width={Const.ui.sidebarWidth} active={summary}> {children} </Right>
+})[side];

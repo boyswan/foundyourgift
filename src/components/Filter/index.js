@@ -22,7 +22,7 @@ const Intro = styled.p`
   margin-bottom: 2rem;
 `;
 const Divider = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   border-bottom: 0.2rem solid #EBEBEB;
 `;
 const Interests = styled.ul`
@@ -36,7 +36,7 @@ const Terms = styled.span`
   bottom: 3rem;
 `;
 
-const Interest = (router, interests) =>
+const Interest = router =>
   ({ label, active }, index) => (
     <Button
       key={index}
@@ -46,7 +46,7 @@ const Interest = (router, interests) =>
     />
   );
 
-const Component = ({ router, interests, searchInput, budgetInput, filterInput }) => (
+const Component = ({ router, interests, budgetInput }) => (
   <Filter width={Const.ui.sidebarWidth}>
     <LogoWrap>
       <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
@@ -55,7 +55,7 @@ const Component = ({ router, interests, searchInput, budgetInput, filterInput })
     </LogoWrap>
     <Intro>{Const.text.search.intro}</Intro>
     <Divider />
-    <Slider max={250} item="budgetInput" value={budgetInput} label="Budget" />
+    <Slider max={25000} item="budgetInput" value={budgetInput} label="Budget" />
     <Interests>
       {mapIndex(Interest(router, interests), interests)}
     </Interests>

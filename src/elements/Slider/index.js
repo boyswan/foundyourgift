@@ -4,17 +4,20 @@ import Actions from "actions";
 import { Container, Label } from "styles";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import { formatPrice } from "utils";
 import Const from "utils/constants";
 import { prop } from "ramda";
 
 const primary = styled.div`
   position: relative;
   .rc-slider-track {
-    background: ${prop("color")} !important;
-    height: 0.7rem;
+    background: #ffcdcc !important; 
+    border-radius: 10rem;
+    height: 1rem;
   }
   .rc-slider-rail {
-    height: 0.7rem;
+    border-radius: 10rem;
+    height: 1rem;
   }
 `;
 const light = styled(primary)`
@@ -22,11 +25,11 @@ const light = styled(primary)`
   margin: 0 auto;
   .rc-slider-track {
     background: white !important;
-    height: 1.7rem;
+    height: 2rem;
     border-radius: 50px;
   }
   .rc-slider-rail {
-    height: 1.7rem;
+    height: 2rem;
     border-radius: 50px;
 
   }
@@ -38,8 +41,8 @@ const Value = styled(Label)`
   font-weight: 600;
 `;
 const Handle = styled.div`
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.8rem;
+  height: 2rem;
   display: flex;
   top: 0;
   background: ${prop("primary")};
@@ -47,7 +50,7 @@ const Handle = styled.div`
   position: absolute;
   left: 0%;
   justify-content: space-around;
-  padding: 0.3rem;
+  padding: 0.6rem;
   align-items: center;
   margin-left: -1rem;
   cursor: pointer;
@@ -88,20 +91,20 @@ export default class extends React.Component {
   }
 
   render() {
-    const { item, label, defaultValue = 50, min = 0, max, style = "primary" } = this.props;
+    const { item, label, defaultValue = 5000, min = 0, max, style = "primary" } = this.props;
     const SliderTheme = ({ primary, light })[style];
     return (
       <Container>
         <SliderTheme color={Const.color.primary}>
           <Label color={Const.color.secondary}>{label}</Label>
-          <Value color={Const.color.primary}>£{this.state.val}</Value>
+          <Value color={Const.color.primary}>{formatPrice(this.state.val)}</Value>
           <Slider
             value={this.state.val}
             tipFormatter={null}
             handle={<SliderHandle />}
             onChange={x => this.handleOnChange(x)}
             onAfterChange={() => handleSlider(item, this.state.val)}
-            step={5}
+            step={500}
             defaultValue={defaultValue}
             min={min}
             max={max}

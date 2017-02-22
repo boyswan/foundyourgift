@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Actions from "actions";
 import Const from "utils/constants";
 import { connect } from "utils";
-import { Summary, Filter, Grid } from "components";
+import { Summary, Filter, Grid, Header } from "components";
 import { Body, Sidebar } from "elements";
 
 const Background = styled.div`
@@ -26,16 +26,17 @@ class Component extends React.Component {
   }
 
   render() {
-    const { router } = this.props;
+    const { router, summary, filter } = this.props;
     return (
       <Background color={Const.color.grey}>
-        <Sidebar side="left">
+        <Header />
+        <Sidebar summary={summary} filter={filter} side="left">
           <Filter router={router} />
         </Sidebar>
         <Body>
           <Grid />
         </Body>
-        <Sidebar side="right">
+        <Sidebar summary={summary} filter={filter} side="right">
           <Summary />
         </Sidebar>
       </Background>

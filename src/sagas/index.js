@@ -20,7 +20,7 @@ const Ui = [
     yield* takeLatest("REMOVE_ITEM", updateBudget);
   }),
   fork(function*() {
-    yield* takeLatest("SELECT_ITEM", updateBudget);
+    yield* takeLatest("ADD_ITEM", updateBudget);
   }),
   fork(function*() {
     yield* takeLatest("SET_RESULTS", updateAvailable);

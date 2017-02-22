@@ -40,7 +40,7 @@ const NoResults = styled.figure`
   }
 `;
 const CardWrap = styled.div`
-  ${"" /* width: 100%; */}
+  ${""}/* width: 100%; */
   display: flex;
   flex-direction: flex-row;
   justify-content: center;
@@ -86,7 +86,6 @@ const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item, breakp
 
 const Products = ({ width, breakpoint, availableProducts }) => (
   <List
-    // width={breakpoint === 1 ? width : width - Const.ui.sidebarWidth * 2}
     width={width}
     height={window.innerHeight}
     rowCount={availableProducts.length}

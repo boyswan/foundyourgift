@@ -1,4 +1,3 @@
-import Actions from "actions";
 import { call as _call, put, select } from "redux-saga/effects";
 
 import {
@@ -10,24 +9,22 @@ import {
   filterResults,
   updateCacheWithRes,
   getColumn,
-  checkCache,
   getBreakpoint,
   checkCacheToUrl
 } from "utils";
-
-import { concat, identity, keys, flatten, pipe, pick, values, map, filter, prop } from "ramda";
+import { concat, tap, identity, keys, flatten, pipe, pick, values, map, filter, prop } from "ramda";
 import Const from "utils/constants";
-
+const log = tap(console.log);
 const searchUrl = concat(`${Const.api.API_URL}/search`);
 const cartUrl = concat(`${Const.api.API_URL}/cart`);
 
 export function* hydrate(route) {
   try {
     const cart = yield JSON.parse(localStorage.getItem("cart") || "[]");
-    yield put(Actions.setCart({ value: cart }));
+    yield put({ type: "SET_CART", value: cart });
     yield updateParams(route);
   } catch (err) {
-    yield console.log(err);
+    yield log(err);
   }
 }
 
@@ -35,11 +32,9 @@ function* callApi(url) {
   const { cache } = yield select(identity);
   const { data } = yield _call(fetch, searchUrl(url));
   if (data) {
-    yield [
-      put(Actions.setStatus({ value: { loading: false } })),
-      put(Actions.setCache({ value: updateCacheWithRes(keys(data), cache) })),
-      put(Actions.setResults({ value: data }))
-    ];
+    yield put({ type: "SET_STATUS", value: { loading: false } });
+    yield put({ type: "SET_CACHE", value: updateCacheWithRes(keys(data), cache) });
+    yield put({ type: "SET_RESULTS", value: data });
   }
 }
 
@@ -49,13 +44,14 @@ export function* updateParams({ router: { push, location } }) {
     yield push({ ...location, query: interestToQuery(interests) });
     if (window.location.search.length > 0) {
       const cachedUrl = checkCacheToUrl(cache, window.location.search);
-      yield put(Actions.setStatus({ value: { loading: true } }));
+      yield put({ type: "SET_STATUS", value: { loading: true } });
       yield callApi(cachedUrl);
     } else {
+      yield put({ type: "SET_STATUS", value: { loading: false } });
       yield updateAvailable();
     }
   } catch (err) {
-    yield console.log(err);
+    yield log(err);
   }
 }
 
@@ -73,12 +69,9 @@ export function* updateAvailable() {
     const available = formatAvailable(currentSelected(interests), searchResults);
     const availableProducts = filterResults(budgetInput, cart, available);
     const columnProducts = getColumn(breakpoint, availableProducts);
-    yield [
-      put(Actions.availableProducts({ value: columnProducts })),
-      put(Actions.setStatus({ value: { loading: false } }))
-    ];
+    yield put({ type: "AVAILABLE_PRODUCTS", value: columnProducts });
   } catch (err) {
-    yield console.log(err);
+    yield log(err);
   }
 }
 
@@ -87,26 +80,22 @@ export function* updateBudget() {
     const { budgetInput, cart } = yield select(identity);
     const remainingBudget = formatBalance(budgetInput, cart);
     const total = totalPrice(cart);
-    yield [
-      put(Actions.setBudget({ value: remainingBudget })),
-      put(Actions.setTotal({ value: total })),
-      updateAvailable()
-    ];
+    yield put({ type: "SET_BUDGET", value: remainingBudget });
+    yield put({ type: "SET_TOTAL", value: total });
+    yield updateAvailable();
     localStorage.setItem("cart", JSON.stringify(cart));
   } catch (err) {
-    yield console.log(err);
+    yield log(err);
   }
 }
 
 export function* updateDimensionss({ value }) {
   try {
-    yield [
-      put(Actions.setDimensions({ value })),
-      put(Actions.setBreakpoints({ value: getBreakpoint(value.width) })),
-      updateAvailable()
-    ];
+    yield put({ type: "SET_DIMENSIONS", value });
+    yield put({ type: "SET_BREAKPOINT", value: getBreakpoint(value.width) });
+    yield updateAvailable();
   } catch (err) {
-    yield console.log(err);
+    yield log(err);
   }
 }
 
@@ -114,9 +103,7 @@ export function* checkout() {
   try {
     const { cart } = yield select(identity);
     const { data } = yield _call(fetch, cartUrl(getCartQuery(cart)));
-    // yield window.location.assign(data);
-    yield console.log(data);
   } catch (err) {
-    yield console.log(err);
+    yield log(err);
   }
 }

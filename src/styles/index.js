@@ -23,7 +23,7 @@ export const Label = styled.label`
 `;
 export const Container = styled.div`
   position: relative;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
 `;
 
 // iterate through the sizes and create a media template

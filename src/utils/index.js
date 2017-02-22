@@ -10,7 +10,11 @@ import {
   join,
   map,
   pipe,
+  when,
   head,
+  equals,
+  ifElse,
+  any,
   tail,
   split,
   filter,
@@ -21,6 +25,11 @@ import {
   prop,
   sortBy,
   cond,
+  append,
+  over,
+  lensProp,
+  dec,
+  F,
   lt,
   always,
   uniq,
@@ -30,6 +39,7 @@ import {
   replace,
   toLower,
   splitEvery,
+  tap,
   dropLast,
   T,
   toUpper,
@@ -37,6 +47,8 @@ import {
   add,
   clamp
 } from "ramda";
+
+const log = tap(console.log);
 
 const getConfig = url => ({
   method: "GET",
@@ -73,17 +85,17 @@ export const setInteretsFromParams = map(
   x => getParams(window.location.search).includes(x.type) ? assoc("active", true, x) : x
 );
 
-export const totalPrice = reduce((acc, { price }) => add(acc, price), 0);
+export const totalPrice = reduce((acc, { price, quantity }) => add(acc, price * quantity), 0);
 
 export const formatBalance = (budgetInput, cart) =>
-  clamp(0, 9999999, budgetInput - totalPrice(cart) / 100).toFixed(2);
+  parseInt(clamp(0, 9999999, budgetInput - totalPrice(cart)));
 
 export const isOverBudget = (budgetInput, cart) =>
   pipe(prop("price"), gt(budgetInput - totalPrice(cart)));
 
 export const filterResults = uncurryN(2, (budgetInput, cart) =>
   pipe(
-    filter(isOverBudget(budgetInput * 100, cart)),
+    filter(isOverBudget(budgetInput, cart)),
     filter(pipe(prop("length"), isNil)),
     sortBy(prop("random"))
   ));
@@ -91,22 +103,16 @@ export const filterResults = uncurryN(2, (budgetInput, cart) =>
 export const getCartQuery = pipe(map(({ asin }) => `${asin}=${1}`), join("&"), concat("?"));
 
 export const formatPrice = price => `£${(price / 100).toFixed(2)}`;
-
 export const activeInterests = filter(propEq("active", "true"));
-
 export const getBreakpoint = cond([
-  [gt(__, Const.ui.breakpoints.desktop), always(3)],
-  [allPass([lt(__, Const.ui.breakpoints.desktop), gt(__, Const.ui.breakpoints.tablet)]), always(2)],
+  [gt(__, 1550), always(3)],
+  [allPass([lt(__, 1550), gt(__, 768)]), always(2)],
   [T, always(1)]
 ]);
-
 export const getColumn = pipe(splitEvery, dropLast(1));
-
 export const updateCacheWithRes = pipe(concat, uniq);
-
 export const checkCache = uncurryN(2, cache =>
   pipe(tail, split("&"), map(pipe(split("="), head)), filter(x => !cache.includes(x))));
-
 export const checkCacheToUrl = uncurryN(2, cache =>
   pipe(
     tail,
@@ -117,3 +123,21 @@ export const checkCacheToUrl = uncurryN(2, cache =>
     join("&"),
     concat("?")
   ));
+export const addItemToCart = uncurryN(2, item =>
+  ifElse(
+    pipe(map(propEq("asin", item.asin)), any(equals(true))),
+    map(
+      when(propEq("asin", item.asin), x => assoc("quantity", !x.quantity ? 1 : x.quantity + 1, x))
+    ),
+    append(assoc("quantity", 1, item))
+  ));
+export const removeItemFromCart = asin =>
+  pipe(
+    map(
+      when(
+        propEq("asin", asin),
+        ifElse(pipe(prop("quantity"), gt(__, 1)), over(lensProp("quantity"), dec), F)
+      )
+    ),
+    filter(identity)
+  );

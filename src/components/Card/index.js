@@ -10,7 +10,7 @@ import { formatPrice } from "utils";
 
 const Card = styled.li`
   background: white;
-  ${"" /* flex: 0 0 30rem;*/}
+  ${""}/* flex: 0 0 30rem;*/
   height: 100%;
   width: ${({ breakpoint }) => breakpoint == 1 ? "100%" : breakpoint == 2 ? "50%" : "33.3%"};
   min-width: ${({ breakpoint }) => breakpoint == 1 ? "100%" : breakpoint == 2 ? "50%" : "33.3%"};
@@ -42,7 +42,7 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 4rem;
+  padding: 5rem;
 `;
 const Type = styled.div`
   color: #a29d9d;
@@ -80,30 +80,38 @@ const Content = styled.div`
     font-weight: 400;
     letter-spacing: 1.1px;
     margin-bottom: 0.6rem;
-    display: block;
+    display: inline-block;
+    margin-right: 1rem;
     color: ${prop("primary")};
   }
   h1 {
     font-size: 1.8rem;
     font-weight: 300;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.9rem;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
-    height: 5rem;
+    height: 2.4rem;
     letter-spacing: 0.4px;
     line-height: 2.4rem;
   }
   p {
     margin-top: 0.8rem;
     color: #a29d9d;
-    font-weight: 300;
+    opacity: 0.5;
+    font-weight: 100;
     font-size: 1.4rem;
   }
 `;
 const ImageWrap = styled.div`
-  height: 64%;
+  height: 69%;
+`;
+const OldPrice = styled.span`
+  opacity: 0.75;
+  color: #d8d8d8 !important;
+  text-decoration: line-through;
+  font-weight: 200 !important;
 `;
 
 export default ({ item = {}, breakpoint }) => {
@@ -117,7 +125,7 @@ export default ({ item = {}, breakpoint }) => {
   } = item;
   return (
     <Card breakpoint={breakpoint}>
-      <Type secondary={Const.color.greyDark}>{searchType}</Type>
+      {/* <Type secondary={Const.color.greyDark}>{searchType}</Type> */}
       <Save color={Const.color.grey} onClick={() => Actions.setCurrent({ value: item })}>
         <ShowMore color={Const.color.primary} />
       </Save>
@@ -126,13 +134,14 @@ export default ({ item = {}, breakpoint }) => {
           <Button
             style="primaryLight"
             label="Add to cart"
-            onClick={() => Actions.addItem({ item })}
+            onClick={() => Actions.addItem({ value: item })}
           />
         </div>
         <Image src={image} />
       </ImageWrap>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <span>{formatPrice(salePrice > 1 ? salePrice : price)}</span>
+        <span>{formatPrice(salePrice < price && salePrice > 0 ? salePrice : price)}</span>
+        {salePrice < price && salePrice > 0 ? <OldPrice>{formatPrice(price)}</OldPrice> : ""}
         <h1>{title}</h1>
         <p> Last updated {Moment(currentTimestamp).fromNow()}</p>
       </Content>
