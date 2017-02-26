@@ -11,7 +11,7 @@ import { prop } from "ramda";
 const primary = styled.div`
   position: relative;
   .rc-slider-track {
-    background: #ffcdcc !important; 
+    background: #ffcdcc !important;
     border-radius: 10rem;
     height: 1rem;
   }
@@ -64,6 +64,7 @@ const Handle = styled.div`
 `;
 
 const handleSlider = (item, value) => {
+  console.log("off");
   Actions.setSlider({ item, value });
 };
 class SliderHandle extends Component {
@@ -93,16 +94,21 @@ export default class extends React.Component {
   render() {
     const { item, label, defaultValue = 5000, min = 0, max, style = "primary" } = this.props;
     const SliderTheme = ({ primary, light })[style];
+
     return (
       <Container>
         <SliderTheme color={Const.color.primary}>
           <Label color={Const.color.secondary}>{label}</Label>
-          <Value color={Const.color.primary}>{formatPrice(this.state.val)}</Value>
+          <Value color={Const.color.primary}>
+            £{this.state.val / 100}
+          </Value>
           <Slider
             value={this.state.val}
             tipFormatter={null}
             handle={<SliderHandle />}
+            onMouseDown={x => console.log("on")}
             onChange={x => this.handleOnChange(x)}
+            onBeforeCange={() => console.lo("beforechange")}
             onAfterChange={() => handleSlider(item, this.state.val)}
             step={500}
             defaultValue={defaultValue}

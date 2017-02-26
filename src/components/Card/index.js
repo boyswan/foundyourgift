@@ -2,15 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import Actions from "actions";
 import Const from "utils/constants";
-import { Heart, Cart, ShowMore } from "svg";
+import { Heart, Cart, ShowMore, Clock } from "svg";
 import { prop, tail, map } from "ramda";
 import { Button } from "elements";
 import Moment from "moment";
 import { formatPrice } from "utils";
+import { media } from "styles";
 
 const Card = styled.li`
   background: white;
-  ${""}/* flex: 0 0 30rem;*/
   height: 100%;
   width: ${({ breakpoint }) => breakpoint == 1 ? "100%" : breakpoint == 2 ? "50%" : "33.3%"};
   min-width: ${({ breakpoint }) => breakpoint == 1 ? "100%" : breakpoint == 2 ? "50%" : "33.3%"};
@@ -30,6 +30,26 @@ const Card = styled.li`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    ${media.tablet`
+      position: relative;
+      opacity: 1;
+      background: white;
+      flex-direction: row;
+    `}
+
+    button {
+      min-width: 65%;
+      ${media.tablet`
+        min-width: 30%;
+        span {
+          display: none;
+        }
+        svg {
+          margin: 0
+        }
+      `}
+    }
   }
   &:hover {
     .card_dim {
@@ -70,6 +90,7 @@ const More = styled(Save)`
   top: 0.8rem;
   right: 0.9rem;
 `;
+
 const Content = styled.div`
   padding: 1.8rem;
   color: ${prop("secondary")};
@@ -106,6 +127,9 @@ const Content = styled.div`
 `;
 const ImageWrap = styled.div`
   height: 69%;
+  ${media.tablet`
+    height: 61%;
+  `}
 `;
 const OldPrice = styled.span`
   opacity: 0.75;
@@ -121,24 +145,31 @@ export default ({ item = {}, breakpoint }) => {
     price = 0,
     searchType,
     image = "",
+    url,
     currentTimestamp
   } = item;
   return (
     <Card breakpoint={breakpoint}>
-      {/* <Type secondary={Const.color.greyDark}>{searchType}</Type> */}
       <Save color={Const.color.grey} onClick={() => Actions.setCurrent({ value: item })}>
         <ShowMore color={Const.color.primary} />
       </Save>
       <ImageWrap>
-        <div className="card_dim">
-          <Button
-            style="primaryLight"
-            label="Add to cart"
-            onClick={() => Actions.addItem({ value: item })}
-          />
-        </div>
         <Image src={image} />
       </ImageWrap>
+      <div className="card_dim">
+        <Button
+          icon={<Cart color="white" />}
+          style="primaryLight"
+          label="Add to cart"
+          onClick={() => Actions.addItem({ value: item })}
+        />
+        <Button
+          icon={<Clock color="white" />}
+          style="primaryLight"
+          label="Quick buy"
+          onClick={() => window.open(url, "_blank")}
+        />
+      </div>
       <Content secondary={Const.color.secondary} primary={Const.color.primary}>
         <span>{formatPrice(salePrice < price && salePrice > 0 ? salePrice : price)}</span>
         {salePrice < price && salePrice > 0 ? <OldPrice>{formatPrice(price)}</OldPrice> : ""}

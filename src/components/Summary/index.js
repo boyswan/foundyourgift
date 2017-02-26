@@ -9,7 +9,6 @@ import Actions from "actions";
 
 const Sidebar = styled.aside`
   width: 100%;
-  background: white;
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -22,15 +21,14 @@ const Balance = styled.div`
   flex-direction: column;
   color: ${prop("color")};
   text-align: right;
-  margin-right: 3rem;
   border-bottom: 1px solid #f1f1f1;
+  margin-right: 3rem;
   h1 {
     font-weight: 600;
     font-size: 4.2rem;
   }
   span {
     font-size: 1.6rem;
-    margin-bottom: 2rem;
     display: block;
   }
 `;
@@ -43,14 +41,15 @@ const Image = styled.img`
   min-height: 8rem;
   border-radius: 10rem;
   margin-right: 2rem;
+  object-fit: cover;
 `;
 const Label = styled.h2`
   font-size: 1.6rem;
   color: ${prop("color")};
-  padding-bottom: 2rem;
   font-weight: 300;
   width: 100%;
   text-align: left;
+  margin-bottom: 2rem;
 `;
 const ItemContent = styled.div`
   display: flex;
@@ -81,26 +80,27 @@ const Item = styled.li`
   flex-direction: row;
   display: flex;
   width: 100%;
-  ${""}/* border-bottom: 1px solid ${prop("color")}; */
-  padding-bottom: 2rem;
+  background: white;
+  padding: 2rem;
   margin-bottom: 2rem;
   align-items: center;
   position: relative;
   min-height: 9.5rem;
+  align-items: center;
+  border-radius: 1rem;
+  justify-content: space-between;
 `;
 const Cart = styled.ul`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
-  height: calc(100vh - 32rem);
+  height: calc(100vh - 37rem);
   margin-right: 3rem;
-  border-bottom: 1px solid #f1f1f1;
-  padding-top: 2rem;
+  margin-bottom: 3rem;
+
 `;
 const Remove = styled.div`
-  position: absolute;
-  right: 0;
   cursor: pointer;
 `;
 const ButtonWrap = styled.div`
@@ -108,7 +108,6 @@ const ButtonWrap = styled.div`
   flex-direction: column;
   display: flex;
   padding-right: 3rem;
-  height: 16rem;
   justify-content: center;
   button {
     width: 20rem;
@@ -155,8 +154,8 @@ export default connect(({ cart, remainingBudget, total }) => (
         <h1>{formatPrice(remainingBudget)}</h1>
         <span>Remaining</span>
       </div>
-      <Label color={Const.color.secondary} grey={Const.color.grey}>Your Cart</Label>
     </Balance>
+    <Label color={Const.color.secondary} grey={Const.color.grey}>Your Cart</Label>
     <Cart>
       {mapIndex(ItemComponent, cart)}
     </Cart>

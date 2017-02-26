@@ -7,11 +7,12 @@ import { media } from "styles";
 const Sidebar = styled.aside`
   width: ${prop("width")}px;
   min-width: ${prop("width")}px;
+  background: #f1f1f1;
 `;
 
 const Left = styled(Sidebar)`
   padding: 3rem;
-  background: #F6F6F6;
+  overflow-x: scroll;
   ${media.tablet`
     width: 100vw;
     position: fixed;
@@ -26,7 +27,6 @@ const Left = styled(Sidebar)`
 
 const Right = styled(Sidebar)`
   padding: 0rem 0 3rem 3rem;
-  background: white;
   ${media.tablet`
     width: 100vw;
     position: fixed;
@@ -40,8 +40,8 @@ const Right = styled(Sidebar)`
     `}
 `;
 
-export default ({ side, children, filter, summary }) => console.log(filter) ||
-({
-  left: <Left width={Const.ui.sidebarWidth} active={filter}> {children} </Left>,
-  right: <Right width={Const.ui.sidebarWidth} active={summary}> {children} </Right>
-})[side];
+export default ({ side, children, filter, summary }) =>
+  ({
+    left: <Left width={Const.ui.sidebarWidth} active={filter}> {children} </Left>,
+    right: <Right width={Const.ui.sidebarWidth} active={summary}> {children} </Right>
+  })[side];

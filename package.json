@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "moduleRoots": [ "src" ],
   "scripts": {
     "watch": "npm run build:src -- --watch",
     "build:src": "webpack",

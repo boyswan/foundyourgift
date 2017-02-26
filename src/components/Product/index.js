@@ -3,19 +3,24 @@ import styled from "styled-components";
 import Actions from "actions";
 import Const from "utils/constants";
 import { Button } from "elements";
-import { Cart } from "svg";
-import { formatPrice } from "utils";
-import { prop, map, pipe, addIndex, take } from "ramda";
+import { Cart, Clock, Cross } from "svg";
+import { formatPrice, mapIndex } from "utils";
+import { prop, propOr, map, pipe, take, uniq, append, uncurryN } from "ramda";
+import { media } from "styles";
 import Moment from "moment";
 
 const Product = styled.div`
-  flex: 0 0 50%;
   position: relative;
-  margin: 1rem;
   background: white;
-  width: 50vw;
-  height: 80vh;
   padding: 2rem;
+  display: flex;
+  width: 60%;
+  ${media.tablet`
+    flex-direction: column-reverse;
+    width: 100%;
+    margin-top: 9rem;
+    padding: 0;
+  `}
 `;
 const ImageWrap = styled.div`
   display: flex;
@@ -23,21 +28,20 @@ const ImageWrap = styled.div`
   justify-content: space-between;
   height: 50%;
 `;
-const Image = styled.img`
-  ${"" /* width: 50rem;
-  width: 50rem;*/}
-  padding: 2rem;
-  object-fit: contain;
-`;
 const ImageList = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 2rem;
 `;
-const ImageSmall = styled.img`
-  width: 10rem;
-  height: 10rem;
+const Image = styled.img`
   padding: 1rem;
+  height: 25rem;
+  width: 25rem;
   object-fit: contain;
+  ${media.tablet`
+    width: 100%;
+    height: 100%;
+  `}
 `;
 const Save = styled.div`
   width: 4.3rem;
@@ -54,96 +58,174 @@ const Save = styled.div`
     top: 13px;
   }
 `;
+const OldPrice = styled.span`
+  opacity: 0.75;
+  color: #d8d8d8 !important;
+  text-decoration: line-through;
+  font-weight: 200 !important;
+`;
 const Body = styled.div`
+  width: 80%;
+  ${media.tablet`
+    width: 100%;
+  `}
+  button {
+    margin-left: 0;
+  }
 `;
 const Feature = styled.li`
   font-size: 1.6rem;
+  margin-bottom: 1rem;
+`;
+const FeatureWrap = styled.ul`
+  font-weight: 300;
   margin-bottom: 4rem;
 `;
-const FeatureWrap = styled.div`
-  height: 10%;
-  overflow: scroll;
+const Price = styled.span`
+  font-size: 5.2rem;
+  font-weight: 400;
+  letter-spacing: 1.1px;
+  display: inline-block;
+  margin-right: 1rem;
+  color: ${prop("primary")};
 `;
 const Content = styled.div`
-  padding: 1.5rem 1rem;
   color: ${prop("secondary")};
   position: relative;
-
-  span {
-    font-size: 4.3rem;
-    font-weight: 400;
-    letter-spacing: 1.1px;
-    margin-bottom: 1.6rem;
-    display: block;
-    color: ${prop("primary")};
-  }
-  h1 {
-    font-size: 1.8rem;
+  h2 {
+    font-size: 2.8rem;
+    ${"" /* color: #ff7270; */}
     font-weight: 300;
     margin-bottom: 2rem;
+  }
+  h1 {
+    font-size: 2.6rem;
+    font-weight: 500;
+    margin-bottom: 4rem;
   }
   p {
     color: #b9b9b9;
     font-weight: 300;
     font-size: 1.4rem;
+    margin-bottom: 4rem;
+  }
+`;
+const LastUpdated = styled.p`
+  margin-bottom: 2rem;
+`;
+const Description = styled.div`
+  display: flex;
+  padding: 2rem;
+  flex-direction: column;
+`;
+const Close = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  svg {
+    width: 3rem;
+    cursor: pointer;
+    height: 3rem;
+  }
+`;
+const ButtonWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  ${media.tablet`
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  `}
+
+  button {
+    margin-bottom: 4rem;
+    ${media.tablet`
+      width: 100%;
+      svg {
+        margin-right: 1rem;
+      }
+    `}
   }
 `;
 
-const SmallImage = (src, key) => <ImageSmall src={src} key={key} />;
+const Background = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+`;
 
-const Gallery = ({ image, imageSet }) => (
-  <ImageWrap>
-    <Image src={image} />
-    <ImageList>
-      {pipe(addIndex(map)(SmallImage), take(4))(imageSet)}
-    </ImageList>
-  </ImageWrap>
+const SmallImage = (src, key) => <Image src={src} key={key} />;
+
+const getGallery = uncurryN(
+  2,
+  image => pipe(x => console.log(x) || x, append(image), uniq, mapIndex(SmallImage))
 );
+
+const Gallery = ({ image, images = { values: [] } }) => {
+  return (
+    <ImageList>
+      {getGallery(image, images.values)}
+    </ImageList>
+  );
+};
+
+const warning = "Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product.";
 export default ({ currentProduct }) => {
   const {
     title = "",
     price = 0,
-    feature1,
-    feature2,
-    feature3,
-    feature4,
-    feature5,
-    image1,
-    image2,
-    image3,
-    image4,
-    image5,
+    features = {},
+    images = {},
     image = "",
     publisher,
+    date,
+    salePrice,
     description,
     timestamp,
     url
   } = currentProduct;
 
-  const features = [feature1, feature2, feature3, feature4, feature5];
-  const imageSet = [image1, image2, image3, image4, image5];
   return (
     <Product>
-      <Gallery image={image} imageSet={imageSet} />
-      <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-        <Save color={Const.color.grey} onClick={() => Actions.addItem({ item: currentProduct })}>
-          <Cart color={Const.color.primary} />
-        </Save>
-        <span>{formatPrice(price)}</span>
-        <h2>{publisher}</h2> : ""}
-        <h1>{title}</h1>
-        <p>
-          Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on [relevant Amazon Site(s), as applicable] at the time of purchase will apply to the purchase of this product."
-        </p>
-        <Body>
-          <p>{description}</p>
-          <FeatureWrap>{features.map((x, i) => <Feature key={i}>{x}</Feature>)}</FeatureWrap>
-        </Body>
-        <p>Last updated {Moment(timestamp).fromNow()}</p>
-        <a target="_blank" href={url}>
-          <Button style="primaryLight" label="Quick buy on Amazon" />
-        </a>
-      </Content>
+      <Gallery image={image} images={images} />
+      <Description>
+        <Content secondary={Const.color.secondary} primary={Const.color.primary}>
+          <Close onClick={() => Actions.setCurrent({ value: {} })}>
+            <Cross color={"#a9a9a9"} />
+          </Close>
+          <Body>
+            <Price primary={Const.color.primary}>
+              {formatPrice(salePrice < price && salePrice > 0 ? salePrice : price)}
+            </Price>
+            {salePrice < price && salePrice > 0 ? <OldPrice>{formatPrice(price)}</OldPrice> : ""}
+            <LastUpdated>Last updated {Moment(date).fromNow()}</LastUpdated>
+            <h1>{title}</h1>
+            <ButtonWrap>
+              <Button
+                icon={<Cart color="white" />}
+                style="primaryLight"
+                label="Add to cart"
+                onClick={() => Actions.addItem({ value: item })}
+              />
+              <Button
+                icon={<Clock color="white" />}
+                style="primaryLight"
+                label="Quick buy"
+                onClick={() => window.open(url, "_blank")}
+              />
+            </ButtonWrap>
+            {publisher && <h2>{publisher}</h2>}
+            <p>{description}</p>
+            <FeatureWrap>
+              {features.values && features.values.map((x, i) => <Feature key={i}>{x}</Feature>)}
+            </FeatureWrap>
+            <p>{warning}</p>
+          </Body>
+        </Content>
+      </Description>
+      <Background onClick={() => Actions.setCurrent({ value: {} })} />
     </Product>
   );
 };

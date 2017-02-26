@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Actions from "actions";
 import Const from "utils/constants";
 import { connect } from "utils";
-import { Summary, Filter, Grid, Header } from "components";
-import { Body, Sidebar } from "elements";
+import { Summary, Filter, Grid, Header, Product } from "components";
+import { Body, Sidebar, Modal } from "elements";
 
 const Background = styled.div`
   display: flex;
@@ -14,25 +14,30 @@ const Background = styled.div`
   width: 100%;
 `;
 
+const updateDimensions = () =>
+  Actions.getDimensions({
+    item: "dimensions",
+    value: { width: window.innerWidth, height: window.innerHeight }
+  });
+
 class Component extends React.Component {
   componentDidMount() {
     Actions.hydrate({ router: this.props.router });
-    window.addEventListener("resize", () => {
-      Actions.getDimensions({
-        item: "dimensions",
-        value: { width: window.innerWidth, height: window.innerHeight }
-      });
-    });
+    updateDimensions();
+    window.addEventListener("resize", () => updateDimensions());
   }
 
   render() {
-    const { router, summary, filter } = this.props;
+    const { router, summary, filter, currentProduct } = this.props;
     return (
       <Background color={Const.color.grey}>
         <Header />
         <Sidebar summary={summary} filter={filter} side="left">
           <Filter router={router} />
         </Sidebar>
+        <Modal active={currentProduct.title}>
+          <Product currentProduct={currentProduct} />
+        </Modal>
         <Body>
           <Grid />
         </Body>

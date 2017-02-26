@@ -10,6 +10,10 @@ import Const from "utils/constants";
 
 const Filter = styled.aside`
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 const LogoWrap = styled.div`
   margin-bottom: 2rem;
@@ -31,7 +35,6 @@ const Interests = styled.ul`
 const Terms = styled.span`
   font-size: 1.6rem;
   color: #b9b9b9;
-  position: absolute;
   align-self: flex-end;
   bottom: 3rem;
 `;
@@ -39,6 +42,7 @@ const Terms = styled.span`
 const Interest = router =>
   ({ label, active }, index) => (
     <Button
+      inline
       key={index}
       style={active ? "selectedSmallLight" : "primarySmallLight"}
       onClick={() => Actions.toggleInterest({ index, active: !active, router })}
@@ -48,17 +52,19 @@ const Interest = router =>
 
 const Component = ({ router, interests, budgetInput }) => (
   <Filter width={Const.ui.sidebarWidth}>
-    <LogoWrap>
-      <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
-        <Logo color={Const.color.primary} />
-      </Link>
-    </LogoWrap>
-    <Intro>{Const.text.search.intro}</Intro>
-    <Divider />
-    <Slider max={25000} item="budgetInput" value={budgetInput} label="Budget" />
-    <Interests>
-      {mapIndex(Interest(router, interests), interests)}
-    </Interests>
+    <div>
+      <LogoWrap>
+        <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
+          <Logo color={Const.color.primary} />
+        </Link>
+      </LogoWrap>
+      <Intro>{Const.text.search.intro}</Intro>
+      <Divider />
+      <Slider max={10000} item="budgetInput" value={budgetInput} label="Budget" />
+      <Interests>
+        {mapIndex(Interest(router, interests), interests)}
+      </Interests>
+    </div>
     <Link to="terms">
       <Terms>Terms & Conditions</Terms>
     </Link>

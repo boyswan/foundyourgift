@@ -6,7 +6,6 @@ export default createActions([
   "checkout",
   "getDimensions",
   "hydrate",
-  "removeCurrent",
   "removeItem",
   "selectSlider",
   "setBreakpoint",
