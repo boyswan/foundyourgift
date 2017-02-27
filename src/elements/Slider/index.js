@@ -91,7 +91,7 @@ class SliderHandle extends Component {
 export default class extends React.Component {
   constructor() {
     super();
-    this.state = { val: Const.ui.defaultBudget };
+    this.state = { val: JSON.parse(localStorage.getItem("budget")) || Const.ui.defaultBudget };
   }
 
   handleOnChange(val) {

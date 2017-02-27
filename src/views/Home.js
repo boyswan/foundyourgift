@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router";
 import { connect } from "utils";
 import { mapIndex, interestToQuery } from "utils";
-import { Logo, MascotShadow } from "svg";
+import { Logo, Mascot } from "svg";
 import Actions from "actions";
 import { Summary, Filter } from "components";
 import { H1, H2 } from "styles";
@@ -90,7 +90,7 @@ export default connect(({ interests, router, budgetInput }) => (
     </HeaderLogo>
     <Content>
       <MascotLogo>
-        <MascotShadow stroke="5" color="white" />
+        <Mascot color="white" />
       </MascotLogo>
       <H1>{Const.text.home.title}</H1>
       <H2>{Const.text.home.intro}</H2>

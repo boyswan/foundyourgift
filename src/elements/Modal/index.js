@@ -29,7 +29,6 @@ const Modal = styled.div`
 `;
 const Child = styled.div`
   z-index: 5;
-  ${"" /* filter: drop-shadow(0px 0px 12px rgba(0, 0, 0, 0.32)); */}
   display: flex;
   justify-content: center;
 `;

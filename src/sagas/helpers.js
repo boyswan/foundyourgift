@@ -1,5 +1,5 @@
 import { call as _call, put, select } from "redux-saga/effects";
-
+import moment from "moment";
 import {
   fetch,
   interestToQuery,
@@ -12,17 +12,38 @@ import {
   getBreakpoint,
   checkCacheToUrl
 } from "utils";
-import { concat, tap, identity, keys, flatten, pipe, pick, values, map, filter, prop } from "ramda";
+import {
+  concat,
+  tap,
+  identity,
+  keys,
+  flatten,
+  pipe,
+  pick,
+  values,
+  map,
+  filter,
+  prop,
+  take
+} from "ramda";
 import Const from "utils/constants";
 const log = tap(console.log);
 const searchUrl = concat(`${Const.api.API_URL}/search`);
 const cartUrl = concat(`${Const.api.API_URL}/cart`);
+const extraTime = 1000 * 60 * 60 * 12;
+const add12Hours = Date.now() - extraTime;
 
 export function* hydrate(route) {
   try {
-    const cart = yield JSON.parse(localStorage.getItem("cart") || "[]");
-    yield put({ type: "SET_CART", value: cart });
+    const [ cart, budget ] = [
+      yield JSON.parse(localStorage.getItem("cart") || "[]"),
+      yield JSON.parse(localStorage.getItem("budget") || "50")
+    ];
+
+    yield put({ type: "SET_CART", value: cart.filter(({ date }) => date < add12Hours) });
+    yield put({ type: "SET_SLIDER", value: budget });
     yield updateParams(route);
+    yield updateBudget();
   } catch (err) {
     yield log(err);
   }
@@ -77,7 +98,8 @@ export function* updateBudget() {
     yield put({ type: "SET_BUDGET", value: remainingBudget });
     yield put({ type: "SET_TOTAL", value: total });
     yield updateAvailable();
-    localStorage.setItem("cart", JSON.stringify(cart));
+    localStorage.setItem("cart", JSON.stringify(take(50, cart)));
+    localStorage.setItem("budget", JSON.stringify(budgetInput));
   } catch (err) {
     yield log(err);
   }
