@@ -7,6 +7,7 @@ const Background = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
   padding: 3rem;
 `;
 const Terms = styled.p`
@@ -24,6 +25,7 @@ export default () => (
       <br />
       <br />
       It is not technically possible for the prices displayed to be updated in real-time, therefore the prices shown may have changed on the sellers site.
+
       <br />
       <br />
       The actual price of the product on the seller’s site at the time of purchase will govern the sale.

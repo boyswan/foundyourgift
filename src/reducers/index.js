@@ -1,45 +1,54 @@
-import { set, lensProp, over, adjust, reject, propEq, assoc, append } from 'ramda';
-import { createReducer, setInteretsFromParams, formatBalance } from 'utils';
-import Const from 'utils/constants';
+// @flow
 
-// _set :: (String, a) -> State -> State
-const _set = ({ item, value }, state) => set(lensProp(item), value);
+import { set, lensProp, over, evolve, adjust, assoc, merge, not, __, curry } from "ramda";
+import { createReducer, setInteretsFromParams, addItemToCart, removeItemFromCart } from "utils";
+import Const from "utils/constants";
 
-// _toggle :: (Number) -> State -> State
-const _toggle = ({ index }, state) =>
-  over(lensProp('interests'), adjust(x => assoc('active', !x.active, x), index));
+const _set = curry((lens, { value }) => set(lens, value));
+const _overFn = curry((lens, fn, { value }) => over(lens, fn(value)));
+const _merge = curry((lens, { value }) => over(lens, merge(__, value)));
+const _toggleArray = curry(
+  (lens, { index }) => over(lens, adjust(x => assoc("active", not(x.active), x), index))
+);
+const _toggle = curry((lens, _) => over(lens, not));
 
-// _append :: (Object) -> State -> State
-const _append = ({ item }, state) => over(lensProp('cart'), append(item));
-
-// _remove :: (Number) -> State -> State
-const _remove = ({ productId }, state) =>
-  over(lensProp('cart'), reject(propEq('productId', productId)));
-
-// var cart = {
-//   'Item.1.ASIN': itemId,
-//   'Item.1.Quantity': quantity
-// }
 const init = {
+  status: { loading: false, budgetLoad: false },
+  breakpoint: 3,
+  filter: false,
+  summary: false,
+  dimensions: { width: window.innerWidth, height: window.innerHeight },
   interests: setInteretsFromParams(Const.interests),
   total: 0,
   cart: [],
-  searchResults: [],
+  cache: [],
+  searchResults: {},
   availableProducts: [],
-  searchInput: '',
+  searchInput: "",
+  currentProduct: {},
   filterInput: 0,
-  budgetInput: 125,
-  remainingBudget: 125
+  budgetInput: Const.ui.defaultBudget,
+  remainingBudget: Const.ui.defaultBudget
 };
 
 export default createReducer(init, {
-  TOGGLE_INTEREST: _toggle,
-  SET_INPUT: _set,
-  SET_SLIDER: _set,
-  SET_BUDGET: _set,
-  AVAILABLE_PRODUCTS: _set,
-  SET_TOTAL: _set,
-  SET_RESULTS: _set,
-  SELECT_ITEM: _append,
-  REMOVE_ITEM: _remove
+  TOGGLE_INTEREST: _toggleArray(lensProp("interests")),
+  TOGGLE_FILTER: _toggle(lensProp("filter")),
+  TOGGLE_SUMMARY: _toggle(lensProp("summary")),
+  TOGGLE_BUDGET_LOAD: _toggle(lensProp("budgetLoad")),
+  AVAILABLE_PRODUCTS: _set(lensProp("availableProducts")),
+  SET_BREAKPOINT: _set(lensProp("breakpoint")),
+  SET_DIMENSIONS: _set(lensProp("dimensions")),
+  SET_INPUT: _set(lensProp("input")),
+  SET_SLIDER: _set(lensProp("budgetInput")),
+  SET_BUDGET: _set(lensProp("remainingBudget")),
+  SET_TOTAL: _set(lensProp("total")),
+  SET_CURRENT: _set(lensProp("currentProduct")),
+  SET_CACHE: _set(lensProp("cache")),
+  SET_CART: _set(lensProp("cart")),
+  SET_RESULTS: _merge(lensProp("searchResults")),
+  SET_STATUS: _merge(lensProp("status")),
+  ADD_ITEM: _overFn(lensProp("cart"), addItemToCart),
+  REMOVE_ITEM: _overFn(lensProp("cart"), removeItemFromCart),
+  REMOVE_CURRENT: _set(lensProp("currentProduct"))
 });

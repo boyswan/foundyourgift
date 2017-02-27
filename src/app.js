@@ -1,11 +1,8 @@
-import 'app.css';
-import React from 'react';
-import render from 'utils/render';
-import { Router, Route, Link, browserHistory } from 'react-router';
-import { Home, Search, NoMatch, Terms } from 'views';
-import Actions from 'actions';
-
-document.title = 'foundyourgift';
+import "app.css";
+import React from "react";
+import render from "utils/render";
+import { Router, Route, browserHistory } from "react-router";
+import { Home, Search, NoMatch, Terms } from "views";
 
 render(
   <Router history={browserHistory}>

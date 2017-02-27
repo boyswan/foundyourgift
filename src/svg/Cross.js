@@ -15,10 +15,10 @@ export default ({ color = 'black' }) => (
         d="M0.5,17.5 L17.0680415,0.931958474"
         id="Line-Copy"
         stroke={color}
-        strokeWidth="3"
+        strokeWidth="2"
         transform="translate(9.000000, 9.000000) scale(-1, 1) translate(-9.000000, -9.000000) "
       />
-      <path d="M0.5,17.5 L17.0680415,0.931958474" id="Line" stroke={color} strokeWidth="3" />
+      <path d="M0.5,17.5 L17.0680415,0.931958474" id="Line" stroke={color} strokeWidth="2" />
     </g>
   </svg>
 );

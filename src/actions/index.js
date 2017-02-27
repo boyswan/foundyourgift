@@ -1,11 +1,25 @@
-import { createActions } from 'utils';
+import { createActions } from "utils";
 
 export default createActions([
-  'search',
-  'selectItem',
-  'removeItem',
-  'toggleInterest',
-  'setInput',
-  'setSlider',
-  'checkout'
+  "addItem",
+  "availableProducts",
+  "checkout",
+  "getDimensions",
+  "hydrate",
+  "removeItem",
+  "selectSlider",
+  "setBreakpoint",
+  "setBudget",
+  "setCache",
+  "setCart",
+  "setCurrent",
+  "setDimensions",
+  "setInput",
+  "setResults",
+  "setSlider",
+  "setStatus",
+  "setTotal",
+  "toggleFilter",
+  "toggleInterest",
+  "toggleSummary"
 ]);

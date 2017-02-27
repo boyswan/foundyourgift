@@ -1,4 +1,7 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { css } from "styled-components";
+import { pipe, reduce, merge, toPairs } from "ramda";
+import Const from "utils/constants";
 
 export const H1 = styled.h1`
   font-size: 6.4rem;
@@ -20,5 +23,16 @@ export const Label = styled.label`
 `;
 export const Container = styled.div`
   position: relative;
-  margin-bottom: 4rem;
+  margin-bottom: 6rem;
 `;
+
+// iterate through the sizes and create a media template
+export const media = Object.keys(Const.ui.breakpoints).reduce((acc, label) => {
+  const emSize = Const.ui.breakpoints[label] / 10;
+  acc[label] = (...args) => css`
+    @media (max-width: ${emSize}rem) {
+      ${css(...args)}
+    }
+  `;
+  return acc;
+}, {});

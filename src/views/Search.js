@@ -1,32 +1,49 @@
-import React from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import Const from 'utils/constants';
-import { connect } from 'utils';
-import { Summary, Filter, Footer, Grid } from 'components';
-import { Body } from 'elements';
+import React from "react";
+import styled from "styled-components";
+import Actions from "actions";
+import Const from "utils/constants";
+import { connect } from "utils";
+import { Summary, Filter, Grid, Header, Product } from "components";
+import { Body, Sidebar, Modal } from "elements";
 
 const Background = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background: ${({ color }) => color};
+  width: 100%;
 `;
+
+const updateDimensions = () =>
+  Actions.getDimensions({
+    item: "dimensions",
+    value: { width: window.innerWidth, height: window.innerHeight }
+  });
 
 class Component extends React.Component {
   componentDidMount() {
-    Actions.search({ router: this.props.router });
+    Actions.hydrate({ router: this.props.router });
+    updateDimensions();
+    window.addEventListener("resize", () => updateDimensions());
   }
 
   render() {
-    const { router } = this.props;
+    const { router, summary, filter, currentProduct } = this.props;
     return (
       <Background color={Const.color.grey}>
-        <Filter router={router} />
+        <Header />
+        <Sidebar summary={summary} filter={filter} side="left">
+          <Filter router={router} />
+        </Sidebar>
+        <Modal active={currentProduct.title}>
+          <Product currentProduct={currentProduct} />
+        </Modal>
         <Body>
           <Grid />
         </Body>
-        <Summary />
+        <Sidebar summary={summary} filter={filter} side="right">
+          <Summary />
+        </Sidebar>
       </Background>
     );
   }

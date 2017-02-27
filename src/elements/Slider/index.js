@@ -1,20 +1,29 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import { Container, Label } from 'styles';
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import Const from 'utils/constants';
-import { curry, prop } from 'ramda';
+import React, { Component } from "react";
+import styled, { keyframes } from "styled-components";
+import Actions from "actions";
+import { Container, Label } from "styles";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
+import { formatPrice } from "utils";
+import Const from "utils/constants";
+import { prop } from "ramda";
+
+const fadeIn = keyframes`
+  0% { opacity: 1; transform: scale(1)}
+  33% { opacity: 1; transform: scale(1.1, 1.3)}
+  100% { opacity: 1; transform: scale(1)}
+`;
 
 const primary = styled.div`
   position: relative;
   .rc-slider-track {
-    background: ${prop('color')} !important;
-    height: 0.7rem;
+    background: #ffcdcc !important;
+    border-radius: 10rem;
+    height: 1rem;
   }
   .rc-slider-rail {
-    height: 0.7rem;
+    border-radius: 10rem;
+    height: 1rem;
   }
 `;
 const light = styled(primary)`
@@ -22,46 +31,49 @@ const light = styled(primary)`
   margin: 0 auto;
   .rc-slider-track {
     background: white !important;
-    height: 1.7rem;
+    height: 2rem;
     border-radius: 50px;
   }
   .rc-slider-rail {
-    height: 1.7rem;
+    height: 2rem;
     border-radius: 50px;
 
   }
 `;
 const Value = styled(Label)`
   float: right;
-  color: ${prop('color')};
+  color: ${prop("color")};
   font-size: 1.8rem;
   font-weight: 600;
 `;
 const Handle = styled.div`
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.8rem;
+  height: 2rem;
   display: flex;
   top: 0;
-  background: ${prop('primary')};
+  background: ${prop("primary")};
   border-radius: 10rem;
   position: absolute;
   left: 0%;
   justify-content: space-around;
-  padding: 0.3rem;
+  padding: 0.6rem;
   align-items: center;
   margin-left: -1rem;
   cursor: pointer;
-  left: ${({ offset }) => offset + '%'};
+  left: ${({ offset }) => offset + "%"};
   span {
     width: 0.2rem;
     height: 74%;
     border-radius: 0.5rem;
-    background: ${prop('primaryDark')};
+    background: ${prop("primaryDark")};
   }
+
 `;
 
-const handleSlider = curry((item, value) => Actions.setSlider({ item, value }));
-
+const handleSlider = (item, value) => {
+  console.log("off");
+  Actions.setSlider({ item, value });
+};
 class SliderHandle extends Component {
   render() {
     return (
@@ -76,25 +88,49 @@ class SliderHandle extends Component {
   }
 }
 
-export default ({ item, value, label, defaultValue = 50, min = 0, max, style = 'primary' }) => {
-  const SliderTheme = ({ primary, light })[style];
+export default class extends React.Component {
+  constructor() {
+    super();
+    this.state = { val: JSON.parse(localStorage.getItem("budget")) || Const.ui.defaultBudget };
+  }
 
-  return (
-    <Container>
-      <SliderTheme color={Const.color.primary}>
-        <Label color={Const.color.secondary}>{label}</Label>
-        <Value color={Const.color.primary}>£{value}</Value>
-        <Slider
-          value={value}
-          tipFormatter={null}
-          handle={<SliderHandle />}
-          onChange={handleSlider(item)}
-          // step={5}
-          defaultValue={defaultValue}
-          min={min}
-          max={max}
-        />
-      </SliderTheme>
-    </Container>
-  );
-};
+  handleOnChange(val) {
+    this.setState({ val });
+  }
+
+  render() {
+    const {
+      item,
+      hasBudget,
+      label,
+      defaultValue = 5000,
+      min = 0,
+      max,
+      style = "primary"
+    } = this.props;
+    const SliderTheme = ({ primary, light })[style];
+    return (
+      <Container>
+        <SliderTheme color={Const.color.primary}>
+          <Label color={Const.color.secondary}>{label}</Label>
+          <Value color={Const.color.primary}>
+            £{this.state.val / 100}
+          </Value>
+          <Slider
+            value={this.state.val}
+            tipFormatter={null}
+            handle={<SliderHandle />}
+            onMouseDown={x => console.log("on")}
+            onChange={x => this.handleOnChange(x)}
+            onBeforeCange={() => console.lo("beforechange")}
+            onAfterChange={() => handleSlider(item, this.state.val)}
+            step={500}
+            defaultValue={defaultValue}
+            min={min}
+            max={max}
+          />
+        </SliderTheme>
+      </Container>
+    );
+  }
+}
