@@ -15,6 +15,7 @@ const Product = styled.div`
   padding: 2rem;
   display: flex;
   width: 60%;
+  z-index: 2;
   ${media.tablet`
     flex-direction: column-reverse;
     width: 100%;
@@ -22,15 +23,10 @@ const Product = styled.div`
     padding: 0;
   `}
 `;
-const ImageWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 50%;
-`;
+
 const ImageList = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
   padding: 2rem;
 `;
 const Image = styled.img`
@@ -147,15 +143,6 @@ const ButtonWrap = styled.div`
   }
 `;
 
-const Background = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 0;
-`;
-
 const SmallImage = (src, key) => <Image src={src} key={key} />;
 
 const getGallery = uncurryN(
@@ -225,7 +212,6 @@ export default ({ currentProduct }) => {
           </Body>
         </Content>
       </Description>
-      <Background onClick={() => Actions.setCurrent({ value: {} })} />
     </Product>
   );
 };

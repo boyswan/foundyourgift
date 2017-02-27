@@ -32,6 +32,14 @@ const Balance = styled.div`
     display: block;
   }
 `;
+const OldPrice = styled.span`
+  opacity: 0.75;
+  color: #d8d8d8 !important;
+  text-decoration: line-through;
+  font-weight: 200 !important;
+  margin-left: 0.6rem;
+`;
+
 const Image = styled.img`
   border: 1px solid ${prop("color")};
   background: ${prop("color")};
@@ -126,17 +134,22 @@ const ButtonCenter = styled.div`
 `;
 const Quantity = styled.span`
  font-weight: 500;
- margin-left: 2rem;
+ margin-left: 1rem;
+ opacity: 0.5;
+ span {
+   margin-right: 0.6rem;
+ }
 `;
-const ItemComponent = ({ image, price, title, asin, quantity }, key) => {
-  const item = { image, price, title, asin, quantity };
+
+const ItemComponent = ({ image, price, salePrice, title, asin, quantity }, key) => {
+  const item = { image, price, salePrice, title, asin, quantity };
   return (
     <Item key={key} color={Const.color.grey}>
       <ItemContent onClick={() => Actions.setCurrent({ value: item })}>
         <Image color={Const.color.grey} alt={title} src={image} />
         <Content secondary={Const.color.secondary} primary={Const.color.primary}>
-          <span>{formatPrice(price)}</span>
-          <Quantity>x {quantity}</Quantity>
+          <span>{formatPrice(salePrice < price && salePrice > 0 ? salePrice : price)}</span>
+          <Quantity><span>x</span> {quantity}</Quantity>
           <div>{title}</div>
         </Content>
       </ItemContent>

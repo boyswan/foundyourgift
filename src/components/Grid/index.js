@@ -6,7 +6,7 @@ import { connect } from "utils";
 import { MascotSad, MascotNoSelection, MascotLoading } from "svg";
 import { List } from "react-virtualized";
 import { activeInterests } from "utils";
-import { prop, cond, T, identity, clamp } from "ramda";
+import { prop, cond, T, identity, clamp, range } from "ramda";
 
 const fadeIn = keyframes`
   0% { opacity: 0 }
@@ -53,6 +53,10 @@ const CardWrap = styled.div`
   height: 90%;
   width: 90%;
   margin: 0 auto;
+`;
+const Dot = styled.span`
+  animation: 1s ease-in-out 0s normal infinite ${fadeIn};
+  animation-delay: ${({ index }) => index * 0.1 + "s"};
 `;
 
 const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item, breakpoint) => {
@@ -117,7 +121,7 @@ export default connect((
       () => (
         <NoItems
           icon={<MascotLoading color={Const.color.primary} />}
-          title="Loading ... "
+          title={<div>Loading {range(0, 3).map(x => <Dot key={x} index={x}>.</Dot>)} </div>}
           body="Just one second"
         />
       )

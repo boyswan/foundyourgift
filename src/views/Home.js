@@ -81,6 +81,8 @@ const Interest = router =>
     />
   );
 
+document.body.style.backgroundColor = Const.color.primary;
+
 export default connect(({ interests, router, budgetInput }) => (
   <Background color={Const.color.primary}>
     <HeaderLogo>

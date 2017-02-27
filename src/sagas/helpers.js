@@ -57,13 +57,7 @@ export function* updateParams({ router: { push, location } }) {
 
 export function* updateAvailable() {
   try {
-    const {
-      interests,
-      budgetInput,
-      cart,
-      searchResults,
-      breakpoint
-    } = yield select(identity);
+    const { interests, budgetInput, cart, searchResults, breakpoint } = yield select(identity);
     const currentSelected = pipe(filter(prop("active")), map(prop("type")));
     const formatAvailable = pipe(pick, values, flatten);
     const available = formatAvailable(currentSelected(interests), searchResults);
@@ -103,6 +97,7 @@ export function* checkout() {
   try {
     const { cart } = yield select(identity);
     const { data } = yield _call(fetch, cartUrl(getCartQuery(cart)));
+    yield window.open(data, "_blank");
   } catch (err) {
     yield log(err);
   }

@@ -29,9 +29,20 @@ const Modal = styled.div`
 `;
 const Child = styled.div`
   z-index: 5;
-  filter: drop-shadow(0px 0px 12px rgba(0, 0, 0, 0.32));
+  ${"" /* filter: drop-shadow(0px 0px 12px rgba(0, 0, 0, 0.32)); */}
   display: flex;
   justify-content: center;
+`;
+const Background = styled.div`
+  position: absolute;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200vh;
+  width: 100vw;
+  z-index: 1;
 `;
 
 export default ({ active, children }) => {
@@ -41,3 +52,6 @@ export default ({ active, children }) => {
     </Modal>
   );
 };
+
+{ /* <Background onClick={() => Actions.setCurrent({ value: {} })} /> */
+}

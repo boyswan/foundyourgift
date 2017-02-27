@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Actions from "actions";
 import { Container, Label } from "styles";
 import Slider from "rc-slider";
@@ -7,6 +7,12 @@ import "rc-slider/assets/index.css";
 import { formatPrice } from "utils";
 import Const from "utils/constants";
 import { prop } from "ramda";
+
+const fadeIn = keyframes`
+  0% { opacity: 1; transform: scale(1)}
+  33% { opacity: 1; transform: scale(1.1, 1.3)}
+  100% { opacity: 1; transform: scale(1)}
+`;
 
 const primary = styled.div`
   position: relative;
@@ -61,6 +67,7 @@ const Handle = styled.div`
     border-radius: 0.5rem;
     background: ${prop("primaryDark")};
   }
+
 `;
 
 const handleSlider = (item, value) => {
@@ -92,9 +99,16 @@ export default class extends React.Component {
   }
 
   render() {
-    const { item, label, defaultValue = 5000, min = 0, max, style = "primary" } = this.props;
+    const {
+      item,
+      hasBudget,
+      label,
+      defaultValue = 5000,
+      min = 0,
+      max,
+      style = "primary"
+    } = this.props;
     const SliderTheme = ({ primary, light })[style];
-
     return (
       <Container>
         <SliderTheme color={Const.color.primary}>
