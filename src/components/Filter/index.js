@@ -51,34 +51,31 @@ const Interest = router =>
     />
   );
 
-const Component = ({ router, availableProducts, interests, budgetInput }) =>
-  console.log("selected", interests.filter(x => x.active).length) ||
-    console.log("vailable", availableProducts.length) ||
-    (
-      <Filter width={Const.ui.sidebarWidth}>
-        <div>
-          <LogoWrap>
-            <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
-              <Logo color={Const.color.primary} />
-            </Link>
-          </LogoWrap>
-          <Intro>{Const.text.search.intro}</Intro>
-          <Divider />
-          <Slider
-            hasBudget={!availableProducts.length && interests.filter(x => x.active).length > 0}
-            max={10000}
-            item="budgetInput"
-            value={budgetInput}
-            label="Budget"
-          />
-          <Interests interests={interests.filter(x => x.active).length}>
-            {mapIndex(Interest(router, interests), interests)}
-          </Interests>
-        </div>
-        <Link to="terms">
-          <Terms>Terms & Conditions</Terms>
+const Component = ({ router, availableProducts, interests, budgetInput }) => (
+  <Filter width={Const.ui.sidebarWidth}>
+    <div>
+      <LogoWrap>
+        <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
+          <Logo color={Const.color.primary} />
         </Link>
-      </Filter>
-    );
+      </LogoWrap>
+      <Intro>{Const.text.search.intro}</Intro>
+      <Divider />
+      <Slider
+        hasBudget={!availableProducts.length && interests.filter(x => x.active).length > 0}
+        max={10000}
+        item="budgetInput"
+        value={budgetInput}
+        label="Budget"
+      />
+      <Interests interests={interests.filter(x => x.active).length}>
+        {mapIndex(Interest(router, interests), interests)}
+      </Interests>
+    </div>
+    <Link to="terms">
+      <Terms>Terms & Conditions</Terms>
+    </Link>
+  </Filter>
+);
 
 export default connect(Component);

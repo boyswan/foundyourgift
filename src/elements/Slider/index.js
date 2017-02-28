@@ -71,7 +71,6 @@ const Handle = styled.div`
 `;
 
 const handleSlider = (item, value) => {
-  console.log("off");
   Actions.setSlider({ item, value });
 };
 class SliderHandle extends Component {

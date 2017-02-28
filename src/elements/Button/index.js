@@ -27,9 +27,9 @@ const Button = styled.button`
 `;
 
 const small = () => `
-  padding: 1.5rem;
+  padding: 1.2rem 1.5rem;
   font-size: 1.4rem;
-  margin: 0 1.5rem 1.5rem 0rem;
+  margin: 0 1.6rem 1.6rem 0rem;
 `;
 
 const primary = styled(Button)`

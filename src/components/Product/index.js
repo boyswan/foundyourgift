@@ -26,7 +26,7 @@ const Product = styled.div`
 
 const ImageList = styled.div`
   display: flex;
-  flex-direction: column;  
+  flex-direction: column;
   padding: 2rem;
 `;
 const Image = styled.img`
@@ -59,6 +59,7 @@ const OldPrice = styled.span`
   color: #d8d8d8 !important;
   text-decoration: line-through;
   font-weight: 200 !important;
+  font-size: 3.6rem;
 `;
 const Body = styled.div`
   width: 80%;
@@ -145,10 +146,7 @@ const ButtonWrap = styled.div`
 
 const SmallImage = (src, key) => <Image src={src} key={key} />;
 
-const getGallery = uncurryN(
-  2,
-  image => pipe(x => console.log(x) || x, append(image), uniq, mapIndex(SmallImage))
-);
+const getGallery = uncurryN(2, image => pipe(append(image), uniq, mapIndex(SmallImage)));
 
 const Gallery = ({ image, images = { values: [] } }) => {
   return (
