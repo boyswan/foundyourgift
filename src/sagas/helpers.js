@@ -38,7 +38,7 @@ export function* hydrate(route) {
   try {
     const [ cart, budget ] = [
       yield JSON.parse(localStorage.getItem("cart") || "[]"),
-      yield JSON.parse(localStorage.getItem("budget") || "50")
+      yield JSON.parse(localStorage.getItem("budget") || Const.ui.defaultBudget)
     ];
 
     yield put({ type: "SET_CART", value: cart.filter(({ date }) => date < add12Hours) });
