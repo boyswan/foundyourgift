@@ -18,16 +18,30 @@ const color = {
   greyDark: "#EBEBEB"
 };
 
+// const interests = [
+//   { type: "business", label: "Entreprenurial" },
+//   { type: "exercise", label: "Fitness fanatic" },
+//   { type: "gaming", label: "Video gamer" },
+//   { type: "health", label: "Nature lover" },
+//   { type: "sports", label: "Sports fan" },
+//   { type: "travel", label: "Traveller" },
+//   { type: "arts", label: "Creative" },
+//   { type: "tech", label: "Tech geek" },
+//   { type: "music", label: "Sound person" }
+// ];
 const interests = [
-  { type: "business", label: "Entreprenurial" },
-  { type: "exercise", label: "Fitness fanatic" },
-  { type: "gaming", label: "Video gamer" },
-  { type: "health", label: "Nature lover" },
-  { type: "sports", label: "Sports fan" },
-  { type: "travel", label: "Traveller" },
-  { type: "arts", label: "Creative" },
-  { type: "tech", label: "Tech geek" },
-  { type: "music", label: "Sound person" }
+  { type: "gaming", label: "Video gaming" },
+  { type: "exercise", label: "Fitness" },
+  { type: "travel", label: "Travelling" },
+  { type: "nature", label: "Nature" },
+  { type: "bike", label: "Cycling" },
+  { type: "art", label: "Creative" },
+  { type: "health", label: "Health" },
+  { type: "baby", label: "Parenting" },
+  { type: "camping", label: "Camping" },
+  { type: "music", label: "Music " },
+  { type: "cooking", label: "Cooking" },
+  { type: "animal", label: "Animals" }
 ];
 
 const text = {
