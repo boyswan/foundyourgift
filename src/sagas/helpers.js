@@ -41,6 +41,8 @@ export function* hydrate(route) {
       yield JSON.parse(localStorage.getItem("budget") || Const.ui.defaultBudget)
     ];
 
+    console.log(budget);
+
     yield put({ type: "SET_CART", value: cart.filter(({ date }) => date < add12Hours) });
     yield put({ type: "SET_SLIDER", value: budget });
     yield updateParams(route);
