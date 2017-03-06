@@ -28,8 +28,8 @@ const Content = styled.section`
   width: 100%;
   padding: 0 2rem;
   text-align: center;
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
+
 `;
 const Divider = styled.hr`
   border: none;
