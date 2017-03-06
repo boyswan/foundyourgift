@@ -120,7 +120,8 @@ export function* checkout() {
   try {
     const { cart } = yield select(identity);
     const { data } = yield _call(fetch, cartUrl(getCartQuery(cart)));
-    yield window.open(data, "_blank");
+    // yield put({ type: "SET_URL", value: data });
+    yield window.location = data;
   } catch (err) {
     yield log(err);
   }

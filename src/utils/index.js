@@ -111,8 +111,8 @@ export const getCartQuery = pipe(map(({ asin }) => `${asin}=${1}`), join("&"), c
 export const formatPrice = price => `£${(price / 100).toFixed(2)}`;
 export const activeInterests = filter(propEq("active", "true"));
 export const getBreakpoint = cond([
-  [ gt(__, 1550), always(3) ],
-  [ allPass([ lt(__, 1550), gt(__, 768) ]), always(2) ],
+  [ gt(__, 1440), always(3) ],
+  [ allPass([ gt(__, 768) ]), always(2) ],
   [ T, always(1) ]
 ]);
 export const getColumn = pipe(splitEvery, dropLast(1));

@@ -9,6 +9,7 @@ import { Summary, Filter } from "components";
 import { H1, H2 } from "styles";
 import { Sidebar, Button, Slider } from "elements";
 import Const, { text } from "utils/constants";
+import { media } from "styles";
 
 const Background = styled.div`
   display: flex;
@@ -23,6 +24,12 @@ const HeaderLogo = styled.header`
 `;
 const MascotLogo = styled.div`
   margin-bottom: 3rem;
+  svg {
+    height: 18rem;
+    ${media.tablet`
+      height: 12rem;
+    `}
+  }
 `;
 const Content = styled.section`
   width: 100%;
@@ -43,6 +50,9 @@ const Interests = styled.ul`
   max-width: 50%;
   margin: 0 auto;
   margin-bottom: 2rem;
+  ${media.tablet`
+    max-width: 100%;
+  `}
 `;
 const Footer = styled.footer`
   width: 100%;
@@ -100,7 +110,7 @@ export default connect(({ interests, router, budgetInput }) => (
       </Interests>
       <Divider color={Const.color.primaryDark} />
       <Link to={{ pathname: "search", query: interestToQuery(interests) }}>
-        <Button inline style="primary" label={Const.text.home.cta} />
+        <Button inline style="cta" label={Const.text.home.cta} />
       </Link>
     </Content>
     <Footer>
