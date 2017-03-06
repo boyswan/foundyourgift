@@ -8,7 +8,7 @@ const Button = styled.button`
   display: inline-block;
   padding: 1.5rem 2rem;
   border: 1px solid white;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   cursor: pointer;
   border-radius: 10rem;
   font-weight: 100;
@@ -77,10 +77,16 @@ const primarySmallLight = styled(primaryLight)`
   }
 `;
 
+const cta = styled(primary)`
+  background: white;
+  color: ${prop("primary")};
+`;
+
 export default ({ icon: Icon, style = "primary", inline = false, onClick, label }) => {
   const Button = ({
     primary,
     selected,
+    cta,
     primaryLight,
     selectedSmall,
     primarySmall,

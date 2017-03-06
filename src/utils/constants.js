@@ -4,7 +4,7 @@ const api = {
 };
 
 const ui = {
-  sidebarWidth: 400,
+  sidebarWidth: 325,
   defaultBudget: 5000,
   breakpoints: { desktop: 992, tablet: 768, mobile: 376 }
 };
@@ -49,7 +49,7 @@ const text = {
     title: "Looking to buy the perfect gift?",
     // (describe intro relations with humours situations)
     intro: "Whether it’s for your boyfriend, wife, husband or girlfriend we’ll help you find the right gift for them.",
-    cta: "Get started",
+    cta: "Find your gift",
     amazon: "foundyourgift is a participant in the Amazon EU Associates Programme, an affiliate advertising programme designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.co.uk",
     amazon2: "CERTAIN CONTENT THAT APPEARS [IN THIS APPLICATION or ON THIS SITE, as applicable] COMES FROM AMAZON EU S.à r.l. THIS CONTENT IS PROVIDED 'AS IS' AND IS SUBJECT TO CHANGE OR REMOVAL AT ANY TIME."
   },

@@ -5,6 +5,7 @@ import { Input, Slider, Button } from "elements";
 import { Link } from "react-router";
 import { connect, interestToQuery, mapIndex } from "utils";
 import { prop } from "ramda";
+import { media } from "styles";
 import Actions from "actions";
 import Const from "utils/constants";
 
@@ -17,6 +18,9 @@ const Filter = styled.aside`
 `;
 const LogoWrap = styled.div`
   margin-bottom: 2rem;
+  ${media.tablet`
+    display: none;
+    `}
 `;
 const Intro = styled.p`
   font-weight: 300;
@@ -32,6 +36,12 @@ const Divider = styled.div`
 
 const Interests = styled.ul`
   margin-bottom: 2rem;
+  ${media.tablet`
+    button {
+      font-size: 1.8rem;
+      padding: 2rem;
+    }
+    `}
 `;
 const Terms = styled.span`
   font-size: 1.6rem;

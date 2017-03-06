@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 import styled from "styled-components";
 import { connect, mapIndex, formatPrice, getCartAmounts } from "utils";
 import { prop } from "ramda";
@@ -160,7 +161,7 @@ const ItemComponent = ({ image, price, salePrice, title, asin, quantity }, key) 
   );
 };
 
-export default connect(({ cart, remainingBudget, total }) => (
+export default connect(({ url, cart, remainingBudget, total }) => (
   <Sidebar width={Const.ui.sidebarWidth}>
     <Balance color={Const.color.primary}>
       <div>
@@ -175,11 +176,13 @@ export default connect(({ cart, remainingBudget, total }) => (
     <ButtonWrap>
       <ButtonCenter>
         <Total color={Const.color.primary}>Total: {formatPrice(total)}</Total>
-        <Button
-          style="primaryLight"
-          onClick={() => Actions.checkout({ cart })}
-          label="Buy from Amazon"
-        />
+        <Link to={url} target="_blank">
+          <Button
+            style="primaryLight"
+            onClick={() => Actions.checkout({ cart })}
+            label="Buy from Amazon"
+          />
+        </Link>
       </ButtonCenter>
     </ButtonWrap>
   </Sidebar>

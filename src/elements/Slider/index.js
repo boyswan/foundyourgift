@@ -7,6 +7,7 @@ import "rc-slider/assets/index.css";
 import { formatPrice } from "utils";
 import Const from "utils/constants";
 import { prop } from "ramda";
+import { media } from "styles";
 
 const fadeIn = keyframes`
   0% { opacity: 1; transform: scale(1)}
@@ -25,6 +26,12 @@ const primary = styled.div`
     border-radius: 10rem;
     height: 1rem;
   }
+  ${media.tablet`
+    .rc-slider-track,
+    .rc-slider-rail {
+      height: 3rem;
+    }
+  `}
 `;
 const light = styled(primary)`
   width: 50%;
@@ -37,8 +44,13 @@ const light = styled(primary)`
   .rc-slider-rail {
     height: 2rem;
     border-radius: 50px;
-
   }
+  ${media.tablet`
+    .rc-slider-track,
+    .rc-slider-rail {
+      height: 4rem;
+    }
+  `}
 `;
 const Value = styled(Label)`
   float: right;
@@ -61,11 +73,18 @@ const Handle = styled.div`
   margin-left: -1rem;
   cursor: pointer;
   left: ${({ offset }) => offset + "%"};
+  ${media.tablet`
+    width: 5.2rem;
+    height: 4rem;
+  `}
   span {
     width: 0.2rem;
     height: 74%;
     border-radius: 0.5rem;
     background: ${prop("primaryDark")};
+    ${media.tablet`
+      width: 0.4rem;
+    `}
   }
 
 `;
