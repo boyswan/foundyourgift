@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import Const from "utils/constants";
+import Const from "../../utils/constants";
 import { prop } from "ramda";
-import { media } from "styles";
+import { media } from "../../styles";
 
 const Sidebar = styled.aside`
   width: ${prop("width")}px;

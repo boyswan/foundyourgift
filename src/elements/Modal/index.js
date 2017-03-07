@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Const from "utils/constants";
-import Actions from "actions";
+import Const from "../../utils/constants";
+import Actions from "../../actions";
 import { prop } from "ramda";
-import { media } from "styles";
+import { media } from "../../styles";
 const active = () => `
   pointer-events: all;
   opacity: 1;

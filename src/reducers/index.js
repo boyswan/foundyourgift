@@ -1,8 +1,8 @@
-// @flow
-
 import { set, lensProp, over, evolve, adjust, assoc, merge, not, __, curry } from "ramda";
-import { createReducer, setInteretsFromParams, addItemToCart, removeItemFromCart } from "utils";
-import Const from "utils/constants";
+import { createReducer, setInteretsFromParams, addItemToCart, removeItemFromCart } from "../utils";
+import Const from "../utils/constants";
+
+const isClient = typeof window !== "undefined";
 
 const _set = curry((lens, { value }) => set(lens, value));
 const _overFn = curry((lens, fn, { value }) => over(lens, fn(value)));
@@ -17,7 +17,7 @@ const init = {
   breakpoint: 3,
   filter: false,
   summary: false,
-  dimensions: { width: window.innerWidth, height: window.innerHeight },
+  dimensions: { width: isClient && window.innerWidth, height: isClient && window.innerHeight },
   interests: setInteretsFromParams(Const.interests),
   total: 0,
   cart: [],

@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Const from "utils/constants";
-import Actions from "actions";
+import Const from "../../utils/constants";
+import Actions from "../../actions";
 import { prop } from "ramda";
-import { Logo, Cart, Menu } from "svg";
-import { interestToQuery, connect } from "utils";
+import { Logo, Cart, Menu } from "../../svg";
+import { interestToQuery, connect } from "../../utils";
 import { Link } from "react-router";
-import { media } from "styles";
+import { media } from "../../styles";
 
 const Header = styled.header`
   flex: 1;

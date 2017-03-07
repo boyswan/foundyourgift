@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import Actions from "actions";
-import Const from "utils/constants";
-import { Heart, Cart, ShowMore, Clock } from "svg";
+import Actions from "../../actions";
+import Const from "../../utils/constants";
+import { Heart, Cart, ShowMore, Clock } from "../../svg";
 import { prop, tail, map } from "ramda";
-import { Button } from "elements";
+import { Button } from "../../elements";
 import Moment from "moment";
-import { formatPrice } from "utils";
-import { media } from "styles";
+import { formatPrice } from "../../utils";
+import { media } from "../../styles";
 
 const Card = styled.li`
   background: white;

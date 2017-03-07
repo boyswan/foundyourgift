@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Actions from "actions";
-import Const from "utils/constants";
-import { Button } from "elements";
-import { Cart, Clock, Cross } from "svg";
-import { formatPrice, mapIndex } from "utils";
+import Actions from "../../actions";
+import Const from "../../utils/constants";
+import { Button } from "../../elements";
+import { Cart, Clock, Cross } from "../../svg";
+import { formatPrice, mapIndex } from "../../utils";
 import { prop, propOr, map, pipe, take, uniq, append, uncurryN } from "ramda";
-import { media } from "styles";
+import { media } from "../../styles";
 import Moment from "moment";
 
 const Product = styled.div`

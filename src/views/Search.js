@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import Actions from "actions";
-import Const from "utils/constants";
-import { connect } from "utils";
-import { Summary, Filter, Grid, Header, Product } from "components";
-import { Body, Sidebar, Modal } from "elements";
+import Actions from "../actions";
+import Const from "../utils/constants";
+import { connect } from "../utils";
+import { Summary, Filter, Grid, Header, Product } from "../components";
+import { Body, Sidebar, Modal } from "../elements";
 
+const isClient = typeof window !== "undefined";
 const Background = styled.div`
   display: flex;
   flex-direction: row;
@@ -17,14 +18,14 @@ const Background = styled.div`
 const updateDimensions = () =>
   Actions.getDimensions({
     item: "dimensions",
-    value: { width: window.innerWidth, height: window.innerHeight }
+    value: { width: isClient && window.innerWidth, height: isClient && window.innerHeight }
   });
 
 class Component extends React.Component {
   componentDidMount() {
     Actions.hydrate({ router: this.props.router });
     updateDimensions();
-    window.addEventListener("resize", () => updateDimensions());
+    isClient && window.addEventListener("resize", () => updateDimensions());
   }
 
   render() {

@@ -11,7 +11,7 @@ import {
   getColumn,
   getBreakpoint,
   checkCacheToUrl
-} from "utils";
+} from "../utils";
 
 import {
   concat,
@@ -27,7 +27,7 @@ import {
   prop,
   take
 } from "ramda";
-import Const from "utils/constants";
+import Const from "../utils/constants";
 const log = tap(console.log);
 const searchUrl = concat(`${Const.api.API_URL}/search`);
 const cartUrl = concat(`${Const.api.API_URL}/cart`);

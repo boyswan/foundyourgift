@@ -1,7 +1,8 @@
 import store from "./store";
 import { connect as _connect } from "react-redux";
 import axios from "axios";
-import Const from "utils/constants";
+import Const from "../utils/constants";
+const isClient = typeof window !== "undefined";
 import {
   reduce,
   curry,
@@ -90,7 +91,8 @@ export const connect = (component, state = identity) => _connect(state)(componen
 export const getParams = pipe(tail, split("&"), map(pipe(split("="), head)));
 
 export const setInteretsFromParams = map(
-  x => getParams(window.location.search).includes(x.type) ? assoc("active", true, x) : x
+  x =>
+    isClient ? getParams(window.location.search).includes(x.type) ? assoc("active", true, x) : x : x
 );
 
 export const totalPrice = reduce((acc, { price, quantity }) => add(acc, price * quantity), 0);

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { css } from "styled-components";
 import { pipe, reduce, merge, toPairs } from "ramda";
-import Const from "utils/constants";
+import Const from "../utils/constants";
 
 // iterate through the sizes and create a media template
 export const media = Object.keys(Const.ui.breakpoints).reduce((acc, label) => {

@@ -7,7 +7,7 @@ import {
   updateParams,
   hydrate,
   checkout
-} from "sagas/helpers";
+} from "./helpers";
 
 const Ui = [
   fork(function*() {
@@ -40,5 +40,5 @@ const Api = [
 ];
 
 export default function* root() {
-  yield [...Api, ...Ui];
+  yield [ ...Api, ...Ui ];
 }

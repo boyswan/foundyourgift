@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router";
 import styled from "styled-components";
-import { connect, mapIndex, formatPrice, getCartAmounts } from "utils";
+import { connect, mapIndex, formatPrice, getCartAmounts } from "../../utils";
 import { prop } from "ramda";
-import { Cross } from "svg";
-import { Button } from "elements";
-import Const from "utils/constants";
-import Actions from "actions";
+import { Cross } from "../../svg";
+import { Button } from "../../elements";
+import Const from "../../utils/constants";
+import Actions from "../../actions";
 
 const Sidebar = styled.aside`
   width: 100%;

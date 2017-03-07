@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import Actions from 'actions';
-import { Container, Label } from 'styles';
-import { Dropdown } from 'svg';
+import React from "react";
+import styled from "styled-components";
+import Actions from "../../actions";
+import { Container, Label } from "../../styles";
+import { Dropdown } from "../../svg";
 
 const InputContainer = styled.div`
   position: relative;
@@ -22,7 +22,7 @@ const Input = styled.input`
   font-weight: 300;
   font-size: 1.4rem;
   color: #4875A9;
-  width: ${({ icon }) => icon ? '100%' : '85%'};
+  width: ${({ icon }) => icon ? "100%" : "85%"};
 `;
 
 const Icon = styled.div`
@@ -41,7 +41,7 @@ export default ({ item, value, label, icon, onClick }) => (
     <Label>{label}</Label>
     <InputContainer>
       <Input value={value} onChange={e => handleInput(item, e.target.value)} />
-      {icon ? <Icon onClick={onClick}>{icon}</Icon> : ''}
+      {icon ? <Icon onClick={onClick}>{icon}</Icon> : ""}
     </InputContainer>
   </Container>
 );
