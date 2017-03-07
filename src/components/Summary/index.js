@@ -124,7 +124,7 @@ const ButtonWrap = styled.div`
 `;
 const Total = styled.span`
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   color: ${prop("color")};
 `;
 const ButtonCenter = styled.div`
@@ -161,7 +161,7 @@ const ItemComponent = ({ image, price, salePrice, title, asin, quantity }, key) 
   );
 };
 
-export default connect(({ url, cart, remainingBudget, total }) => (
+export default connect(({ cart, remainingBudget, total }) => (
   <Sidebar width={Const.ui.sidebarWidth}>
     <Balance color={Const.color.primary}>
       <div>
@@ -176,13 +176,12 @@ export default connect(({ url, cart, remainingBudget, total }) => (
     <ButtonWrap>
       <ButtonCenter>
         <Total color={Const.color.primary}>Total: {formatPrice(total)}</Total>
-        <Link to={url} target="_blank">
-          <Button
-            style="primaryLight"
-            onClick={() => Actions.checkout({ cart })}
-            label="Buy from Amazon"
-          />
-        </Link>
+        <Button
+          disabled={!cart.length}
+          style="primaryLight"
+          onClick={() => Actions.checkout({ cart })}
+          label="Buy from Amazon"
+        />
       </ButtonCenter>
     </ButtonWrap>
   </Sidebar>

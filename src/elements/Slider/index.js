@@ -39,11 +39,11 @@ const light = styled(primary)`
   margin: 0 auto;
   .rc-slider-track {
     background: white !important;
-    height: 2rem;
+    height: 2.1rem;
     border-radius: 50px;
   }
   .rc-slider-rail {
-    height: 2rem;
+    height: 2.1rem;
     border-radius: 50px;
   }
   ${media.tablet`
@@ -60,8 +60,8 @@ const Value = styled(Label)`
   font-weight: 600;
 `;
 const Handle = styled.div`
-  width: 2.8rem;
-  height: 2rem;
+  width: 3rem;
+  height: 2.4rem;
   display: flex;
   top: 0;
   background: ${prop("primary")};

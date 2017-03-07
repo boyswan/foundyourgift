@@ -123,6 +123,7 @@ export function* checkout() {
     const { cart } = yield select(identity);
     const { data } = yield _call(fetch, cartUrl(getCartQuery(cart)));
     // yield put({ type: "SET_URL", value: data });
+    // yield window.open(data, "_blank");
     yield window.location = data;
   } catch (err) {
     yield log(err);
