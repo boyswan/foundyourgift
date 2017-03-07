@@ -19,6 +19,18 @@ const Button = styled.button`
   &:hover {
     transition: all 0.2s ease-in-out;
   }
+  &:disabled {
+    transition: all 0.2s ease-in-out;
+    background: #e8e8e8;
+    color: #bdbbbb;
+    border: none;
+    &:hover {
+      background: #e8e8e8;
+      color: #bdbbbb;
+      border: none;
+      cursor: default;
+    }
+  }
   svg {
     width: 2.4rem;
     height: 2.4rem;
@@ -82,7 +94,7 @@ const cta = styled(primary)`
   color: ${prop("primary")};
 `;
 
-export default ({ icon: Icon, style = "primary", inline = false, onClick, label }) => {
+export default ({ disabled, icon: Icon, style = "primary", inline = false, onClick, label }) => {
   const Button = ({
     primary,
     selected,
@@ -96,6 +108,7 @@ export default ({ icon: Icon, style = "primary", inline = false, onClick, label 
 
   return (
     <Button
+      disabled={disabled}
       inline={inline}
       primary={Const.color.primary}
       secondary={Const.color.secondary}
