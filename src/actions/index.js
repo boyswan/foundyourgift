@@ -1,4 +1,4 @@
-import { createActions } from "utils";
+import { createActions } from "../utils";
 
 export default createActions([
   "addItem",

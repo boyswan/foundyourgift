@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Const from "utils/constants";
+import Const from "../../utils/constants";
 import { prop } from "ramda";
 
 const Button = styled.button`

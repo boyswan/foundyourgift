@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
-import Actions from "actions";
-import { Container, Label } from "styles";
+import Actions from "../../actions";
+import { Container, Label, media } from "../../styles";
 import Slider from "rc-slider";
-import "rc-slider/assets/index.css";
-import { formatPrice } from "utils";
-import Const from "utils/constants";
+import { formatPrice } from "../../utils";
+import Const from "../../utils/constants";
 import { prop } from "ramda";
-import { media } from "styles";
+
+const isClient = typeof window !== "undefined";
+if (isClient) require("rc-slider/assets/index.css");
 
 const fadeIn = keyframes`
   0% { opacity: 1; transform: scale(1)}

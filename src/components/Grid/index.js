@@ -1,11 +1,10 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import Const from "utils/constants";
-import { Card } from "components";
-import { connect } from "utils";
-import { MascotSad, MascotNoSelection, MascotLoading } from "svg";
+import Const from "../../utils/constants";
+import { Card } from "../../components";
+import { MascotSad, MascotNoSelection, MascotLoading } from "../../svg";
 import { List } from "react-virtualized";
-import { activeInterests } from "utils";
+import { activeInterests, connect } from "../../utils";
 import { prop, cond, T, identity, clamp, range } from "ramda";
 
 const fadeIn = keyframes`

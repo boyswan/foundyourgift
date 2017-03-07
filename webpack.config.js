@@ -12,33 +12,23 @@ const AWS = {
 
 const config = {
   context: __dirname,
-  entry: {
-    app: ["babel-polyfill", "./src/app.js"]
-  },
-  output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "[name].js",
-    publicPath: ""
-  },
+  entry: { app: [ "babel-polyfill", "./src/app.js" ] },
+  output: { path: path.resolve(__dirname, "public"), filename: "[name].js", publicPath: "" },
   resolve: {
-    modulesDirectories: ["node_modules", "src"],
-    extensions: ["", ".js", ".jsx", ".css", ".svg"]
+    modulesDirectories: [ "node_modules", "src" ],
+    extensions: [ "", ".js", ".jsx", ".css", ".svg" ]
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ["babel"] },
+      { test: /\.js$/, exclude: /node_modules/, loaders: [ "babel" ] },
       { test: /\.css$/, loader: "style-loader!css-loader" },
       { test: /\.svg$/, loader: "babel!react-svg" },
       { test: /\.(ttf|eot|jpg|woff(2)?)(\?[a-z0-9]+)?$/, loader: "file-loader" }
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.aws": AWS
-    }),
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "src/index.ejs")
-    })
+    new webpack.DefinePlugin({ "process.aws": AWS }),
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, "src/index.ejs") })
   ]
 };
 

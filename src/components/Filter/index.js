@@ -1,13 +1,13 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { Logo } from "svg";
-import { Input, Slider, Button } from "elements";
+import { Logo } from "../../svg";
+import { Input, Slider, Button } from "../../elements";
 import { Link } from "react-router";
-import { connect, interestToQuery, mapIndex } from "utils";
+import { connect, interestToQuery, mapIndex } from "../../utils";
 import { prop } from "ramda";
-import { media } from "styles";
-import Actions from "actions";
-import Const from "utils/constants";
+import { media } from "../../styles";
+import Actions from "../../actions";
+import Const from "../../utils/constants";
 
 const Filter = styled.aside`
   width: 100%;
