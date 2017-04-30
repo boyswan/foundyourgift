@@ -7,12 +7,9 @@
     "src"
   ],
   "scripts": {
-    "watch": "npm run build:src -- --watch",
-    "build:src": "webpack",
-    "build:sitemap": "node ./src/sitemap.js",
-    "dev": "NODE_ENV=development webpack-dev-server ---inline --hot --quiet --config webpack.config.js",
-    "build": "NODE_ENV=production webpack && npm run build:sitemap",
-    "buildprod": "NODE_ENV=production webpack"
+    "watch": "webpack --watch",
+    "build": "NODE_ENV=production webpack",
+    "sitemap": "node ./src/sitemap.js"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +19,7 @@
     "express": "^4.15.2",
     "moment": "^2.17.1",
     "ramda": "^0.22.1",
+    "ramda-fantasy": "^0.7.0",
     "rc-slider": "^5.4.3",
     "react": "^15.4.1",
     "react-addons-shallow-compare": "^15.4.2",
