@@ -1,71 +1,28 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import { Logo } from "../../svg";
-import { Input, Slider, Button } from "../../elements";
-import { Link } from "react-router";
-import { connect, interestToQuery, mapIndex } from "../../utils";
-import { prop } from "ramda";
-import { media } from "../../styles";
-import Actions from "../../actions";
-import Const from "../../utils/constants";
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
+import { Logo } from '../../svg'
+import { Input, Slider, Button } from '../../elements'
+import { Link } from 'react-router'
+import { connect, interestToQuery, mapIndex } from '../../utils'
+import Actions from '../../actions'
+import Const from '../../utils/constants'
+import { Filter, LogoWrap, Intro, Divider, Interests, Terms } from './styles'
 
-const Filter = styled.aside`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-const LogoWrap = styled.div`
-  margin-bottom: 2rem;
-  ${media.tablet`
-    display: none;
-    `}
-`;
-const Intro = styled.p`
-  font-weight: 300;
-  font-size: 1.4rem;
-  color: #4875A9;
-  line-height: 2.4rem;
-  margin-bottom: 2rem;
-`;
-const Divider = styled.div`
-  margin-bottom: 4rem;
-  border-bottom: 0.2rem solid #EBEBEB;
-`;
-
-const Interests = styled.ul`
-  margin-bottom: 2rem;
-  ${media.tablet`
-    button {
-      font-size: 1.8rem;
-      padding: 2rem;
-    }
-    `}
-`;
-const Terms = styled.span`
-  font-size: 1.6rem;
-  color: #b9b9b9;
-  align-self: flex-end;
-  bottom: 3rem;
-`;
-
-const Interest = router =>
-  ({ label, active }, index) => (
-    <Button
-      inline
-      key={index}
-      style={active ? "selectedSmallLight" : "primarySmallLight"}
-      onClick={() => Actions.toggleInterest({ index, active: !active, router })}
-      label={label}
-    />
-  );
+const Interest = router => ({ label, active }, index) => (
+  <Button
+    inline
+    key={index}
+    style={active ? 'selectedSmallLight' : 'primarySmallLight'}
+    onClick={() => Actions.toggleInterest({ index, active: !active, router })}
+    label={label}
+  />
+)
 
 const Component = ({ router, availableProducts, interests, budgetInput }) => (
   <Filter width={Const.ui.sidebarWidth}>
     <div>
       <LogoWrap>
-        <Link to={{ pathname: "/", query: interestToQuery(interests) }}>
+        <Link to={{ pathname: '/', query: interestToQuery(interests) }}>
           <Logo color={Const.color.primary} />
         </Link>
       </LogoWrap>
@@ -86,6 +43,6 @@ const Component = ({ router, availableProducts, interests, budgetInput }) => (
       <Terms>Terms & Conditions</Terms>
     </Link>
   </Filter>
-);
+)
 
-export default connect(Component);
+export default connect(Component)

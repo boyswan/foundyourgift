@@ -1,5 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
+import { media } from '../../styles'
+import { prop } from 'ramda'
 
 export const Card = styled.li`
   background: white;

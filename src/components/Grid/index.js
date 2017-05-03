@@ -4,14 +4,12 @@ import { Card } from '../../components'
 import { MascotSad, MascotNoSelection, MascotLoading } from '../../svg'
 import { List } from 'react-virtualized'
 import { connect } from '../../utils'
+import { Grid, NoResults, CardWrap, Dot } from './styles'
 import { prop, cond, T, pipe, range } from 'ramda'
 
 const Either = require('ramda-fantasy').Either
 const Left = Either.Left
 const Right = Either.Right
-import * as Styles from './styles'
-
-const { Grid, NoResults, CardWrap, Dot } = Styles
 
 const rowRenderer = ({ key, index, isScrolling, isVisible, style }, item, breakpoint) => {
   const bp1 = (

@@ -1,14 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import Const from "../../utils/constants";
-import Actions from "../../actions";
-import { prop } from "ramda";
-import { media } from "../../styles";
-const active = () => `
+import React from 'react'
+import styled from 'styled-components'
+import Const from '../../utils/constants'
+import Actions from '../../actions'
+import { prop } from 'ramda'
+import { media } from '../../styles'
+const active = () =>
+  `
   pointer-events: all;
   opacity: 1;
   transition: all 0.2s ease-in-out;
-`;
+`
 
 const Modal = styled.div`
   position: absolute;
@@ -26,12 +27,12 @@ const Modal = styled.div`
   ${media.tablet`
     padding: 2rem;
   `}
-`;
+`
 const Child = styled.div`
   z-index: 5;
   display: flex;
   justify-content: center;
-`;
+`
 const Background = styled.div`
   position: absolute;
   display: flex;
@@ -42,15 +43,12 @@ const Background = styled.div`
   height: 200vh;
   width: 100vw;
   z-index: 1;
-`;
+`
 
 export default ({ active, children }) => {
   return (
     <Modal active={active}>
       <Child>{children}</Child>
     </Modal>
-  );
-};
-
-{ /* <Background onClick={() => Actions.setCurrent({ value: {} })} /> */
+  )
 }

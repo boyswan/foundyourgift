@@ -1,11 +1,6 @@
 .DS_Store
 npm-debug.log*
 node_modules
-public/app.js
-public/app.js.map
-.env
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+public/*.js
+public/*.js.map
+cert

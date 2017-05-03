@@ -7,6 +7,7 @@
     "src"
   ],
   "scripts": {
+    "start": "webpack --watch",
     "watch": "webpack --watch",
     "build": "NODE_ENV=production webpack",
     "deploy": "npm run build && now --docker",
